@@ -1,0 +1,11 @@
+
+/**
+* DummyName routes
+*/
+$router->get("/DummyPluralName/schema", "DummyNameController@schema");
+$router->get("/DummyPluralName", "DummyNameController@index");
+$router->get("/DummyPluralName/dropdown", "DummyNameController@dropdown");
+$router->post("/DummyPluralName", "DummyNameController@store");
+$router->get("/DummyPluralName/{id}", "DummyNameController@show");
+$router->put("/DummyPluralName/{id}", "DummyNameController@update");
+$router->delete("/DummyPluralName/{id}", "DummyNameController@destroy");

@@ -1,0 +1,59 @@
+<?php
+
+use Laravel\Lumen\Testing\WithoutMiddleware;
+use Laravel\Lumen\Testing\DatabaseMigrations;
+use Laravel\Lumen\Testing\DatabaseTransactions;
+use PHPUnit\Framework\Assert as PHPUnit;
+use Mockery as m;
+use App\Models\DummyEloquentName;
+
+class DummyControllerTest extends TestCase
+{
+    use DatabaseMigrations, DatabaseTransactions;
+
+    public function testIndexDummyPluralName()
+    {
+        $data = factory(DummyEloquentName::class)->create();
+        $this->json('GET', '/LowerPluralName', [] , $this->postHeaders);
+        $this->seeStatusCode(200);
+    }
+
+    public function testStoreDummyPluralName()
+    {
+        $data = factory(DummyEloquentName::class)->create();
+        $properties = [
+                DummyFillableAdd
+        ];
+        $this->json('POST', '/LowerPluralName', $this->setupPayloads($properties) , $this->postHeaders);
+        $this->seeStatusCode(200);
+    }
+
+    public function testShowDummyPluralName()
+    {
+        $data = factory(DummyEloquentName::class)->create();
+        $this->json('GET', '/LowerPluralName/'.$data->id, [] , $this->postHeaders);
+        $this->seeStatusCode(200);
+    }
+
+    public function testUpdateDummyPluralName()
+    {
+        $data = factory(DummyEloquentName::class)->create();
+        $properties = [
+                DummyFillableEdit
+            ];
+        $this->json('PATCH', '/LowerPluralName/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
+        $this->seeStatusCode(200);
+    }
+
+
+    public function testDestroyDummyPluralName()
+    {
+        $data = factory(DummyEloquentName::class)->create();
+        $properties = [
+            "id" => $data->id,
+        ];
+        $this->json('DELETE', '/LowerPluralName', $this->setupDeletePayloads($data) , $this->postHeaders);
+        $this->seeStatusCode(200);
+    }
+
+}

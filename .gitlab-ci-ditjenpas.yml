@@ -1,0 +1,84 @@
+stages:
+  - preparation
+  - test
+  - build
+  - deploy
+  
+composer:
+  stage: preparation
+  image: composer:1.9.3
+  script:
+    - php -v
+    - apk add libwebp-dev libpng-dev libxpm-dev freetype-dev libjpeg-turbo-dev
+    - docker-php-ext-configure gd --with-freetype --with-jpeg 
+    - docker-php-ext-install bcmath sockets gd
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+  artifacts:
+    paths:
+      - vendor/
+      - .env
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - vendor/
+
+phpunit:
+  services:
+    - mysql:latest
+  variables:
+    MYSQL_DATABASE: "mysql"
+    MYSQL_ROOT_PASSWORD: "m1Cr0-53rv1c3"
+    DB_HOST: "192.168.102.7"
+    DB_HOST_SLAVE: "192.168.102.7"
+    DB_HOST_SLAVE_2: "192.168.102.7"
+    DB_PORT: "3306"
+    DB_DATABASE: "common_essential_testing"
+    DB_USERNAME: "root"
+    DB_PASSWORD: "m1Cr0-53rv1c3"
+  stage: test
+  image:
+    name: $CI_REGISTRY/root/php-7.4
+  dependencies:
+    - composer
+  script:
+    - cp .env.example .env
+    # - php artisan migrate
+    # - vendor/bin/phpunit
+
+
+docker:
+  stage: build
+  image:
+    name: docker:stable
+  services:
+    - docker:stable-dind
+  script:
+    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
+    - cp .env.example .env
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - sed -i "s,git-devel.torche.id:5050,192.168.102.6:5000,g" Dockerfile.production
+    - docker build -t $IMAGE . -f Dockerfile.production
+    - docker push $IMAGE
+    
+
+kubernetes:
+  stage: deploy
+  image: dtzar/helm-kubectl
+  only:
+    - master
+  script:
+    - echo "$KUBECONFIG" > admin.config
+    - export KUBECONFIG=admin.config
+    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME
+    - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/service.yaml
+    - sed -i "s,<PORT>,${PORT},g" .kubernetes/service.yaml
+    - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/deployment.yaml
+    - sed -i "s,<VERSION>,${CI_COMMIT_SHORT_SHA},g" .kubernetes/deployment.yaml
+    - sed -i "s,<IMAGE>,${IMAGE},g" .kubernetes/deployment.yaml
+    - kubectl apply -f .kubernetes/deployment.yaml
+    - kubectl apply -f .kubernetes/service.yaml
+    - kubectl apply -f .kubernetes/configmap.yaml
+    - echo "Application should be accessible at http://10.1.2.52:${PORT}"
+    

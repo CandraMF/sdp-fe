@@ -1,0 +1,5 @@
+FROM git-devel.torche.id:5050/root/php-swoole
+
+COPY . /var/www
+COPY ./nginx-swoole.conf /etc/nginx/nginx.conf
+COPY ./swoole.conf /etc/supervisor/service.d/swoole.conf

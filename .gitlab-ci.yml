@@ -1,0 +1,121 @@
+stages:
+  - preparation
+  - test
+  - build
+  - deploy
+  
+composer:
+  stage: preparation
+  image: composer:2.1.11
+  script:
+    - php -v
+    - apk add libwebp-dev libpng-dev libxpm-dev freetype-dev libjpeg-turbo-dev
+    - docker-php-ext-configure gd --with-freetype --with-jpeg 
+    - docker-php-ext-install bcmath sockets gd
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+  artifacts:
+    paths:
+      - vendor/
+      - .env
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - vendor/
+    key:
+      files:
+        - composer.lock
+
+
+# phpunit:
+#   services:
+#     - mysql:latest
+#   variables:
+#     MYSQL_DATABASE: "lumen"
+#     MYSQL_ROOT_PASSWORD: "P@ssw0rd"
+#     DB_HOST: "43.252.137.150:33011"
+#     DB_HOST_SLAVE: "43.252.137.150:33011"
+#     DB_HOST_SLAVE_2: "43.252.137.150:33011"
+#     DB_PORT: "3306"
+#     DB_DATABASE: "common_essential_testing"
+#     DB_USERNAME: "root"
+#     DB_PASSWORD: "mysqlroot"
+#   stage: test
+#   image:
+#     name: git-devel.torche.id:5050/root/php-8.1
+#   dependencies:
+#     - composer
+#   script:
+#     - cp .env.example .env
+#     - php artisan migrate
+#     - vendor/bin/phpunit
+
+
+docker:
+  stage: build
+  image:
+    name: docker:stable
+  services:
+    - docker:stable-dind
+  script:
+    - export IMAGE=$CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
+    - cp .env.example .env
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE . -f Dockerfile.production
+    - docker push $IMAGE
+    
+
+kubernetes:
+  stage: deploy
+  image: dtzar/helm-kubectl
+  only:
+    - master
+  script:
+    - echo "$KUBECONFIG" > admin.config
+    - export KUBECONFIG=admin.config
+    - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/service.yaml
+    - sed -i "s,<PORT>,${PORT},g" .kubernetes/service.yaml
+    - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/deployment.yaml
+    - sed -i "s,<VERSION>,${CI_COMMIT_SHORT_SHA},g" .kubernetes/deployment.yaml
+    - sed -i "s,<IMAGE>,${CI_REGISTRY_IMAGE},g" .kubernetes/deployment.yaml
+    - kubectl apply -f .kubernetes/deployment.yaml
+    - kubectl rollout status deployment $CI_PROJECT_NAME
+    - kubectl apply -f .kubernetes/service.yaml
+    - echo "Application should be accessible at http://kumbang.torche.id:${PORT}"
+
+# kubernetes-https:
+#   stage: deploy
+#   image: dtzar/helm-kubectl
+#   only:
+#     - master
+#   script:
+#     - echo "$KUBECONFIG" > admin.config
+#     - export KUBECONFIG=admin.config
+#     - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME}-https,g" .kubernetes/deployment.yaml
+#     - sed -i "s,<VERSION>,${CI_COMMIT_SHORT_SHA},g" .kubernetes/deployment.yaml
+#     - sed -i "s,<IMAGE>,${CI_REGISTRY_IMAGE},g" .kubernetes/deployment.yaml
+#     - kubectl apply -f .kubernetes/deployment.yaml
+#     - kubectl rollout status deployment $CI_PROJECT_NAME-https
+
+# kubernetes-sdp:
+#    stage: deploy
+#    image: dtzar/helm-kubectl
+#    only:
+#      - master
+#    script:
+#      - apk add openvpn
+#      - echo "$CLIENT_OVPN" > /etc/openvpn/client.ovpn
+#      - openvpn --config /etc/openvpn/client.ovpn  --daemon
+#      - sleep 30s
+#      - echo "$KUBECONFIG_SDP" > admin.config
+#      - export KUBECONFIG=admin.config
+#      - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/service.yaml
+#      - sed -i "s,<PORT>,${DEV_PORT},g" .kubernetes/service.yaml
+#      - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/deployment.yaml
+#      - sed -i "s,<VERSION>,${CI_COMMIT_SHORT_SHA},g" .kubernetes/deployment.yaml
+#      - sed -i "s,<IMAGE>,${CI_REGISTRY_IMAGE},g" .kubernetes/deployment.yaml
+#      - kubectl apply -f .kubernetes/deployment.yaml
+#      - kubectl rollout status deployment $CI_PROJECT_NAME
+#    retry: 2
+

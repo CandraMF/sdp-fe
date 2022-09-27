@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keamanan
+  labels:
+    name: keamanan
+data:
+  APP_ENV: "production"
+  APP_KEY: "base64:vw6G2uP8LV22haEERtzr5yDCBraLrMwbxlbSJDA97uk="
+  APP_DEBUG: "true"
+  APP_LOG: "errorlog"
+  APP_LOG_LEVEL: "debug"
+  APP_URL: "http://localhost"
+  LOG_CHANNEL: "stderr"
+
+  DB_HOST: 192.168.102.7
+  DB_HOST_SLAVE: 192.168.102.7
+  DB_HOST_SLAVE_2: 192.168.102.7
+  DB_DATABASE: "common_essential"
+  DB_USERNAME: "root"
+  DB_PASSWORD: "m1Cr0-53rv1c3"
+
+  BROADCAST_DRIVER: "log"
+  CACHE_DRIVER: "file"
+  SESSION_DRIVER: "file"
+  QUEUE_DRIVER: "sync"
+
+  REDIS_HOST: "pingspace-redis"
+  REDIS_PORT: "6379"
+
+  API_THROTTLE: "false"
+  API_RATE_LIMIT: "1000"
+
+  SSO_PUBLIC_KEY: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhyWi941DgV+UUbavoOuSIfUndtcXvrz0WRnd07I5rgzFpL1MzmYLUV2iZS/6bGHThiWh638hlHl+dmYdVCMavxMj8TSbDgqEXcal6GPBw3FyRywjhlF48G0yUeRh1NYFeloiOGXWnFc0aTelZeruB8E92Em2ZhA8o5cZtSyAtXy9fEqVk9mnj6kgnloPNurNIJddg84uHZ/UVzGeJgaRoT/j5AebR4SzjyKxjWQKanfgqDGqfYvEY0pfsiIxII+CT3IHPnCd0hoXxbo0ET+ZyX9UbDCSaMc4kJZJ5Ghrvu7Tft3K/YxO9RkJFDkZf01gcDfwr+SL1F4SRaacpxgxCQIDAQAB"
+
+  API_GATEWAY: http://10.1.2.52:32301
+  API_BIOMETRIK: http://10.1.2.52:32302
+  API_COMMON_ESSENTIAL: http://10.1.2.52:32303
+  API_COMMON_TOOLS: http://10.1.2.52:32304
+  API_DASHBOARD: http://10.1.2.52:32305
+  API_IDENTITAS: http://10.1.2.52:32306
+  API_INTEGRASI: http://10.1.2.52:32307
+  API_KALKULATOR_EKSPIRASI: http://10.1.2.52:32308
+  API_KUNJUNGAN_ONLINE: http://10.1.2.52:32309
+  API_KUNJUNGAN_ONSITE: http://10.1.2.52:32310
+  API_REGISTRASI: http://10.1.2.52:32311
+  API_REMISI_ONLINE: http://10.1.2.52:32312
+  API_REMISI_SUSULAN: http://10.1.2.52:32313
+  API_SIDANG_TPP: http://10.1.2.52:32314
+  API_UPLOAD: http://10.1.2.52:32315

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <PROJECT_NAME>
+  labels:
+    app: <PROJECT_NAME>
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: <PROJECT_NAME>
+  template:
+    metadata:
+      labels:
+        app: <PROJECT_NAME>
+    spec:
+      containers:
+        - name: <PROJECT_NAME>
+          image: <IMAGE>:<VERSION>
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+          envFrom:
+            - configMapRef:
+                name: <PROJECT_NAME>
+      imagePullSecrets:
+        - name: gitlab-registry
