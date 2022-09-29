@@ -64,7 +64,29 @@ docker:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE . -f Dockerfile.production
     - docker push $IMAGE
-    
+
+
+kubernetes-local:
+   stage: deploy
+   image: dtzar/helm-kubectl
+   only:
+     - master
+   script:
+     - apk add openvpn
+     - echo "$CLIENT_OVPN" > /etc/openvpn/client.ovpn
+     - openvpn --config /etc/openvpn/client.ovpn  --daemon
+     - sleep 30s
+     - echo "$KUBECONFIG" > admin.config
+     - export KUBECONFIG=admin.config
+     - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/service.yaml
+     - sed -i "s,<PORT>,${PORT},g" .kubernetes/service.yaml
+     - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/deployment.yaml
+     - sed -i "s,<VERSION>,${CI_COMMIT_SHORT_SHA},g" .kubernetes/deployment.yaml
+     - sed -i "s,<IMAGE>,${CI_REGISTRY_IMAGE},g" .kubernetes/deployment.yaml
+     - kubectl apply -f .kubernetes/deployment.yaml
+     - kubectl rollout status deployment $CI_PROJECT_NAME
+     - kubectl apply -f .kubernetes/service.yaml
+     - echo "Application should be accessible at http://192.168.2.11:${PORT}"
 
 kubernetes:
   stage: deploy
