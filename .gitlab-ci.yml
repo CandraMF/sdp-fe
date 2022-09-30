@@ -76,7 +76,7 @@ kubernetes-local:
      - echo "$CLIENT_OVPN" > /etc/openvpn/client.ovpn
      - openvpn --config /etc/openvpn/client.ovpn  --daemon
      - sleep 30s
-     - echo "$KUBECONFIG" > admin.config
+     - echo "$KUBECONFIG_LOCAL" > admin.config
      - export KUBECONFIG=admin.config
      - sed -i "s,<PROJECT_NAME>,${CI_PROJECT_NAME},g" .kubernetes/service.yaml
      - sed -i "s,<PORT>,${PORT},g" .kubernetes/service.yaml
