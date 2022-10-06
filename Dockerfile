@@ -1,4 +1,4 @@
-FROM git-devel.torche.id:5050/root/php-8.1
+FROM git-devel.torche.id:5050/root/php-8.0
 
 COPY . /var/www/html/
 COPY ./php.ini $PHP_INI_DIR/php.ini
