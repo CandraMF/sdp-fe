@@ -70,7 +70,7 @@ kubernetes-local:
    stage: deploy
    image: dtzar/helm-kubectl
    only:
-     - master
+     - development
    script:
      - apk add openvpn
      - echo "$CLIENT_OVPN" > /etc/openvpn/client.ovpn
@@ -86,7 +86,7 @@ kubernetes-local:
      - kubectl apply -f .kubernetes/deployment.yaml
      - kubectl rollout status deployment $CI_PROJECT_NAME
      - kubectl apply -f .kubernetes/service.yaml
-     - echo "Application should be accessible at http://192.168.2.11:${PORT}"
+     - echo "Application should be accessible at http://sdp-dev.torche.id:${PORT}"
 
 kubernetes:
   stage: deploy
