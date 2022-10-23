@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $env = env('APP_ENV');
-$file = '.env.'.$env;
+$file = '.env.' . $env;
 
 // If the specific environment file doesn't exist, null out the $file variable.
-if (!file_exists(dirname(__DIR__).'/'.$file)) {
+if (!file_exists(dirname(__DIR__) . '/' . $file)) {
     $file = null;
 }
 
@@ -102,8 +102,8 @@ $routeMiddleware = [
     // 'auth' => App\Http\Middleware\Authenticate::class,
     'permission' => App\Http\Middleware\PermissionMiddleware::class,
 ];
- 
-if(env('API_THROTTLE', 'false') == 'true' || env('CORS', false)) {
+
+if (env('API_THROTTLE', 'false') == 'true' || env('CORS', false)) {
     $routeMiddleware['throttle'] = \LumenRateLimiting\ThrottleRequests::class;
 }
 
@@ -148,12 +148,12 @@ env('APP_ENV', 'local') == 'production' ? $app->register(SwooleTW\Http\LumenServ
 $group = [
     'namespace' => 'App\Http\Controllers'
 ];
-if(env('API_THROTTLE', false)) {
+if (env('API_THROTTLE', false)) {
     $group['middleware'] = 'throttle:global';
 }
 
 $app->router->group($group, function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__ . '/../routes/web.php';
 });
 
 return $app;
