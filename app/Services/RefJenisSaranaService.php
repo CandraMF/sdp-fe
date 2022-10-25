@@ -293,43 +293,35 @@ class RefJenisSaranaService
         $templateProcessor->saveAs(Storage_path('temp/word/' . $namaFileWord));
 
         
-
-        $dataFile["pathfile"] = Storage_path('temp/word/' . $namaFileWord);
+		$dataFile["namaFilePdf"] = 'Referensi-Jenis-Sarana-' . Carbon::now()->format('Ymdhis') . '.pdf';
+		$dataFile["pathfile"] = Storage_path('temp/word/' . $namaFileWord);
 
         $pdf = $this->exportToPdf($dataFile);
 
         //delete file
         File::delete(Storage_path('temp/word/' . $namaFileWord));
-        return $pdf;
+        
+		return $pdf;
 
     }
 
     public function exportToPdf($dataFile)
     {
-        $uri = '/unoconv/pdf';
-        $token = null;
 
-        $data = [
-            'base_uri' => env('API_UNOCONV'),
-            'headers'  => ['Accept' => 'application/json'],
-            'http_errors' => true,
-        ];
+		$domPdfPath = base_path('vendor/dompdf/dompdf');
+		\PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
+		\PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
 
-        if (!is_null($token)) {
-            $data['headers']['Authorization'] = 'bearer ' . $token;
-        }
+		//Load word file
+		$Content = \PhpOffice\PhpWord\IOFactory::load($dataFile['pathfile']); 
 
-        $data['multipart'][0]['Content-type'] = 'multipart/form-data';
-        //$data['multipart'][0]['contents'] = file_get_contents($dataFile['pathfile']);
-        $data['multipart'][0]['contents'] = $dataFile['pathfile'] != null ? fopen($dataFile['pathfile'], 'r') : null;
-        $data['multipart'][0]['name'] = 'file';
+		//Save it into PDF
+		$PDFWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content,'PDF');
 
-        $client = new Client($data);
+		$filename = Storage_path('temp/pdf/'.$dataFile['namaFilePdf']);
+		$contents=$PDFWriter->save($filename); 
 
-        $response = $client->post($uri);
-        $contents = $response->getBody()->getContents();
-        
-        return $contents;
+        return response()->download($filename);
         
     }
 }
