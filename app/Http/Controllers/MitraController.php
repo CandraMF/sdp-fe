@@ -16,18 +16,18 @@ class MitraController extends Controller
     public function __construct()
     {
         $this->service = new MitraService();
-        $this->rules = array (
-  'nama_mitra' => 'nullable',
-  'nama_pic' => 'nullable',
-  'alamat' => 'nullable',
-  'id_dati2' => 'nullable',
-  'no_telp' => 'nullable',
-  'no_hp' => 'nullable',
-  'email' => 'nullable',
-  'keterangan' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'nama_mitra' => 'nullable',
+            'nama_pic' => 'nullable',
+            'alamat' => 'nullable',
+            'id_dati2' => 'nullable',
+            'no_telp' => 'nullable',
+            'no_hp' => 'nullable',
+            'email' => 'nullable',
+            'keterangan' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -130,111 +130,111 @@ class MitraController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_mitra',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'nama_mitra',
-    'Type' => 'VARCHAR(100)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'nama_pic',
-    'Type' => 'VARCHAR(100)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'alamat',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'id_dati2',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'no_telp',
-    'Type' => 'VARCHAR(20)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'no_hp',
-    'Type' => 'VARCHAR(20)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'email',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  8 => 
-  array (
-    'Field' => 'keterangan',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  9 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  10 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_mitra',
+                'Type' => 'BIGINT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
+            ),
+            1 =>
+            array(
+                'Field' => 'nama_mitra',
+                'Type' => 'VARCHAR(100)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'nama_pic',
+                'Type' => 'VARCHAR(100)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'alamat',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'id_dati2',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'no_telp',
+                'Type' => 'VARCHAR(20)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'no_hp',
+                'Type' => 'VARCHAR(20)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'email',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            8 =>
+            array(
+                'Field' => 'keterangan',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            9 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            10 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'mitra', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_mitra', 
+            'name' => 'mitra',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_mitra',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/mitra'
@@ -332,7 +332,6 @@ class MitraController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -387,7 +386,6 @@ class MitraController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -426,7 +424,22 @@ class MitraController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
+    public function exportExcel(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->exportExcel($data);
+
+        return $export;
+    }
+
+
+    public function exportPdf(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->printPDF($data);
+
+        return $export;
+    }
 }

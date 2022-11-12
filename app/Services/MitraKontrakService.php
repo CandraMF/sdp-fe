@@ -3,18 +3,25 @@
 namespace App\Services;
 
 use App\Models\MitraKontrak;
+use App\Exports\MitraKontrakExport;
 use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\TemplateProcessor;
+
 
 class MitraKontrakService
 {
 
     public function __construct()
     {
-
     }
 
     /**
@@ -67,19 +74,16 @@ class MitraKontrakService
             return [];
         }
         foreach ($mitra_kontrak as $val) {
-            $result[] = array (
-  'id_kontrak' => $val['id_kontrak'],
-  'id_mitra' => $val['id_mitra'],
-  'jenis_mitra' => $val['jenis_mitra'],
-  'kontrak_dengan' => $val['kontrak_dengan'],
-  'id_kanwil' => $val['id_kanwil'],
-  'id_upt' => $val['id_upt'],
-  'nomor_kontrak' => $val['nomor_kontrak'],
-  'kontrak_awal' => $val['kontrak_awal'],
-  'kontrak_akhir' => $val['kontrak_akhir'],
-  'update_terakhir' => $val['update_terakhir'],
-  'update_oleh' => $val['update_oleh'],
-);
+            $result[] = array(
+                'id_kontrak' => $val['id_kontrak'],
+                'id_mitra' => $val['id_mitra'],
+                'jenis_mitra' => $val['jenis_mitra'],
+                'nomor_kontrak' => $val['nomor_kontrak'],
+                'kontrak_awal' => $val['kontrak_awal'],
+                'kontrak_akhir' => $val['kontrak_akhir'],
+                'update_terakhir' => $val['update_terakhir'],
+                'update_oleh' => $val['update_oleh'],
+            );
         }
 
         return $result;
@@ -100,14 +104,20 @@ class MitraKontrakService
         $sort = isset($data['sort']) ? $data['sort'] : NULL;
         $column = isset($data['column']) ? $data['column'] : 'id_kontrak';
 
-        $defaultColumn = ["id_kontrak","id_mitra","jenis_mitra","kontrak_dengan","id_kanwil","id_upt","nomor_kontrak","kontrak_awal","kontrak_akhir","update_terakhir","update_oleh"];
+        // $defaultColumn = ["id_kontrak", "id_mitra", "jenis_mitra", "nomor_kontrak", "kontrak_awal", "kontrak_akhir", "update_terakhir", "update_oleh"];
+        // $q = MitraKontrak::query();
+        // $q = $q->select($defaultColumn);
+        // $data = $this->mapping($q);
+        // $collection = collect(array_values($data));
+
+        $defaultColumn = ["jenis_mitra", "nama_mitra", "nama_pic", "alamat", "no_telp", "provinsi.deskripsi as propinsi", "dati2.deskripsi as kabkot"];
         $q = MitraKontrak::query();
         $q = $q->select($defaultColumn);
-        $data = $this->mapping($q);
-        $collection = collect(array_values($data));
+        $q = $q->Join('mitra', 'mitra.id_dati2', '=', 'dati2.id_dati2');
+
 
         if (!is_null($keyword) && !is_null($column)) {
-            $collection = $collection->filter(function ($value, $key) use($keyword, $column) {
+            $collection = $collection->filter(function ($value, $key) use ($keyword, $column) {
                 return (false !== stripos($value[$column], $keyword));
             });
         }
@@ -143,20 +153,16 @@ class MitraKontrakService
      */
     public function show(object $mitra_kontrak)
     {
-        $data = array (
-  'id_kontrak' => $mitra_kontrak->id_kontrak,
-  'id_mitra' => $mitra_kontrak->id_mitra,
-  'jenis_mitra' => $mitra_kontrak->jenis_mitra,
-  'kontrak_dengan' => $mitra_kontrak->kontrak_dengan,
-  'id_kanwil' => $mitra_kontrak->id_kanwil,
-  'id_upt' => $mitra_kontrak->id_upt,
-  'nomor_kontrak' => $mitra_kontrak->nomor_kontrak,
-  'kontrak_awal' => $mitra_kontrak->kontrak_awal,
-  'kontrak_akhir' => $mitra_kontrak->kontrak_akhir,
-  'update_terakhir' => $mitra_kontrak->update_terakhir,
-  'update_oleh' => $mitra_kontrak->update_oleh,
-);
+        $data = array(
+            'id_kontrak' => $mitra_kontrak->id_kontrak,
+            'id_mitra' => $mitra_kontrak->id_mitra,
+            'jenis_mitra' => $mitra_kontrak->jenis_mitra,
+            'nomor_kontrak' => $mitra_kontrak->nomor_kontrak,
+            'kontrak_awal' => $mitra_kontrak->kontrak_awal,
+            'kontrak_akhir' => $mitra_kontrak->kontrak_akhir,
+            'update_terakhir' => $mitra_kontrak->update_terakhir,
+            'update_oleh' => $mitra_kontrak->update_oleh,
+        );
         return $data;
     }
-
 }
