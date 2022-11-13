@@ -10,7 +10,7 @@
 			use Maatwebsite\Excel\Concerns\WithStyles;
 			use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-			class MitraExport implements FromArray, WithCustomStartCell, ShouldAutoSize, WithTitle, WithStyles //,WithDrawings
+			class PrasaranaRuangExport implements FromArray, WithCustomStartCell, ShouldAutoSize, WithTitle, WithStyles //,WithDrawings
 			{
 
 				protected $judul = '';
@@ -37,12 +37,12 @@
 					$valueSheet = [];
 					$valueSheet[] = [$this->judul, ''];
 					$valueSheet[] = [''];
-					$valueSheet[] = ['No', "Nama", "Mitra", "Penanggung Jawab", "Alamat", "No Telpon", "Provinsi", "Kota", "Update Terakhir", "Update Oleh"];
+					$valueSheet[] = ['No', "Jenis Prasarana", " Nama Prasarana", " UPT", " Tanggal Pengadaan", " Keterangan", " Update Terakhir", " Update Oleh"];
 
 					//data
 					foreach ($this->data as $index => $item) {
 						$no = $index + 1;
-						$valueSheet[] = [$no, $item['nama_mitra '], $item['nama_pic'], $item['alamat'], $item['no_telp'], $item['propinsi'], $item['kabkota'], $item['update_terakhir'], $item['update_oleh']];
+						$valueSheet[] = [$no, $item['jenis_prasarana'], $item['nama_prasarana_ruang'], $item['nmupt'], $item['tgl_pengadaan'], $item['keterangan'], $item['update_terakhir'], $item['update_oleh']];
 					}
 
 					$this->lastRow = 4 + (count($valueSheet) - 3);
@@ -73,14 +73,14 @@
 						],
 					];
 
-					$sheet->getStyle('A4:I' . $this->lastRow)->applyFromArray($styleArray);
+					$sheet->getStyle('A4:H' . $this->lastRow)->applyFromArray($styleArray);
 
 					//set color background header
-					$sheet->getStyle('A4:I4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('C0C0C0C0');
+					$sheet->getStyle('A4:H4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('C0C0C0C0');
 
 					//set center align text
 					$hor_center = ['horizontal' => 'center'];
-					$sheet->getStyle('A4:I4')->getAlignment()->applyFromArray($hor_center);
+					$sheet->getStyle('A4:H4')->getAlignment()->applyFromArray($hor_center);
 
 					//set center align for column 'no'
 					for ($x = 4; $x <= $this->lastRow; $x++) {

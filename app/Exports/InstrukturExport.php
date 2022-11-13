@@ -10,7 +10,7 @@
 			use Maatwebsite\Excel\Concerns\WithStyles;
 			use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-			class MitraExport implements FromArray, WithCustomStartCell, ShouldAutoSize, WithTitle, WithStyles //,WithDrawings
+			class InstrukturExport implements FromArray, WithCustomStartCell, ShouldAutoSize, WithTitle, WithStyles //,WithDrawings
 			{
 
 				protected $judul = '';
@@ -37,12 +37,12 @@
 					$valueSheet = [];
 					$valueSheet[] = [$this->judul, ''];
 					$valueSheet[] = [''];
-					$valueSheet[] = ['No', "Nama", "Mitra", "Penanggung Jawab", "Alamat", "No Telpon", "Provinsi", "Kota", "Update Terakhir", "Update Oleh"];
+					$valueSheet[] = ['No', "Jenis Program", "Nama Instruktur", "Asal Institusi", "Jenis Instruktur", "Keterangan", "No Telpon", "Email", "Keterangan"];
 
 					//data
 					foreach ($this->data as $index => $item) {
 						$no = $index + 1;
-						$valueSheet[] = [$no, $item['nama_mitra '], $item['nama_pic'], $item['alamat'], $item['no_telp'], $item['propinsi'], $item['kabkota'], $item['update_terakhir'], $item['update_oleh']];
+						$valueSheet[] = [$no, $item['id_instruktur '], $item['nama_program'], $item['nama_instruktur'], $item['asal_institusi_instruktur'], $item['jenis_instruktur'], $item['keterangan'], $item['no_telp'], $item['email'], $item['keterangan']];
 					}
 
 					$this->lastRow = 4 + (count($valueSheet) - 3);

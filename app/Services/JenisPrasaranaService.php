@@ -2,8 +2,8 @@
 
 		namespace App\Services;
 
-		use App\Models\PrasaranaLahan;
-		use App\Exports\PrasaranaLahanExport;
+		use App\Models\DaftarReferensi;
+		use App\Exports\DaftarReferensiExport;
 		use GuzzleHttp\Client;
 		use Illuminate\Pagination\LengthAwarePaginator;
 		use Illuminate\Pagination\Paginator;
@@ -17,7 +17,7 @@
 		use PhpOffice\PhpWord\TemplateProcessor;
 
 
-		class PrasaranaLahanService
+		class JenisPrasaranaService
 		{
 
 			public function __construct()
@@ -69,13 +69,13 @@
 			 */
 			private function mapping(object $data)
 			{
-				$prasarana_lahan = $data->get()->toArray();
-				if (empty($prasarana_lahan)) {
+				$daftar_referensi = $data->get()->toArray();
+				if (empty($daftar_referensi)) {
 					return [];
 				}
-				foreach ($prasarana_lahan as $val) {
+				foreach ($daftar_referensi as $val) {
 					$result[] = array(
-						 'id_prasarana_lahan' => $val['id_prasarana_lahan'],  'jenis_prasarana' => $val['jenis_prasarana'],  'nama_prasarana_lahan' => $val['nama_prasarana_lahan'],  'nmupt' => $val['nmupt'],  'tgl_pengadaan' => $val['tgl_pengadaan'],  'keterangan' => $val['keterangan'],  'update_terakhir' => $val['update_terakhir'],  'update_oleh' => $val['update_oleh']
+						 'id_lookup' => $val['id_lookup'],  'groups' => $val['groups'],  'catatan' => $val['catatan']
 					);
 				}
 
@@ -95,15 +95,13 @@
 				$perPage = isset($data['per_page']) ? (int) $data['per_page'] : 10;
 				$keyword = isset($data['keyword']) ? $data['keyword'] : NULL;
 				$sort = isset($data['sort']) ? $data['sort'] : NULL;
-				$column = isset($data['column']) ? $data['column'] : 'id_prasarana_lahan';
+				$column = isset($data['column']) ? $data['column'] : 'id_lookup';
 
-				$defaultColumn = ['prasarana_lahan.id_prasarana_lahan', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_lahan.nama_prasarana_lahan', 'upt.uraian as nmupt', 'prasarana_lahan.tgl_pengadaan', 'prasarana_lahan.keterangan', 'prasarana_lahan.update_terakhir', 'prasarana_lahan.update_oleh'];
-				$q = PrasaranaLahan::query();
+				$defaultColumn = ['daftar_referensi.id_lookup', 'daftar_referensi.groups', 'daftar_referensi.catatan'];
+				$q = DaftarReferensi::query();
 				$q = $q->select($defaultColumn);
-				$q = $q->join('daftar_referensi', 'prasarana_lahan.id_jenis_prasarana_lahan', '=', 'daftar_referensi.id_lookup');
-				$q = $q->join('upt', 'prasarana_lahan.id_upt', '=', 'upt.id_upt');
 				
-				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana lahan');
+				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana');
 				$data = $this->mapping($q);
 				$collection = collect(array_values($data));
 
@@ -139,13 +137,13 @@
 			/**
 			 * Mapping details
 			 * 
-			 * @param object $prasarana_lahan
+			 * @param object $daftar_referensi
 			 * @return mixed
 			 */
-			public function show(object $prasarana_lahan)
+			public function show(object $daftar_referensi)
 			{
 				$data = array(
-					'id_prasarana_lahan' => $prasarana_lahan->id_prasarana_lahan, 'jenis_prasarana' => $prasarana_lahan->jenis_prasarana, 'nama_prasarana_lahan' => $prasarana_lahan->nama_prasarana_lahan, 'nmupt' => $prasarana_lahan->nmupt, 'tgl_pengadaan' => $prasarana_lahan->tgl_pengadaan, 'keterangan' => $prasarana_lahan->keterangan, 'update_terakhir' => $prasarana_lahan->update_terakhir, 'update_oleh' => $prasarana_lahan->update_oleh
+					'id_lookup' => $daftar_referensi->id_lookup, 'groups' => $daftar_referensi->groups, 'catatan' => $daftar_referensi->catatan
 				);
 				return $data;
 			}
@@ -158,13 +156,11 @@
 				$sort = $data['sort'] ?? NULL;
 				$column = $data['column'] ?? 'id';
 
-				$defaultColumn = ['prasarana_lahan.id_prasarana_lahan', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_lahan.nama_prasarana_lahan', 'upt.uraian as nmupt', 'prasarana_lahan.tgl_pengadaan', 'prasarana_lahan.keterangan', 'prasarana_lahan.update_terakhir', 'prasarana_lahan.update_oleh'];
-				$q = PrasaranaLahan::query();
+				$defaultColumn = ['daftar_referensi.id_lookup', 'daftar_referensi.groups', 'daftar_referensi.catatan'];
+				$q = DaftarReferensi::query();
 				$q = $q->select($defaultColumn);
-				$q = $q->join('daftar_referensi', 'prasarana_lahan.id_jenis_prasarana_lahan', '=', 'daftar_referensi.id_lookup');
-				$q = $q->join('upt', 'prasarana_lahan.id_upt', '=', 'upt.id_upt');
 				
-				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana lahan');
+				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana');
 				$data = $this->mapping($q);
 				$collection = collect(array_values($data));
 
@@ -198,8 +194,8 @@
 				}
 
 				//return $collection;
-				$judul = 'Daftar Prasarana Lahan';
-				return $file = Excel::download(new PrasaranaLahanExport($judul, $collection), 'Prasarana-Lahan' . date('Ymdhis') . '.xlsx');
+				$judul = 'Daftar Daftar Referensi';
+				return $file = Excel::download(new DaftarReferensiExport($judul, $collection), 'Daftar-Referensi' . date('Ymdhis') . '.xlsx');
 			}
 
 			public function printPDF($data)
@@ -210,13 +206,11 @@
 				$sort = $data['sort'] ?? NULL;
 				$column = $data['column'] ?? 'id';
 
-				$defaultColumn = ['prasarana_lahan.id_prasarana_lahan', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_lahan.nama_prasarana_lahan', 'upt.uraian as nmupt', 'prasarana_lahan.tgl_pengadaan', 'prasarana_lahan.keterangan', 'prasarana_lahan.update_terakhir', 'prasarana_lahan.update_oleh'];
-				$q = PrasaranaLahan::query();
+				$defaultColumn = ['daftar_referensi.id_lookup', 'daftar_referensi.groups', 'daftar_referensi.catatan'];
+				$q = DaftarReferensi::query();
 				$q = $q->select($defaultColumn);
-				$q = $q->join('daftar_referensi', 'prasarana_lahan.id_jenis_prasarana_lahan', '=', 'daftar_referensi.id_lookup');
-				$q = $q->join('upt', 'prasarana_lahan.id_upt', '=', 'upt.id_upt');
 				
-				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana lahan');
+				$q = $q->where('daftar_referensi.groups', '=', 'jenis prasarana');
 				$data = $this->mapping($q);
 				$collection = collect(array_values($data));
 
@@ -249,12 +243,12 @@
 					$collection = $paginate->getCollection();
 				}
 
-				$judul = 'Prasarana Lahan';
-				$columns = ["Jenis Prasarana", " Nama Prasarana", " UPT", " Tanggal Pengadaan", " Keterangan", " Update Terakhir", " Update Oleh" ];
+				$judul = 'Daftar Referensi';
+				$columns = ["Deskripsi", "Catatan"];
 
-				$columnOfValues = ['prasarana_lahan.id_prasarana_lahan', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_lahan.nama_prasarana_lahan', 'upt.uraian as nmupt', 'prasarana_lahan.tgl_pengadaan', 'prasarana_lahan.keterangan', 'prasarana_lahan.update_terakhir', 'prasarana_lahan.update_oleh'];
-				$sizeCellcolumns = ["Jenis Prasarana" => 1000, " Nama Prasarana" => 1000, " UPT" => 1000, " Tanggal Pengadaan" => 1000, " Keterangan" => 1000, " Update Terakhir" => 1000, " Update Oleh"  => 1000];
-				$sizeCells = ['jenis_prasarana' => 1000, 'nama_prasarana_lahan' => 1000, 'nmupt' => 1000, 'tgl_pengadaan' => 1000, 'keterangan' => 1000, 'update_terakhir' => 1000, 'update_oleh' => 1000];
+				$columnOfValues = ['daftar_referensi.id_lookup', 'daftar_referensi.groups', 'daftar_referensi.catatan'];
+				$sizeCellcolumns = ["Deskripsi" => 1000, "Catatan" => 1000];
+				$sizeCells = ['groups' => 1000, 'catatan' => 1000];
 				$collection = json_decode(json_encode($collection), true);
 
 				setlocale(LC_TIME, 'id_ID');
@@ -303,11 +297,11 @@
 
 				$templateProcessor->setComplexBlock('tabel', $table);
 
-				$namaFileWord = 'Prasarana-Lahan' . Carbon::now()->format('Ymdhis') . '.doc';
+				$namaFileWord = 'Daftar-Referensi' . Carbon::now()->format('Ymdhis') . '.doc';
 				$templateProcessor->saveAs(Storage_path('temp/word/' . $namaFileWord));
 
 
-				$dataFile['namaFilePdf'] = 'Prasarana-Lahan' . Carbon::now()->format('Ymdhis') . '.pdf';
+				$dataFile['namaFilePdf'] = 'Daftar-Referensi' . Carbon::now()->format('Ymdhis') . '.pdf';
 				$dataFile['pathfile'] = Storage_path('temp/word/' . $namaFileWord);
 
 				$pdf = $this->exportToPdf($dataFile);
