@@ -14,7 +14,6 @@ class DaftarReferensiService
 
     public function __construct()
     {
-
     }
 
     /**
@@ -67,14 +66,14 @@ class DaftarReferensiService
             return [];
         }
         foreach ($daftar_referensi as $val) {
-            $result[] = array (
-  'id_lookup' => $val['id_lookup'],
-  'groups' => $val['groups'],
-  'deskripsi' => $val['deskripsi'],
-  'catatan' => $val['catatan'],
-  'content' => $val['content'],
-  'status_download' => $val['status_download'],
-);
+            $result[] = array(
+                'id_lookup' => $val['id_lookup'],
+                'groups' => $val['groups'],
+                'deskripsi' => $val['deskripsi'],
+                'catatan' => $val['catatan'],
+                'content' => $val['content'],
+                'status_download' => $val['status_download'],
+            );
         }
 
         return $result;
@@ -93,16 +92,20 @@ class DaftarReferensiService
         $perPage = isset($data['per_page']) ? (int) $data['per_page'] : 10;
         $keyword = isset($data['keyword']) ? $data['keyword'] : NULL;
         $sort = isset($data['sort']) ? $data['sort'] : NULL;
+        $groups = isset($data['groups']) ? $data['groups'] : NULL;
         $column = isset($data['column']) ? $data['column'] : 'id_lookup';
 
-        $defaultColumn = ["id_lookup","groups","deskripsi","catatan","content","status_download"];
+
+
+        $defaultColumn = ["id_lookup", "groups", "deskripsi", "catatan", "content", "status_download"];
         $q = DaftarReferensi::query();
         $q = $q->select($defaultColumn);
+        $q = $q->where('groups', '=', $groups);
         $data = $this->mapping($q);
         $collection = collect(array_values($data));
 
         if (!is_null($keyword) && !is_null($column)) {
-            $collection = $collection->filter(function ($value, $key) use($keyword, $column) {
+            $collection = $collection->filter(function ($value, $key) use ($keyword, $column) {
                 return (false !== stripos($value[$column], $keyword));
             });
         }
@@ -138,15 +141,14 @@ class DaftarReferensiService
      */
     public function show(object $daftar_referensi)
     {
-        $data = array (
-  'id_lookup' => $daftar_referensi->id_lookup,
-  'groups' => $daftar_referensi->groups,
-  'deskripsi' => $daftar_referensi->deskripsi,
-  'catatan' => $daftar_referensi->catatan,
-  'content' => $daftar_referensi->content,
-  'status_download' => $daftar_referensi->status_download,
-);
+        $data = array(
+            'id_lookup' => $daftar_referensi->id_lookup,
+            'groups' => $daftar_referensi->groups,
+            'deskripsi' => $daftar_referensi->deskripsi,
+            'catatan' => $daftar_referensi->catatan,
+            'content' => $daftar_referensi->content,
+            'status_download' => $daftar_referensi->status_download,
+        );
         return $data;
     }
-
 }

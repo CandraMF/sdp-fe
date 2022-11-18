@@ -16,18 +16,18 @@ class MitraKontrakController extends Controller
     public function __construct()
     {
         $this->service = new MitraKontrakService();
-        $this->rules = array (
-  'id_mitra' => 'nullable',
-  'jenis_mitra' => 'nullable',
-  'kontrak_dengan' => 'nullable',
-  'id_kanwil' => 'nullable',
-  'id_upt' => 'nullable',
-  'nomor_kontrak' => 'nullable',
-  'kontrak_awal' => 'nullable',
-  'kontrak_akhir' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_mitra' => 'nullable',
+            'jenis_mitra' => 'nullable',
+            'kontrak_dengan' => 'nullable',
+            'id_kanwil' => 'nullable',
+            'id_upt' => 'nullable',
+            'nomor_kontrak' => 'nullable',
+            'kontrak_awal' => 'nullable',
+            'kontrak_akhir' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -130,111 +130,111 @@ class MitraKontrakController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_kontrak',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_mitra',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'jenis_mitra',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'kontrak_dengan',
-    'Type' => 'VARCHAR(100)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'id_kanwil',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'id_upt',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'nomor_kontrak',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'kontrak_awal',
-    'Type' => 'DATETIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  8 => 
-  array (
-    'Field' => 'kontrak_akhir',
-    'Type' => 'DATETIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  9 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  10 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_kontrak',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_mitra',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'jenis_mitra',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'kontrak_dengan',
+                'Type' => 'VARCHAR(100)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'id_kanwil',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'id_upt',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'nomor_kontrak',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'kontrak_awal',
+                'Type' => 'DATETIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            8 =>
+            array(
+                'Field' => 'kontrak_akhir',
+                'Type' => 'DATETIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            9 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            10 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'mitrakontrak', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_kontrak', 
+            'name' => 'mitrakontrak',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_kontrak',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/mitrakontrak'
@@ -332,7 +332,6 @@ class MitraKontrakController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -387,7 +386,6 @@ class MitraKontrakController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -426,7 +424,5 @@ class MitraKontrakController extends Controller
                 'data' => null
             ]);
         }
-
     }
-
 }

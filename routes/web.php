@@ -23,22 +23,6 @@ $router->get("/", function () use ($router) {
     return $router->app->version();
 });
 
-$router->get("/routes", function () {
-    $except = ["routes", "docs", "swagger", "documentation", "ping", "health", "oauth2", "test"];
-
-    $x = array();
-    $routes = Route::getRoutes();
-    foreach ($routes as $route) {
-        if (!Str::contains($route["uri"], $except) && $route["uri"] != "/") {
-            $x[] = [
-                "method" => $route["method"],
-                "uri" => $route["uri"],
-                "base_url" => url("/")
-            ];
-        }
-    }
-    return response()->json($x);
-});
 
 $router->group(["prefix" => "ref"], function () use ($router) {
 
