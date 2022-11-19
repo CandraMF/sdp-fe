@@ -16,15 +16,15 @@ class PrasaranaRuangController extends Controller
     public function __construct()
     {
         $this->service = new PrasaranaRuangService();
-        $this->rules = array (
-  'id_jenis_prasarana_ruang' => 'nullable',
-  'nama_prasarana_ruang' => 'nullable',
-  'id_upt' => 'nullable',
-  'tgl_pengadaan' => 'nullable',
-  'keterangan' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_jenis_prasarana_ruang' => 'nullable',
+            'nama_prasarana_ruang' => 'nullable',
+            'id_upt' => 'nullable',
+            'tgl_pengadaan' => 'nullable',
+            'keterangan' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -127,84 +127,84 @@ class PrasaranaRuangController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_prasarana_ruang',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_jenis_prasarana_ruang',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'nama_prasarana_ruang',
-    'Type' => 'VARCHAR(100)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'id_upt',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'tgl_pengadaan',
-    'Type' => 'DATETIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'keterangan',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_prasarana_ruang',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_jenis_prasarana_ruang',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'nama_prasarana_ruang',
+                'Type' => 'VARCHAR(100)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'id_upt',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'tgl_pengadaan',
+                'Type' => 'DATETIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'keterangan',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'prasaranaruang', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_prasarana_ruang', 
+            'name' => 'prasaranaruang',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_prasarana_ruang',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/prasaranaruang'
@@ -302,7 +302,6 @@ class PrasaranaRuangController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -357,7 +356,6 @@ class PrasaranaRuangController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -396,7 +394,22 @@ class PrasaranaRuangController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
+    public function exportExcel(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->exportExcel($data);
+
+        return $export;
+    }
+
+
+    public function exportPdf(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->printPDF($data);
+
+        return $export;
+    }
 }

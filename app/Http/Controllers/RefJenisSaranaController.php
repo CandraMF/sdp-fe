@@ -19,20 +19,20 @@ class RefJenisSaranaController extends Controller
         $this->service = new RefJenisSaranaService();
     }
 
-    
+
     public function index(Request $request)
     {
         $data = $request->toArray();
         $dt = $this->service->search($data, $request->url());
-		
-		return response()->json([
-			'success' => true,
-			'message' => "Process Success!",
-			'data' => $dt
-		], 200);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Process Success!",
+            'data' => $dt
+        ], 200);
     }
 
-   
+
     public function dropdown(Request $request)
     {
         $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["identitas_id"];
@@ -71,8 +71,8 @@ class RefJenisSaranaController extends Controller
         return response()->json($schema);
     }
 
-   
-    
+
+
 
     public function exportExcel(Request $request)
     {
@@ -82,7 +82,7 @@ class RefJenisSaranaController extends Controller
         return $export;
     }
 
-    
+
     public function exportPdf(Request $request)
     {
         $data = $request->toArray();
@@ -91,22 +91,22 @@ class RefJenisSaranaController extends Controller
         return $export;
     }
 
-	////// SHOW, STORE, UPDATE, DESTROY (CRUD)
+    ////// SHOW, STORE, UPDATE, DESTROY (CRUD)
 
-	
 
-	public function show($id)
-    {	$dt = RefJenisSarana::where('id_jenissarana', $id)->firstOrFail();
 
-		return response()->json([
-			'success' => true,
-			'message' => "Process Success!",
-			'data' => $dt
-		], 200);
+    public function show($id)
+    {
+        $dt = RefJenisSarana::where('id_jenissarana', $id)->firstOrFail();
 
+        return response()->json([
+            'success' => true,
+            'message' => "Process Success!",
+            'data' => $dt
+        ], 200);
     }
 
-	public function store(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'jenissarana' => 'required',
@@ -122,8 +122,8 @@ class RefJenisSaranaController extends Controller
             $dt->updateterakhir = date('Y-m-d H:i:s');
             #$dt->updateoleh = $user['preferred_username'];
             $dt->save();
-           
-			return response()->json([
+
+            return response()->json([
                 'success' => true,
                 'message' => "Process Success!",
                 'data' => $dt
@@ -140,15 +140,15 @@ class RefJenisSaranaController extends Controller
     public function update(Request $request, $id)
     {
         try {
-           # $user = Auth::user();
+            # $user = Auth::user();
             $dt = RefJenisSarana::findOrFail($id);
             $dt->jenissarana = $request->jenissarana;
             $dt->keterangan = $request->keterangan;
             $dt->updateterakhir = date('Y-m-d H:i:s');
             #$dt->updateoleh = $user['preferred_username'];
             $dt->save();
-			
-          	return response()->json([
+
+            return response()->json([
                 'success' => true,
                 'message' => "Process Success!",
                 'data' => $dt
@@ -163,7 +163,7 @@ class RefJenisSaranaController extends Controller
     }
 
 
-	public function destroy($id)
+    public function destroy($id)
     {
         $rupbarang = RefJenisSarana::where('id_jenissarana', $id)->firstOrFail();
 

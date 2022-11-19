@@ -16,15 +16,15 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function __construct()
     {
         $this->service = new DaftarPesertaPembinaanKepribadianService();
-        $this->rules = array (
-  'id_jadwal_pk' => 'nullable',
-  'id_peserta' => 'nullable',
-  'status' => 'nullable',
-  'keterangan' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-  'verifikasi_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_jadwal_pk' => 'nullable',
+            'id_peserta' => 'nullable',
+            'status' => 'nullable',
+            'keterangan' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+            'verifikasi_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -127,84 +127,84 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_daftar_ppk',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_jadwal_pk',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'id_peserta',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'status',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'keterangan',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'verifikasi_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_daftar_ppk',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_jadwal_pk',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'id_peserta',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'status',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'keterangan',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'verifikasi_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'daftarpesertapembinaankepribadian', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_daftar_ppk', 
+            'name' => 'daftarpesertapembinaankepribadian',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_daftar_ppk',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/daftarpesertapembinaankepribadian'
@@ -302,7 +302,6 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -357,7 +356,6 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -396,7 +394,5 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
-
 }

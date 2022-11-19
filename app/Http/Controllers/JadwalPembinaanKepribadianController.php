@@ -16,19 +16,19 @@ class JadwalPembinaanKepribadianController extends Controller
     public function __construct()
     {
         $this->service = new JadwalPembinaanKepribadianService();
-        $this->rules = array (
-  'id_pembinaan_kepribadian' => 'nullable',
-  'hari' => 'nullable',
-  'tanggal' => 'nullable',
-  'jam_mulai' => 'nullable',
-  'jam_selesai' => 'nullable',
-  'id_instruktur' => 'nullable',
-  'materi_pembinaan_kepribadian' => 'nullable',
-  'foto' => 'nullable',
-  'status' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_pembinaan_kepribadian' => 'nullable',
+            'hari' => 'nullable',
+            'tanggal' => 'nullable',
+            'jam_mulai' => 'nullable',
+            'jam_selesai' => 'nullable',
+            'id_instruktur' => 'nullable',
+            'materi_pembinaan_kepribadian' => 'nullable',
+            'foto' => 'nullable',
+            'status' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -131,120 +131,120 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_jadwal_pk',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_pembinaan_kepribadian',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'hari',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'tanggal',
-    'Type' => 'DATETIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'jam_mulai',
-    'Type' => 'TIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'jam_selesai',
-    'Type' => 'TIME',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'id_instruktur',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'materi_pembinaan_kepribadian',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  8 => 
-  array (
-    'Field' => 'foto',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  9 => 
-  array (
-    'Field' => 'status',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  10 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  11 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_jadwal_pk',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_pembinaan_kepribadian',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'hari',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'tanggal',
+                'Type' => 'DATETIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'jam_mulai',
+                'Type' => 'TIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'jam_selesai',
+                'Type' => 'TIME',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'id_instruktur',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'materi_pembinaan_kepribadian',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            8 =>
+            array(
+                'Field' => 'foto',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            9 =>
+            array(
+                'Field' => 'status',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            10 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            11 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'jadwalpembinaankepribadian', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_jadwal_pk', 
+            'name' => 'jadwalpembinaankepribadian',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_jadwal_pk',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/jadwalpembinaankepribadian'
@@ -342,7 +342,6 @@ class JadwalPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -397,7 +396,6 @@ class JadwalPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -436,7 +434,5 @@ class JadwalPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
-
 }

@@ -16,20 +16,20 @@ class StatusPrasaranaLahanController extends Controller
     public function __construct()
     {
         $this->service = new StatusPrasaranaLahanService();
-        $this->rules = array (
-  'id_prasarana_lahan' => 'nullable',
-  'tahun' => 'nullable',
-  'bulan' => 'nullable',
-  'status' => 'nullable',
-  'kepemilkan' => 'nullable',
-  'luas_dipakai' => 'nullable',
-  'lahan_tidur' => 'nullable',
-  'satuan' => 'nullable',
-  'foto' => 'nullable',
-  'keterangan' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_prasarana_lahan' => 'nullable',
+            'tahun' => 'nullable',
+            'bulan' => 'nullable',
+            'status' => 'nullable',
+            'kepemilkan' => 'nullable',
+            'luas_dipakai' => 'nullable',
+            'lahan_tidur' => 'nullable',
+            'satuan' => 'nullable',
+            'foto' => 'nullable',
+            'keterangan' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -132,129 +132,129 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_status_prasarana_lahan',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_prasarana_lahan',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'tahun',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'bulan',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'status',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'kepemilkan',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'luas_dipakai',
-    'Type' => 'DECIMAL(, 6)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'lahan_tidur',
-    'Type' => 'DECIMAL(, 6)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  8 => 
-  array (
-    'Field' => 'satuan',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  9 => 
-  array (
-    'Field' => 'foto',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  10 => 
-  array (
-    'Field' => 'keterangan',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  11 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  12 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_status_prasarana_lahan',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_prasarana_lahan',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'tahun',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'bulan',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'status',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'kepemilkan',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'luas_dipakai',
+                'Type' => 'DECIMAL(, 6)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'lahan_tidur',
+                'Type' => 'DECIMAL(, 6)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            8 =>
+            array(
+                'Field' => 'satuan',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            9 =>
+            array(
+                'Field' => 'foto',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            10 =>
+            array(
+                'Field' => 'keterangan',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            11 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            12 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'statusprasaranalahan', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_status_prasarana_lahan', 
+            'name' => 'statusprasaranalahan',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_status_prasarana_lahan',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/statusprasaranalahan'
@@ -338,6 +338,23 @@ class StatusPrasaranaLahanController extends Controller
     {
         $this->validate($request, $this->rules);
 
+        //   $request->foto->store('status_prasarana_lahan', 'public');
+
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $allowedfileExtention = ['png', 'jpg', 'jpeg'];
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowedfileExtention);
+
+            if ($check) {
+                $name = time() . $file->getClientOriginalExtension();
+                $file->move('images', $name);
+                $request->merge(['foto' => $name]);
+            }
+        }
+
+
         $statusprasaranalahan = StatusPrasaranaLahan::create($request->all());
         if ($statusprasaranalahan->exists) {
             return response()->json([
@@ -352,7 +369,6 @@ class StatusPrasaranaLahanController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -394,6 +410,20 @@ class StatusPrasaranaLahanController extends Controller
         $this->validate($request, $this->rules);
 
         $statusprasaranalahan = StatusPrasaranaLahan::where('id_status_prasarana_lahan', $id)->firstOrFail();
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $allowedfileExtention = ['png', 'jpg', 'jpeg'];
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowedfileExtention);
+
+            if ($check) {
+                $name = time() . $file->getClientOriginalExtension();
+                $file->move('images', $name);
+                $request->merge(['foto' => $name]);
+            }
+        }
+
         if ($statusprasaranalahan->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -407,7 +437,6 @@ class StatusPrasaranaLahanController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -446,7 +475,22 @@ class StatusPrasaranaLahanController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
+    public function exportExcel(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->exportExcel($data);
+
+        return $export;
+    }
+
+
+    public function exportPdf(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->printPDF($data);
+
+        return $export;
+    }
 }

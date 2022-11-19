@@ -16,17 +16,17 @@ class PesertaPembinaanKepribadianController extends Controller
     public function __construct()
     {
         $this->service = new PesertaPembinaanKepribadianService();
-        $this->rules = array (
-  'id_daftar_pembinaan_kepribadian' => 'nullable',
-  'id_wbp' => 'nullable',
-  'kehadiran' => 'nullable',
-  'no_sertifikat' => 'nullable',
-  'file_sertifikat' => 'nullable',
-  'nilai' => 'nullable',
-  'predikat' => 'nullable',
-  'update_terakhir' => 'nullable',
-  'update_oleh' => 'nullable',
-);
+        $this->rules = array(
+            'id_daftar_pembinaan_kepribadian' => 'nullable',
+            'id_wbp' => 'nullable',
+            'kehadiran' => 'nullable',
+            'no_sertifikat' => 'nullable',
+            'file_sertifikat' => 'nullable',
+            'nilai' => 'nullable',
+            'predikat' => 'nullable',
+            'update_terakhir' => 'nullable',
+            'update_oleh' => 'nullable',
+        );
     }
 
     /**
@@ -129,102 +129,102 @@ class PesertaPembinaanKepribadianController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_peserta_pk',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_daftar_pembinaan_kepribadian',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'id_wbp',
-    'Type' => 'INT()',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'kehadiran',
-    'Type' => 'TINYINT(1)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'no_sertifikat',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'file_sertifikat',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'nilai',
-    'Type' => 'DECIMAL(, 3)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'predikat',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  8 => 
-  array (
-    'Field' => 'update_terakhir',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  9 => 
-  array (
-    'Field' => 'update_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_peserta_pk',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_daftar_pembinaan_kepribadian',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'id_wbp',
+                'Type' => 'INT()',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'kehadiran',
+                'Type' => 'TINYINT(1)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'no_sertifikat',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'file_sertifikat',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'nilai',
+                'Type' => 'DECIMAL(, 3)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'predikat',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            8 =>
+            array(
+                'Field' => 'update_terakhir',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            9 =>
+            array(
+                'Field' => 'update_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'pesertapembinaankepribadian', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_peserta_pk', 
+            'name' => 'pesertapembinaankepribadian',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_peserta_pk',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/pesertapembinaankepribadian'
@@ -322,7 +322,6 @@ class PesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -377,7 +376,6 @@ class PesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -416,7 +414,5 @@ class PesertaPembinaanKepribadianController extends Controller
                 'data' => null
             ]);
         }
-
     }
-
 }
