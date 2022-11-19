@@ -265,7 +265,28 @@ class DaftarReferensiController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, $this->rules);
+
+
+        $txtgroups = explode(" ", $request->groups);
+        $firtword = "";
+        foreach ($txtgroups as $w) {
+            $firtword .= mb_substr($w, 0, 1);
+        }
+
+
+        $last = DaftarReferensi::whereGroups($request->groups)->orderBy('id_lookup', 'desc')->first();
+        $str_id_lookup = !empty($last->id_lookup) ? $last->id_lookup : 0;
+
+        $digit = floatval(substr(floatval($str_id_lookup), 0, 2)) + 1;
+
+        $nol = "00";
+        $number = substr($nol, 0, "-" . strlen(trim($digit))) . $digit;
+
+        $prm_id_lookup = $firtword . $number . rand(10, 99);
+        $request->merge(['id_lookup' => $prm_id_lookup]);
+
 
         $daftarreferensi = DaftarReferensi::create($request->all());
         if ($daftarreferensi->exists) {
