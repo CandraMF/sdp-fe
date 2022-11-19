@@ -240,3 +240,71 @@ $router->put("/daftarreferensi/{id}", "DaftarReferensiController@update");
 $router->delete("/daftarreferensi/{id}", "DaftarReferensiController@destroy");
 $router->get("/daftarreferensi/export-excel", "DaftarReferensiController@exportExcel");
 $router->get("/daftarreferensi/export-pdf", "DaftarReferensiController@exportPdf");
+
+
+
+/**
+ * Dati2 routes
+ */
+$router->get("/dati2/schema", "Dati2Controller@schema");
+$router->get("/dati2", "Dati2Controller@index");
+$router->get("/dati2/dropdown", "Dati2Controller@dropdown");
+$router->post("/dati2", "Dati2Controller@store");
+$router->get("/dati2/{id}", "Dati2Controller@show");
+$router->put("/dati2/{id}", "Dati2Controller@update");
+$router->delete("/dati2/{id}", "Dati2Controller@destroy");
+
+/**
+ * Provinsi routes
+ */
+$router->get("/provinsi/schema", "ProvinsiController@schema");
+$router->get("/provinsi", "ProvinsiController@index");
+$router->get("/provinsi/dropdown", "ProvinsiController@dropdown");
+$router->post("/provinsi", "ProvinsiController@store");
+$router->get("/provinsi/{id}", "ProvinsiController@show");
+$router->put("/provinsi/{id}", "ProvinsiController@update");
+$router->delete("/provinsi/{id}", "ProvinsiController@destroy");
+
+/**
+ * Kanwil routes
+ */
+$router->get("/kanwil/schema", "KanwilController@schema");
+$router->get("/kanwil", "KanwilController@index");
+$router->get("/kanwil/dropdown", "KanwilController@dropdown");
+$router->post("/kanwil", "KanwilController@store");
+$router->get("/kanwil/{id}", "KanwilController@show");
+$router->put("/kanwil/{id}", "KanwilController@update");
+$router->delete("/kanwil/{id}", "KanwilController@destroy");
+
+/**
+ * Identitas routes
+ */
+$router->get("/identitas/schema", "IdentitasController@schema");
+$router->get("/identitas", "IdentitasController@index");
+$router->get("/identitas/dropdown", "IdentitasController@dropdown");
+$router->post("/identitas", "IdentitasController@store");
+$router->get("/identitas/{id}", "IdentitasController@show");
+$router->put("/identitas/{id}", "IdentitasController@update");
+$router->delete("/identitas/{id}", "IdentitasController@destroy");
+
+/**
+ * Pegawai routes
+ */
+$router->get("/pegawai/schema", "PegawaiController@schema");
+$router->get("/pegawai", "PegawaiController@index");
+$router->get("/pegawai/dropdown", "PegawaiController@dropdown");
+$router->post("/pegawai", "PegawaiController@store");
+$router->get("/pegawai/{id}", "PegawaiController@show");
+$router->put("/pegawai/{id}", "PegawaiController@update");
+$router->delete("/pegawai/{id}", "PegawaiController@destroy");
+
+/**
+ * Upt routes
+ */
+$router->get("/upt/schema", "UptController@schema");
+$router->get("/upt", "UptController@index");
+$router->get("/upt/dropdown", "UptController@dropdown");
+$router->post("/upt", "UptController@store");
+$router->get("/upt/{id}", "UptController@show");
+$router->put("/upt/{id}", "UptController@update");
+$router->delete("/upt/{id}", "UptController@destroy");
