@@ -16,12 +16,12 @@ class DaftarReferensiController extends Controller
     public function __construct()
     {
         $this->service = new DaftarReferensiService();
-        $this->rules = array (
-  'groups' => 'nullable',
-  'deskripsi' => 'nullable',
-  'catatan' => 'nullable',
-  'content' => 'nullable',
-);
+        $this->rules = array(
+            'groups' => 'nullable',
+            'deskripsi' => 'nullable',
+            'catatan' => 'nullable',
+            'content' => 'nullable',
+        );
     }
 
     /**
@@ -124,66 +124,66 @@ class DaftarReferensiController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_lookup',
-    'Type' => 'VARCHAR(35)',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  1 => 
-  array (
-    'Field' => 'groups',
-    'Type' => 'VARCHAR(100)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'deskripsi',
-    'Type' => 'VARCHAR(255)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'catatan',
-    'Type' => 'VARCHAR(255)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'content',
-    'Type' => 'TEXT',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'status_download',
-    'Type' => 'TINYINT(1)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => '0',
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_lookup',
+                'Type' => 'VARCHAR(35)',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            1 =>
+            array(
+                'Field' => 'groups',
+                'Type' => 'VARCHAR(100)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'deskripsi',
+                'Type' => 'VARCHAR(255)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'catatan',
+                'Type' => 'VARCHAR(255)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'content',
+                'Type' => 'TEXT',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'status_download',
+                'Type' => 'TINYINT(1)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => '0',
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'daftarreferensi', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_lookup', 
+            'name' => 'daftarreferensi',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_lookup',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/daftarreferensi'
@@ -281,7 +281,6 @@ class DaftarReferensiController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -336,7 +335,6 @@ class DaftarReferensiController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -375,7 +373,22 @@ class DaftarReferensiController extends Controller
                 'data' => null
             ]);
         }
-
     }
 
+    public function exportExcel(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->exportExcel($data);
+
+        return $export;
+    }
+
+
+    public function exportPdf(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->printPDF($data);
+
+        return $export;
+    }
 }

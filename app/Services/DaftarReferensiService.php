@@ -3,11 +3,18 @@
 namespace App\Services;
 
 use App\Models\DaftarReferensi;
+use App\Exports\DaftarReferensiExport;
 use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class DaftarReferensiService
 {
@@ -150,5 +157,190 @@ class DaftarReferensiService
             'status_download' => $daftar_referensi->status_download,
         );
         return $data;
+    }
+
+    public function exportExcel($data)
+    {
+        $page = $data['page'] ?? 1;
+        $perPage = $data['per_page'] ?? 10;
+        $keyword = $data['keyword'] ?? NULL;
+        $sort = $data['sort'] ?? NULL;
+        $column = $data['column'] ?? 'id';
+        $groups = isset($data['groups']) ? $data['groups'] : NULL;
+
+        $defaultColumn = ["id_lookup", "groups", "deskripsi", "catatan", "content", "status_download"];
+        $q = DaftarReferensi::query();
+        $q = $q->select($defaultColumn);
+
+        $q = $q->where('daftar_referensi.groups', '=', $groups);
+        $data = $this->mapping($q);
+        $collection = collect(array_values($data));
+
+        if (!is_null($keyword) && !is_null($column)) {
+            $collection = $collection->filter(function ($value, $key) use ($keyword, $column) {
+                return (false !== stripos($value[$column], $keyword));
+            });
+        }
+
+        if (!is_null($sort)) {
+            $exSort = explode(',', $sort);
+            foreach ($exSort as $key => $value) {
+                $xdir = explode(':', $value);
+                if (empty($xdir[0])) {
+                    return response()->json([
+                        'message' => 'Invalid format sort.'
+                    ]);
+                }
+                $colSort = $xdir[0];
+                $direction = empty($xdir[1]) ? 'asc' : $xdir[1];
+                $sorted[] = [$colSort, $direction];
+            }
+            $collection = $collection->sortBy($sorted);
+        }
+
+        //manual pagination
+        $collection = $collection->values()->toArray();
+        if ($page != null && $perPage != null) {
+            $startingPoint = ($page * $perPage) - $perPage;
+            $collection = array_slice($collection, $startingPoint, $perPage, false);
+        }
+
+        //return $collection;
+        $judul = 'Daftar Daftar Referensi';
+        return $file = Excel::download(new DaftarReferensiExport($judul, $collection), 'Daftar-Referensi' . date('Ymdhis') . '.xlsx');
+    }
+
+    public function printPDF($data)
+    {
+        $page = $data['page'] ?? 1;
+        $perPage = $data['per_page'] ?? 10;
+        $keyword = $data['keyword'] ?? NULL;
+        $sort = $data['sort'] ?? NULL;
+        $column = $data['column'] ?? 'id';
+        $groups = isset($data['groups']) ? $data['groups'] : NULL;
+
+        $defaultColumn = ["id_lookup", "groups", "deskripsi", "catatan", "content", "status_download"];
+        $q = DaftarReferensi::query();
+        $q = $q->select($defaultColumn);
+
+        $q = $q->where('daftar_referensi.groups', '=', $groups);
+        $data = $this->mapping($q);
+        $collection = collect(array_values($data));
+
+        if (!is_null($keyword) && !is_null($column)) {
+            $collection = $collection->filter(function ($value, $key) use ($keyword, $column) {
+                return (false !== stripos($value->$column, $keyword));
+            });
+        }
+
+        if (!is_null($sort)) {
+            $exSort = explode(',', $sort);
+            foreach ($exSort as $key => $value) {
+                $xdir = explode(':', $value);
+                if (empty($xdir[0])) {
+                    return response()->json([
+                        'message' => 'Invalid format sort.'
+                    ]);
+                }
+                $colSort = $xdir[0];
+                $direction = empty($xdir[1]) ? 'asc' : $xdir[1];
+                $sorted[] = [$colSort, $direction];
+            }
+            $collection = $collection->sortBy($sorted);
+        }
+
+        $collection->all();
+
+        if (!empty($data['page']) && !empty($data['per_page'])) {
+            $paginate = $this->paginate($collection, $perPage, $page);
+            $collection = $paginate->getCollection();
+        }
+
+        $judul = 'Daftar Referensi';
+        $columns = ["Deskripsi", "Catatan"];
+
+        $columnOfValues = ['daftar_referensi.id_lookup', 'daftar_referensi.groups', 'daftar_referensi.catatan'];
+        $sizeCellcolumns = ["Deskripsi" => 1000, "Catatan" => 1000];
+        $sizeCells = ['groups' => 1000, 'catatan' => 1000];
+        $collection = json_decode(json_encode($collection), true);
+
+        setlocale(LC_TIME, 'id_ID');
+        Carbon::setLocale('id');
+
+        $templateProcessor = new TemplateProcessor(Storage_path('template/word/base_template_word.docx'));
+        $templateProcessor->setValue('judul', $judul);
+        $templateProcessor->setValue('tglCetak', Carbon::now()->format('d/m/Y'));
+        //$templateProcessor->setValue('tabel', $tablexml);
+
+        $sectionStyle = [
+            'orientation' => 'landscape',
+            'marginTop' => 600,
+            'colsNum' => 2,
+        ];
+
+        //$table = new Table(array('borderSize' => 12, 'borderColor' => 'green', 'width' => 6000));
+        $table = new Table(['borderSize' => 5, 'borderColor' => '1e1e1e', 'width' => 20000, 'cellMargin' => 75]);
+        $firstRowStyle = ['bgColor' => 'e5eecc'];
+        $cellHCentered = ['alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER];
+        $cellVCentered = ['valign' => 'center'];
+        $styleCell = ['name' => 'TimesNewRomanPSMT', 'size' => '10', 'bold' => false];
+
+        //tabel header
+        $table->addRow();
+        foreach ($columns as $column) {
+            if ($column == 'No' || $column == 'no' || $column == 'Nomor' || $column == 'Nomer') {
+                $table->addCell($sizeCellcolumns[$column], $firstRowStyle)->addText(htmlspecialchars($column), $styleCell, $cellHCentered);
+            } else {
+                $table->addCell($sizeCellcolumns[$column], $firstRowStyle)->addText(htmlspecialchars($column), $styleCell, $cellHCentered);
+            }
+        }
+
+        //tabel body
+        foreach ($collection as $index => $item) {
+            $no = $index + 1;
+            $table->addRow();
+            foreach ($columnOfValues as $columnOfValue) {
+                if ($columnOfValue == 'No' || $columnOfValue == 'no' || $columnOfValue == 'Nomor' || $columnOfValue == 'Nomer') {
+                    $table->addCell($sizeCells[$columnOfValue])->addText(htmlspecialchars($no), $styleCell, $cellHCentered);
+                } else {
+                    $table->addCell($sizeCells[$columnOfValue], $cellVCentered)->addText(htmlspecialchars(!empty($item[$columnOfValue]) ? $item[$columnOfValue] : ''), $styleCell);
+                }
+            }
+        }
+
+        $templateProcessor->setComplexBlock('tabel', $table);
+
+        $namaFileWord = 'Daftar-Referensi' . Carbon::now()->format('Ymdhis') . '.doc';
+        $templateProcessor->saveAs(Storage_path('temp/word/' . $namaFileWord));
+
+
+        $dataFile['namaFilePdf'] = 'Daftar-Referensi' . Carbon::now()->format('Ymdhis') . '.pdf';
+        $dataFile['pathfile'] = Storage_path('temp/word/' . $namaFileWord);
+
+        $pdf = $this->exportToPdf($dataFile);
+
+        //delete file
+        File::delete(Storage_path('temp/word/' . $namaFileWord));
+
+        return $pdf;
+    }
+
+    public function exportToPdf($dataFile)
+    {
+
+        $domPdfPath = base_path('vendor/dompdf/dompdf');
+        \PhpOffice\PhpWord\Settings::setPdfRendererPath($domPdfPath);
+        \PhpOffice\PhpWord\Settings::setPdfRendererName('DomPDF');
+
+        //Load word file
+        $Content = \PhpOffice\PhpWord\IOFactory::load($dataFile['pathfile']);
+
+        //Save it into PDF
+        $PDFWriter = \PhpOffice\PhpWord\IOFactory::createWriter($Content, 'PDF');
+
+        $filename = Storage_path('temp/pdf/' . $dataFile['namaFilePdf']);
+        $contents = $PDFWriter->save($filename);
+
+        return response()->download($filename);
     }
 }
