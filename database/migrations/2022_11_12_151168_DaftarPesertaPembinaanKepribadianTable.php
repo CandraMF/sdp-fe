@@ -16,7 +16,7 @@
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
 				$table->string('verifikasi_oleh',32)->nullable();
-				$table->integer('id_daftar_ppk')->primary();
+				$table->bigIncrements('id_daftar_ppk')->primary();
 			});
 		}
 

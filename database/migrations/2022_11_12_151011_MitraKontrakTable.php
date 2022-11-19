@@ -19,7 +19,7 @@
 				$table->date('kontrak_akhir')->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
-				$table->integer('id_kontrak')->primary();
+				$table->bigIncrements('id_kontrak')->primary();
 			});
 		}
 

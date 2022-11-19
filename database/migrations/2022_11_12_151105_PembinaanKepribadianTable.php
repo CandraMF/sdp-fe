@@ -30,7 +30,7 @@
 				$table->string('status',50)->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
-				$table->string('id_pembinaan_kepribadian',32)->primary();
+				$table->bigIncrements('id_pembinaan_kepribadian',32)->primary();
 			});
 		}
 

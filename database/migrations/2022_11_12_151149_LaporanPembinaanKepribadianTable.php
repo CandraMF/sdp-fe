@@ -27,7 +27,7 @@
 				$table->string('verifikasi_ditjen',32)->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
-				$table->integer('id_laporan_pk')->primary();
+				$table->bigIncrements('id_laporan_pk')->primary();
 			});
 		}
 

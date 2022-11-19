@@ -20,7 +20,7 @@
 				$table->string('status',50)->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
-				$table->integer('id_jadwal_pk')->primary();
+				$table->bigIncrements('id_jadwal_pk')->primary();
 			});
 		}
 

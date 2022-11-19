@@ -19,7 +19,7 @@
 				$table->string('keterangan',200)->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();
-				$table->integer('id_mitra')->primary();
+				$table->bigIncrements('id_mitra')->primary();
 			});
 		}
 
