@@ -346,7 +346,10 @@ class StatusSaranaController extends Controller
    */
   public function store(Request $request)
   {
-    $this->validate($request, $this->rules);
+	 
+    $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+	
 
     if ($request->hasFile('foto')) {
       $file = $request->file('foto');
@@ -412,7 +415,9 @@ class StatusSaranaController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $this->validate($request, $this->rules);
+    $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
     if ($request->hasFile('foto')) {
       $file = $request->file('foto');

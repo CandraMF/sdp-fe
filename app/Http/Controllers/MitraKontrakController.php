@@ -316,7 +316,9 @@ class MitraKontrakController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $mitrakontrak = MitraKontrak::create($request->all());
         if ($mitrakontrak->exists) {
@@ -370,7 +372,9 @@ class MitraKontrakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $mitrakontrak = MitraKontrak::where('id_kontrak', $id)->firstOrFail();
         if ($mitrakontrak->update($request->all())) {

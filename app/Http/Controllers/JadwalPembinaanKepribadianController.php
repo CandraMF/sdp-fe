@@ -326,8 +326,10 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::create($request->all());
         if ($jadwalpembinaankepribadian->exists) {
             return response()->json([
@@ -380,8 +382,10 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id_jadwal_pk', $id)->firstOrFail();
         if ($jadwalpembinaankepribadian->update($request->all())) {
             return response()->json([

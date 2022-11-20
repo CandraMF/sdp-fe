@@ -336,8 +336,10 @@ class InstrukturController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $instruktur = Instruktur::create($request->all());
         if ($instruktur->exists) {
             return response()->json([
@@ -390,8 +392,10 @@ class InstrukturController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $instruktur = Instruktur::where('id_instruktur', $id)->firstOrFail();
         if ($instruktur->update($request->all())) {
             return response()->json([

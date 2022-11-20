@@ -286,8 +286,10 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::create($request->all());
         if ($daftarpesertapembinaankepribadian->exists) {
             return response()->json([
@@ -340,8 +342,10 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+        
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id_daftar_ppk', $id)->firstOrFail();
         if ($daftarpesertapembinaankepribadian->update($request->all())) {
             return response()->json([

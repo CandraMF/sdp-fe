@@ -255,7 +255,9 @@ class ProvinsiController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+       
+$this->validate($request, $this->rules);
+
 
         $provinsi = Provinsi::create($request->all());
         if ($provinsi->exists) {
@@ -310,7 +312,9 @@ class ProvinsiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+      
+$this->validate($request, $this->rules);
+
 
         $provinsi = Provinsi::where('id_provinsi', $id)->firstOrFail();
         if ($provinsi->update($request->all())) {

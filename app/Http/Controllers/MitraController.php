@@ -316,8 +316,11 @@ class MitraController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
+
+        
         $mitra = Mitra::create($request->all());
         if ($mitra->exists) {
             return response()->json([
@@ -370,7 +373,11 @@ class MitraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
+
+        
 
         $mitra = Mitra::where('id_mitra', $id)->firstOrFail();
         if ($mitra->update($request->all())) {

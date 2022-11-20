@@ -286,7 +286,9 @@ class PrasaranaLahanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $prasaranalahan = PrasaranaLahan::create($request->all());
         if ($prasaranalahan->exists) {
@@ -340,7 +342,9 @@ class PrasaranaLahanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $prasaranalahan = PrasaranaLahan::where('id_prasarana_lahan', $id)->firstOrFail();
         if ($prasaranalahan->update($request->all())) {

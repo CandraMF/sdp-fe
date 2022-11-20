@@ -266,7 +266,8 @@ class DaftarReferensiController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, $this->rules);
+		$this->validate($request, $this->rules);
+
 
 
         $txtgroups = explode(" ", $request->groups);
@@ -286,7 +287,6 @@ class DaftarReferensiController extends Controller
 
         $prm_id_lookup = $firtword . $number . rand(10, 99);
         $request->merge(['id_lookup' => $prm_id_lookup]);
-
 
         $daftarreferensi = DaftarReferensi::create($request->all());
         if ($daftarreferensi->exists) {
@@ -340,7 +340,8 @@ class DaftarReferensiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+		$this->validate($request, $this->rules);
+
 
         $daftarreferensi = DaftarReferensi::where('id_lookup', $id)->firstOrFail();
         if ($daftarreferensi->update($request->all())) {

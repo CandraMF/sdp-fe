@@ -455,7 +455,9 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+      
+$this->validate($request, $this->rules);
+
 
         $pegawai = Pegawai::create($request->all());
         if ($pegawai->exists) {
@@ -512,7 +514,9 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+       
+$this->validate($request, $this->rules);
+
 
         $pegawai = Pegawai::where('id_pegawai', $id)->firstOrFail();
         if ($pegawai->update($request->all())) {

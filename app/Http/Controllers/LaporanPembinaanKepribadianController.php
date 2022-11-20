@@ -396,7 +396,9 @@ class LaporanPembinaanKepribadianController extends Controller
    */
   public function store(Request $request)
   {
-    $this->validate($request, $this->rules);
+    
+    $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
 
     $laporanpembinaankepribadian = LaporanPembinaanKepribadian::create($request->all());
     if ($laporanpembinaankepribadian->exists) {
@@ -450,7 +452,10 @@ class LaporanPembinaanKepribadianController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $this->validate($request, $this->rules);
+    
+    $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
     $laporanpembinaankepribadian = LaporanPembinaanKepribadian::where('id_laporan_pk', $id)->firstOrFail();
     if ($laporanpembinaankepribadian->update($request->all())) {

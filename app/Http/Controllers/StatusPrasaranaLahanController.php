@@ -336,7 +336,9 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         //   $request->foto->store('status_prasarana_lahan', 'public');
 
@@ -407,7 +409,9 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $statusprasaranalahan = StatusPrasaranaLahan::where('id_status_prasarana_lahan', $id)->firstOrFail();
 

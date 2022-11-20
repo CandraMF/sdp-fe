@@ -286,7 +286,9 @@ class SaranaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $sarana = Sarana::create($request->all());
         if ($sarana->exists) {
@@ -340,7 +342,9 @@ class SaranaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+$this->validate($request, $this->rules);
+
 
         $sarana = Sarana::where('id_sarana', $id)->firstOrFail();
         if ($sarana->update($request->all())) {

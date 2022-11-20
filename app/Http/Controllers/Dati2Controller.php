@@ -16,12 +16,12 @@ class Dati2Controller extends Controller
     public function __construct()
     {
         $this->service = new Dati2Service();
-        $this->rules = array (
-  'deskripsi' => 'required',
-  'id_provinsi' => 'required',
-  'status' => 'required',
-  'id_bps' => 'nullable',
-);
+        $this->rules = array(
+            'deskripsi' => 'required',
+            'id_provinsi' => 'required',
+            'status' => 'required',
+            'id_bps' => 'nullable',
+        );
     }
 
     /**
@@ -124,66 +124,66 @@ class Dati2Controller extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id_dati2',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => ' UNSIGNED AUTO_INCREMENT',
-  ),
-  1 => 
-  array (
-    'Field' => 'deskripsi',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'id_provinsi',
-    'Type' => 'VARCHAR(35)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'status',
-    'Type' => 'TINYINT(1)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => '0',
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'status_download',
-    'Type' => 'TINYINT(1)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => '0',
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'id_bps',
-    'Type' => 'VARCHAR(4)',
-    'Null' => 'YES',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id_dati2',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
+            ),
+            1 =>
+            array(
+                'Field' => 'deskripsi',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'id_provinsi',
+                'Type' => 'VARCHAR(35)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'status',
+                'Type' => 'TINYINT(1)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => '0',
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'status_download',
+                'Type' => 'TINYINT(1)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => '0',
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'id_bps',
+                'Type' => 'VARCHAR(4)',
+                'Null' => 'YES',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'dati2', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id_dati2', 
+            'name' => 'dati2',
+            'module' => 'lain-lain',
+            'primary_key' => 'id_dati2',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/dati2'
@@ -242,8 +242,8 @@ class Dati2Controller extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *              @OA\Property(property="deskripsi", ref="#/components/schemas/Dati2/properties/deskripsi"),
-*              @OA\Property(property="id_provinsi", ref="#/components/schemas/Dati2/properties/id_provinsi"),
-*              @OA\Property(property="status", ref="#/components/schemas/Dati2/properties/status"),
+     *              @OA\Property(property="id_provinsi", ref="#/components/schemas/Dati2/properties/id_provinsi"),
+     *              @OA\Property(property="status", ref="#/components/schemas/Dati2/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -258,8 +258,8 @@ class Dati2Controller extends Controller
      *          description="error",
      *          @OA\JsonContent(
      *              @OA\Property(property="deskripsi", type="array", @OA\Items(example={"Deskripsi field is required."})),
-*              @OA\Property(property="id_provinsi", type="array", @OA\Items(example={"Id_provinsi field is required."})),
-*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
+     *              @OA\Property(property="id_provinsi", type="array", @OA\Items(example={"Id_provinsi field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
      * )
@@ -269,7 +269,8 @@ class Dati2Controller extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules);
+		$this->validate($request, $this->rules);
+
 
         $dati2 = Dati2::create($request->all());
         if ($dati2->exists) {
@@ -285,7 +286,6 @@ class Dati2Controller extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -300,8 +300,8 @@ class Dati2Controller extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *              @OA\Property(property="deskripsi", ref="#/components/schemas/Dati2/properties/deskripsi"),
-*              @OA\Property(property="id_provinsi", ref="#/components/schemas/Dati2/properties/id_provinsi"),
-*              @OA\Property(property="status", ref="#/components/schemas/Dati2/properties/status"),
+     *              @OA\Property(property="id_provinsi", ref="#/components/schemas/Dati2/properties/id_provinsi"),
+     *              @OA\Property(property="status", ref="#/components/schemas/Dati2/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -316,8 +316,8 @@ class Dati2Controller extends Controller
      *          description="error",
      *          @OA\JsonContent(
      *              @OA\Property(property="deskripsi", type="array", @OA\Items(example={"Deskripsi field is required."})),
-*              @OA\Property(property="id_provinsi", type="array", @OA\Items(example={"Id_provinsi field is required."})),
-*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
+     *              @OA\Property(property="id_provinsi", type="array", @OA\Items(example={"Id_provinsi field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
      * )
@@ -328,7 +328,9 @@ class Dati2Controller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->rules);
+       
+$this->validate($request, $this->rules);
+
 
         $dati2 = Dati2::where('id_dati2', $id)->firstOrFail();
         if ($dati2->update($request->all())) {
@@ -344,7 +346,6 @@ class Dati2Controller extends Controller
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -383,7 +384,5 @@ class Dati2Controller extends Controller
                 'data' => null
             ]);
         }
-
     }
-
 }
