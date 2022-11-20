@@ -317,16 +317,19 @@ class MitraController extends Controller
     public function store(Request $request)
     {
         $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
 
-        
+
         $mitra = Mitra::create($request->all());
+
         if ($mitra->exists) {
+            $id_mitra = Mitra::latest('update_terakhir')->first()->id_mitra;
+            $data_mitra = ['id_mitra' =>  $id_mitra];
             return response()->json([
                 'status' => 200,
                 'message' => "Mitra berhasil ditambahkan.",
-                'data' => $mitra
+                'data' =>  $data_mitra
             ]);
         } else {
             return response()->json([
@@ -374,10 +377,10 @@ $this->validate($request, $this->rules);
     public function update(Request $request, $id)
     {
         $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
 
-        
+
 
         $mitra = Mitra::where('id_mitra', $id)->firstOrFail();
         if ($mitra->update($request->all())) {

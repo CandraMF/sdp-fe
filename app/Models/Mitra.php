@@ -52,7 +52,7 @@ class Mitra extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'nama_mitra', 'nama_pic', 'alamat', 'id_dati2', 'no_telp', 'no_hp', 'email', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_mitra', 'nama_mitra', 'nama_pic', 'alamat', 'id_dati2', 'no_telp', 'no_hp', 'email', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     protected $orderable = [
