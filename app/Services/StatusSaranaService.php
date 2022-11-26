@@ -75,7 +75,7 @@ class StatusSaranaService
 		}
 		foreach ($status_sarana as $val) {
 			$result[] = array(
-				'id_status_sarana' => $val['id_status_sarana'],  'id_sarana' => $val['id_sarana'],  'nama_sarana' => $val['nama_sarana'],  'status' => $val['status'],  'kepemilkan' => $val['kepemilkan'],  'jumlah' => $val['jumlah'],  'kondisi_baik' => $val['kondisi_baik'],  'kondisi_rusak' => $val['kondisi_rusak'],  'foto' => $val['foto']
+				'id_status_sarana' => $val['id_status_sarana'],  'id_sarana' => $val['id_sarana'],  'nama_sarana' => $val['nama_sarana'],  'status' => $val['status'],  'kepemilikan' => $val['kepemilikan'],  'jumlah' => $val['jumlah'],  'kondisi_baik' => $val['kondisi_baik'],  'kondisi_rusak' => $val['kondisi_rusak'],  'foto' => $val['foto']
 			);
 		}
 
@@ -97,7 +97,7 @@ class StatusSaranaService
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
 		$column = isset($data['column']) ? $data['column'] : 'id_status_sarana';
 
-		$defaultColumn = ['status_sarana.id_status_sarana',  'status_sarana.id_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilkan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
+		$defaultColumn = ['status_sarana.id_status_sarana',  'status_sarana.id_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilikan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
 		$q = StatusSarana::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('sarana', 'status_sarana.id_sarana', '=', 'sarana.id_sarana');
@@ -144,7 +144,7 @@ class StatusSaranaService
 	public function show(object $status_sarana)
 	{
 		$data = array(
-			'id_status_sarana' => $status_sarana->id_status_sarana, 'id_sarana' => $status_sarana->id_sarana, 'nama_sarana' => $status_sarana->nama_sarana, 'status' => $status_sarana->status, 'kepemilkan' => $status_sarana->kepemilkan, 'jumlah' => $status_sarana->jumlah, 'kondisi_baik' => $status_sarana->kondisi_baik, 'kondisi_rusak' => $status_sarana->kondisi_rusak, 'foto' => $status_sarana->foto
+			'id_status_sarana' => $status_sarana->id_status_sarana, 'id_sarana' => $status_sarana->id_sarana, 'nama_sarana' => $status_sarana->nama_sarana, 'status' => $status_sarana->status, 'kepemilikan' => $status_sarana->kepemilikan, 'jumlah' => $status_sarana->jumlah, 'kondisi_baik' => $status_sarana->kondisi_baik, 'kondisi_rusak' => $status_sarana->kondisi_rusak, 'foto' => $status_sarana->foto
 		);
 		return $data;
 	}
@@ -158,7 +158,7 @@ class StatusSaranaService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilkan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
+		$defaultColumn = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilikan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
 		$q = StatusSarana::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('sarana', 'status_sarana.id_sarana', '=', 'sarana.id_sarana');
@@ -209,7 +209,7 @@ class StatusSaranaService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilkan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
+		$defaultColumn = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilikan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
 		$q = StatusSarana::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('sarana', 'status_sarana.id_sarana', '=', 'sarana.id_sarana');
@@ -250,9 +250,9 @@ class StatusSaranaService
 		$judul = 'Status Sarana';
 		$columns = ["Nama Sarana", "Status", "Kepemilikan", "Jumlah", "Kondisi Baik", "Kondisi Rusak", "Foto"];
 
-		$columnOfValues = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilkan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
+		$columnOfValues = ['status_sarana.id_status_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilikan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
 		$sizeCellcolumns = ["Nama Sarana" => 1000, "Status" => 1000, "Kepemilikan" => 1000, "Jumlah" => 1000, "Kondisi Baik" => 1000, "Kondisi Rusak" => 1000, "Foto" => 1000];
-		$sizeCells = ['nama_sarana' => 1000, 'status' => 1000, 'kepemilkan' => 1000, 'jumlah' => 1000, 'kondisi_baik' => 1000, 'kondisi_rusak' => 1000, 'foto' => 1000];
+		$sizeCells = ['nama_sarana' => 1000, 'status' => 1000, 'kepemilikan' => 1000, 'jumlah' => 1000, 'kondisi_baik' => 1000, 'kondisi_rusak' => 1000, 'foto' => 1000];
 		$collection = json_decode(json_encode($collection), true);
 
 		setlocale(LC_TIME, 'id_ID');

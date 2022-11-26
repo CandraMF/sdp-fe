@@ -42,7 +42,7 @@
 					//data
 					foreach ($this->data as $index => $item) {
 						$no = $index + 1;
-						$valueSheet[] = [$no, $item['status'], $item['kepemilkan'], $item['luas_dipakai'], $item['lahan_tidur'], $item['foto']];
+						$valueSheet[] = [$no, $item['status'], $item['kepemilikan'], $item['luas_dipakai'], $item['lahan_tidur'], $item['foto']];
 					}
 
 					$this->lastRow = 4 + (count($valueSheet) - 3);

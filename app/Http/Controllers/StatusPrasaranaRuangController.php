@@ -21,7 +21,7 @@ class StatusPrasaranaRuangController extends Controller
       'tahun' => 'nullable',
       'bulan' => 'nullable',
       'status' => 'nullable',
-      'kepemilkan' => 'nullable',
+      'kepemilikan' => 'nullable',
       'luas' => 'nullable',
       'satuan_luas' => 'nullable',
       'jumlah_lantai' => 'nullable',
@@ -47,7 +47,7 @@ class StatusPrasaranaRuangController extends Controller
    *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
    *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
    *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_status_prasarana_ruang:desc"),
-   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_prasarana_ruang,tahun,bulan,status,kepemilkan,luas,satuan_luas,jumlah_lantai,jumlah_ruang,kondisi_baik,kondisi_rusak,satuan_kondisi,foto,pendaftaran_disnaker,catatan_disnaker,keterangan,update_terakhir,update_oleh"),
+   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_prasarana_ruang,tahun,bulan,status,kepemilikan,luas,satuan_luas,jumlah_lantai,jumlah_ruang,kondisi_baik,kondisi_rusak,satuan_kondisi,foto,pendaftaran_disnaker,catatan_disnaker,keterangan,update_terakhir,update_oleh"),
    *      @OA\Response(
    *          response=200,
    *          description="success",
@@ -186,7 +186,7 @@ class StatusPrasaranaRuangController extends Controller
       ),
       5 =>
       array(
-        'Field' => 'kepemilkan',
+        'Field' => 'kepemilikan',
         'Type' => 'VARCHAR(50)',
         'Null' => 'YES',
         'Key' => NULL,
@@ -397,7 +397,7 @@ class StatusPrasaranaRuangController extends Controller
   public function store(Request $request)
   {
     $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+    $this->validate($request, $this->rules);
 
 
     if ($request->hasFile('foto')) {
@@ -466,7 +466,7 @@ $this->validate($request, $this->rules);
   public function update(Request $request, $id)
   {
     $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+    $this->validate($request, $this->rules);
 
 
     if ($request->hasFile('foto')) {

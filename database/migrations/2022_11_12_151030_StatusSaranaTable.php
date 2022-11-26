@@ -13,7 +13,7 @@
 				$table->integer('tahun')->nullable();
 				$table->string('bulan',50)->nullable();
 				$table->string('status',50)->nullable();
-				$table->string('kepemilkan',50)->nullable();
+				$table->string('kepemilikan',50)->nullable();
 				$table->integer('jumlah')->nullable();
 				$table->string('satuan',50)->nullable();
 				$table->integer('kondisi_baik')->nullable();

@@ -21,7 +21,7 @@ class StatusSaranaController extends Controller
       'tahun' => 'nullable',
       'bulan' => 'nullable',
       'status' => 'nullable',
-      'kepemilkan' => 'nullable',
+      'kepemilikan' => 'nullable',
       'jumlah' => 'nullable',
       'satuan' => 'nullable',
       'kondisi_baik' => 'nullable',
@@ -42,7 +42,7 @@ class StatusSaranaController extends Controller
    *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
    *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
    *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_status_sarana:desc"),
-   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_sarana,tahun,bulan,status,kepemilkan,jumlah,satuan,kondisi_baik,kondisi_rusak,foto,keterangan,update_terakhir,update_oleh"),
+   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_sarana,tahun,bulan,status,kepemilikan,jumlah,satuan,kondisi_baik,kondisi_rusak,foto,keterangan,update_terakhir,update_oleh"),
    *      @OA\Response(
    *          response=200,
    *          description="success",
@@ -181,7 +181,7 @@ class StatusSaranaController extends Controller
       ),
       5 =>
       array(
-        'Field' => 'kepemilkan',
+        'Field' => 'kepemilikan',
         'Type' => 'VARCHAR(50)',
         'Null' => 'YES',
         'Key' => NULL,

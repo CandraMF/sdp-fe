@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      @OA\Property(property="tahun", type="integer"),
  *      @OA\Property(property="bulan", type="string"),
  *      @OA\Property(property="status", type="string"),
- *      @OA\Property(property="kepemilkan", type="string"),
+ *      @OA\Property(property="kepemilikan", type="string"),
  *      @OA\Property(property="luas", type="decimal"),
  *      @OA\Property(property="satuan_luas", type="string"),
  *      @OA\Property(property="jumlah_lantai", type="decimal"),
@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer tahun
  * @property string bulan
  * @property string status
- * @property string kepemilkan
+ * @property string kepemilikan
  * @property decimal luas
  * @property string satuan_luas
  * @property decimal jumlah_lantai
@@ -68,15 +68,15 @@ class StatusPrasaranaRuang extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     protected $orderable = [
-        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     protected $searchable = [
-        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_ruang', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas', 'satuan_luas', 'jumlah_lantai', 'jumlah_ruang', 'kondisi_baik', 'kondisi_rusak', 'satuan_kondisi', 'foto', 'pendaftaran_disnaker', 'catatan_disnaker', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     /**

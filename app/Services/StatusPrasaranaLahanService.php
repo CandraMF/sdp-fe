@@ -75,7 +75,7 @@ class StatusPrasaranaLahanService
         }
         foreach ($status_prasarana_lahan as $val) {
             $result[] = array(
-                'id_status_prasarana_lahan' => $val['id_status_prasarana_lahan'],  'id_prasarana_lahan' => $val['id_prasarana_lahan'],  'nama_prasarana_lahan' => $val['nama_prasarana_lahan'],  'status' => $val['status'],  'kepemilkan' => $val['kepemilkan'],  'luas_dipakai' => $val['luas_dipakai'],  'lahan_tidur' => $val['lahan_tidur'],  'foto' => $val['foto']
+                'id_status_prasarana_lahan' => $val['id_status_prasarana_lahan'],  'id_prasarana_lahan' => $val['id_prasarana_lahan'],  'nama_prasarana_lahan' => $val['nama_prasarana_lahan'],  'status' => $val['status'],  'kepemilikan' => $val['kepemilikan'],  'luas_dipakai' => $val['luas_dipakai'],  'lahan_tidur' => $val['lahan_tidur'],  'foto' => $val['foto']
             );
         }
 
@@ -97,7 +97,7 @@ class StatusPrasaranaLahanService
         $sort = isset($data['sort']) ? $data['sort'] : NULL;
         $column = isset($data['column']) ? $data['column'] : 'id_status_prasarana_lahan';
 
-        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilkan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
+        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
         $q = StatusPrasaranaLahan::query();
 
         $q = $q->select($defaultColumn);
@@ -144,7 +144,7 @@ class StatusPrasaranaLahanService
     public function show(object $status_prasarana_lahan)
     {
         $data = array(
-            'id_status_prasarana_lahan' => $status_prasarana_lahan->id_status_prasarana_lahan, 'id_prasarana_lahan' => $status_prasarana_lahan->id_prasarana_lahan, 'nama_prasarana_lahan' => $status_prasarana_lahan->nama_prasarana_lahan,  'status' => $status_prasarana_lahan->status, 'kepemilkan' => $status_prasarana_lahan->kepemilkan, 'luas_dipakai' => $status_prasarana_lahan->luas_dipakai, 'lahan_tidur' => $status_prasarana_lahan->lahan_tidur, 'foto' => $status_prasarana_lahan->foto
+            'id_status_prasarana_lahan' => $status_prasarana_lahan->id_status_prasarana_lahan, 'id_prasarana_lahan' => $status_prasarana_lahan->id_prasarana_lahan, 'nama_prasarana_lahan' => $status_prasarana_lahan->nama_prasarana_lahan,  'status' => $status_prasarana_lahan->status, 'kepemilikan' => $status_prasarana_lahan->kepemilikan, 'luas_dipakai' => $status_prasarana_lahan->luas_dipakai, 'lahan_tidur' => $status_prasarana_lahan->lahan_tidur, 'foto' => $status_prasarana_lahan->foto
         );
         return $data;
     }
@@ -157,7 +157,7 @@ class StatusPrasaranaLahanService
         $sort = $data['sort'] ?? NULL;
         $column = $data['column'] ?? 'id';
 
-        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilkan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
+        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
         $q = StatusPrasaranaLahan::query();
         $q = $q->select($defaultColumn);
         $q = $q->join('prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', '=', 'prasarana_lahan.id_prasarana_lahan');
@@ -207,7 +207,7 @@ class StatusPrasaranaLahanService
         $sort = $data['sort'] ?? NULL;
         $column = $data['column'] ?? 'id';
 
-        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilkan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
+        $defaultColumn = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
         $q = StatusPrasaranaLahan::query();
         $q = $q->select($defaultColumn);
         $q = $q->join('prasarana_lahan', 'status_prasarana_lahan.id_prasarana_lahan', '=', 'prasarana_lahan.id_prasarana_lahan');
@@ -248,9 +248,9 @@ class StatusPrasaranaLahanService
         $judul = 'Status Prasarana Lahan';
         $columns = ["Nama Prasarana", "Status", "Kepemilikan", "Luas Dipakai", "Lahan Tidur", "Foto"];
 
-        $columnOfValues = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilkan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
+        $columnOfValues = ['status_prasarana_lahan.id_status_prasarana_lahan', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
         $sizeCellcolumns = ["Nama Prasarana" => 1000, "Status" => 1000, "Kepemilikan" => 1000, "Luas Dipakai" => 1000, "Lahan Tidur" => 1000, "Foto" => 1000];
-        $sizeCells = ['status' => 1000, 'kepemilkan' => 1000, 'luas_dipakai' => 1000, 'lahan_tidur' => 1000, 'foto' => 1000];
+        $sizeCells = ['status' => 1000, 'kepemilikan' => 1000, 'luas_dipakai' => 1000, 'lahan_tidur' => 1000, 'foto' => 1000];
         $collection = json_decode(json_encode($collection), true);
 
         setlocale(LC_TIME, 'id_ID');

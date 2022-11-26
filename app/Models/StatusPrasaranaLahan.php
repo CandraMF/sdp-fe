@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      @OA\Property(property="tahun", type="integer"),
  *      @OA\Property(property="bulan", type="string"),
  *      @OA\Property(property="status", type="string"),
- *      @OA\Property(property="kepemilkan", type="string"),
+ *      @OA\Property(property="kepemilikan", type="string"),
  *      @OA\Property(property="luas_dipakai", type="decimal"),
  *      @OA\Property(property="lahan_tidur", type="decimal"),
  *      @OA\Property(property="satuan", type="string"),
@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property integer tahun
  * @property string bulan
  * @property string status
- * @property string kepemilkan
+ * @property string kepemilikan
  * @property decimal luas_dipakai
  * @property decimal lahan_tidur
  * @property string satuan
@@ -56,15 +56,15 @@ class StatusPrasaranaLahan extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     protected $orderable = [
-        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     protected $searchable = [
-        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilkan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
+        'id_prasarana_lahan', 'tahun', 'bulan', 'status', 'kepemilikan', 'luas_dipakai', 'lahan_tidur', 'satuan', 'foto', 'keterangan', 'update_terakhir', 'update_oleh'
     ];
 
     /**
