@@ -75,7 +75,7 @@ class StatusPrasaranaRuangService
 		}
 		foreach ($status_prasarana_ruang as $val) {
 			$result[] = array(
-				'id_status_prasarana_ruang' => $val['id_status_prasarana_ruang'],  'nama_prasarana_ruang' => $val['nama_prasarana_ruang'],  'status' => $val['status'],  'kepemilkan' => $val['kepemilkan'],  'luas' => $val['luas'],  'jumlah_lantai' => $val['jumlah_lantai'],  'jumlah_ruang' => $val['jumlah_ruang'],  'kondisi_baik' => $val['kondisi_baik'],  'kondisi_rusak' => $val['kondisi_rusak']
+				'id_status_prasarana_ruang' => $val['id_status_prasarana_ruang'],  'id_prasarana_ruang' => $val['id_prasarana_ruang'],  'nama_prasarana_ruang' => $val['nama_prasarana_ruang'],  'status' => $val['status'],  'kepemilkan' => $val['kepemilkan'],  'luas' => $val['luas'],  'jumlah_lantai' => $val['jumlah_lantai'],  'jumlah_ruang' => $val['jumlah_ruang'],  'kondisi_baik' => $val['kondisi_baik'],  'kondisi_rusak' => $val['kondisi_rusak']
 			);
 		}
 
@@ -97,7 +97,7 @@ class StatusPrasaranaRuangService
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
 		$column = isset($data['column']) ? $data['column'] : 'id_status_prasarana_ruang';
 
-		$defaultColumn = ['status_prasarana_ruang.id_status_prasarana_ruang', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_ruang.status', 'status_prasarana_ruang.kepemilkan', 'status_prasarana_ruang.luas', 'status_prasarana_ruang.jumlah_lantai', 'status_prasarana_ruang.jumlah_ruang', 'status_prasarana_ruang.kondisi_baik', 'status_prasarana_ruang.kondisi_rusak'];
+		$defaultColumn = ['status_prasarana_ruang.id_status_prasarana_ruang', 'status_prasarana_ruang.id_prasarana_ruang', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_ruang.status', 'status_prasarana_ruang.kepemilkan', 'status_prasarana_ruang.luas', 'status_prasarana_ruang.jumlah_lantai', 'status_prasarana_ruang.jumlah_ruang', 'status_prasarana_ruang.kondisi_baik', 'status_prasarana_ruang.kondisi_rusak'];
 		$q = StatusPrasaranaRuang::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('prasarana_ruang', 'status_prasarana_ruang.id_prasarana_ruang', '=', 'prasarana_ruang.id_prasarana_ruang');
@@ -144,7 +144,7 @@ class StatusPrasaranaRuangService
 	public function show(object $status_prasarana_ruang)
 	{
 		$data = array(
-			'id_status_prasarana_ruang' => $status_prasarana_ruang->id_status_prasarana_ruang, 'nama_prasarana_ruang' => $status_prasarana_ruang->nama_prasarana_ruang, 'status' => $status_prasarana_ruang->status, 'kepemilkan' => $status_prasarana_ruang->kepemilkan, 'luas' => $status_prasarana_ruang->luas, 'jumlah_lantai' => $status_prasarana_ruang->jumlah_lantai, 'jumlah_ruang' => $status_prasarana_ruang->jumlah_ruang, 'kondisi_baik' => $status_prasarana_ruang->kondisi_baik, 'kondisi_rusak' => $status_prasarana_ruang->kondisi_rusak
+			'id_status_prasarana_ruang' => $status_prasarana_ruang->id_status_prasarana_ruang, 'id_prasarana_ruang' => $status_prasarana_ruang->id_prasarana_ruang, 'nama_prasarana_ruang' => $status_prasarana_ruang->nama_prasarana_ruang, 'status' => $status_prasarana_ruang->status, 'kepemilkan' => $status_prasarana_ruang->kepemilkan, 'luas' => $status_prasarana_ruang->luas, 'jumlah_lantai' => $status_prasarana_ruang->jumlah_lantai, 'jumlah_ruang' => $status_prasarana_ruang->jumlah_ruang, 'kondisi_baik' => $status_prasarana_ruang->kondisi_baik, 'kondisi_rusak' => $status_prasarana_ruang->kondisi_rusak
 		);
 		return $data;
 	}
