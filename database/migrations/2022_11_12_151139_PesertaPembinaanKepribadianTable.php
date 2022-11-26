@@ -14,7 +14,7 @@
 				$table->boolean('kehadiran')->nullable();
 				$table->string('no_sertifikat',50)->nullable();
 				$table->string('file_sertifikat',200)->nullable();
-				$table->decimal('nilai',3,2)->nullable();
+				$table->decimal('nilai',3,0)->nullable();
 				$table->string('predikat',50)->nullable();
 				$table->dateTime('update_terakhir')->nullable();
 				$table->string('update_oleh',32)->nullable();

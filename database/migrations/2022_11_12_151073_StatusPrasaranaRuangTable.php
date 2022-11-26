@@ -15,7 +15,7 @@ class StatusPrasaranaRuangTable extends Migration
 			$table->string('bulan', 50)->nullable();
 			$table->string('status', 50)->nullable();
 			$table->string('kepemilikan', 50)->nullable();
-			$table->decimal('luas', 6, 2)->nullable();
+			$table->decimal('luas', 6, 0)->nullable();
 			$table->string('satuan_luas', 50)->nullable();
 			$table->decimal('jumlah_lantai', 3)->nullable();
 			$table->decimal('jumlah_ruang', 3)->nullable();

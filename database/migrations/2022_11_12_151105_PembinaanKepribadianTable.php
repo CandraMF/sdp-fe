@@ -23,7 +23,7 @@
 				$table->boolean('perlu_kelulusan')->nullable();
 				$table->string('id_sarana',32)->nullable();
 				$table->string('id_prasarana',32)->nullable();
-				$table->decimal('realisasi_anggaran',10,2)->nullable();
+				$table->decimal('realisasi_anggaran',18,2)->nullable();
 				$table->string('id_jenis_anggaran',32)->nullable();
 				$table->string('foto',200)->nullable();
 				$table->string('keterangan',200)->nullable();

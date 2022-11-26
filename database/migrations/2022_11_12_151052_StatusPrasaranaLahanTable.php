@@ -14,8 +14,8 @@
 				$table->string('bulan',50)->nullable();
 				$table->string('status',50)->nullable();
 				$table->string('kepemilikan',50)->nullable();
-				$table->decimal('luas_dipakai',6, 2)->nullable();
-				$table->decimal('lahan_tidur',6, 2)->nullable();
+				$table->decimal('luas_dipakai',6, 0)->nullable();
+				$table->decimal('lahan_tidur',6, 0)->nullable();
 				$table->string('satuan',50)->nullable();
 				$table->string('foto',200)->nullable();
 				$table->string('keterangan',200)->nullable();
