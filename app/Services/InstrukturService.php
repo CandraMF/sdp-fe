@@ -151,7 +151,17 @@ class InstrukturService
 	public function show(object $instruktur)
 	{
 		$data = [
-			'id ' => $instruktur->id, 'jenis_pembinaan_kepribadian' => $instruktur->jenis_pembinaan_kepribadian, 'jenis_instruktur' => $instruktur->jenis_instruktur, 'nama_instruktur' => $instruktur->nama_instruktur, 'asal_institusi_instruktur' => $instruktur->asal_institusi_instruktur, 'jenis_instruktur' => $instruktur->jenis_instruktur, 'keterangan' => $instruktur->keterangan, 'no_telp' => $instruktur->no_telp, 'email' => $instruktur->email, 'keterangan' => $instruktur->keterangan
+			'id' => $instruktur->id,
+			'jenis_pembinaan_kepribadian' => $instruktur->jenis_pembinaan_kepribadian,
+			'jenis_instruktur' => $instruktur->jenis_instruktur,
+			'id_napi' => $instruktur->id_napi,
+			'id_petugas' => $instruktur->id_petugas,
+			'id_mitra' => $instruktur->id_mitra,
+			'nama_instruktur' => $instruktur->nama_instruktur,
+			'asal_institusi_instruktur' => $instruktur->asal_institusi_instruktur,
+			'no_telp' => $instruktur->no_telp,
+			'email' => $instruktur->email,
+			'keterangan' => $instruktur->keterangan
 		];
 		return $data;
 	}

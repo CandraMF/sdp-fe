@@ -150,7 +150,12 @@ class SaranaService
 	public function show(object $sarana)
 	{
 		$data = [
-			'id' => $sarana->id, 'nama_sarana' => $sarana->nama_sarana, 'id_jenis_sarana' => $sarana->id_jenis_sarana, 'jenis_sarana' => $sarana->jenis_sarana, 'nmupt' => $sarana->nmupt, 'tgl_pengadaan' => $sarana->tgl_pengadaan
+			'id' => $sarana->id,
+			'id_jenis_sarana' => $sarana->id_jenis_sarana,
+			'nama_sarana' => $sarana->nama_sarana,
+			'id_upt' => $sarana->id_upt,
+			'tgl_pengadaan' => $sarana->tgl_pengadaan,
+			'keterangan' => $sarana->keterangan
 		];
 		return $data;
 	}

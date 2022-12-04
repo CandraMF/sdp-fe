@@ -155,14 +155,15 @@ class MitraService
 	{
 		$data = [
 			'id' => $mitra->id,
-			'nama_mitra ' => $mitra->nama_mitra,
+			'nama_mitra' => $mitra->nama_mitra,
 			'nama_pic' => $mitra->nama_pic,
 			'alamat' => $mitra->alamat,
-			'no_telp' => $mitra->no_telp,
-			'propinsi' => $mitra->propinsi,
-			'kabkota' => $mitra->kabkota,
 			'id_dati2' => $mitra->id_dati2,
-			'id_provinsi' => $mitra->id_provinsi
+			'id_provinsi' => $mitra->id_provinsi,
+			'no_telp' => $mitra->no_telp,
+			'no_hp' => $mitra->no_hp,
+			'email' => $mitra->email,
+			'keterangan' => $mitra->keterangan
 		];
 		return $data;
 	}

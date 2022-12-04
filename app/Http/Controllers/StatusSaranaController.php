@@ -282,12 +282,7 @@ class StatusSaranaController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['status_sarana.id', 'status_sarana.id_sarana', 'sarana.nama_sarana', 'status_sarana.status', 'status_sarana.kepemilikan', 'status_sarana.jumlah', 'status_sarana.kondisi_baik', 'status_sarana.kondisi_rusak', 'status_sarana.foto'];
-        $statussarana = StatusSarana::query();
-        $statussarana = $statussarana->select($defaultColumn);
-        $statussarana = $statussarana->join('sarana', 'status_sarana.id_sarana', '=', 'sarana.id');
-        $statussarana = $statussarana->where('status_sarana.id', $id)->firstOrFail();
-
+        $statussarana = StatusSarana::where('id', $id)->firstOrFail();
         if (!$statussarana->exists) {
             return response()->json([
                 'status' => 500,

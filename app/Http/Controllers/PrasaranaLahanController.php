@@ -232,12 +232,7 @@ class PrasaranaLahanController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['prasarana_lahan.id', 'prasarana_lahan.id_jenis_prasarana_lahan', 'prasarana_lahan.nama_prasarana_lahan', 'upt.uraian as nmupt', 'prasarana_lahan.tgl_pengadaan', 'prasarana_lahan.keterangan'];
-        $prasaranalahan = PrasaranaLahan::query();
-        $prasaranalahan = $prasaranalahan->select($defaultColumn);
-        $prasaranalahan = $prasaranalahan->join('daftar_referensi', 'prasarana_lahan.id_jenis_prasarana_lahan', '=', 'daftar_referensi.id_lookup');
-        $prasaranalahan = $prasaranalahan->join('upt', 'prasarana_lahan.id_upt', '=', 'upt.id_upt');
-        $prasaranalahan = $prasaranalahan->where('prasarana_lahan.id', $id)->firstOrFail();
+        $prasaranalahan = PrasaranaLahan::where('id', $id)->firstOrFail();
 
         if (!$prasaranalahan->exists) {
             return response()->json([

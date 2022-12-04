@@ -272,11 +272,7 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['status_prasarana_lahan.id', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
-        $statusprasaranalahan = StatusPrasaranaLahan::query();
-        $statusprasaranalahan = $statusprasaranalahan->select($defaultColumn);
-        $statusprasaranalahan = $statusprasaranalahan->join('prasarana_ruang', 'status_prasarana_lahan.id_prasarana_lahan', '=', 'prasarana_ruang.id');
-        $statusprasaranalahan = $statusprasaranalahan->where('status_prasarana_lahan.id', $id)->firstOrFail();
+       $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();
 
         if (!$statusprasaranalahan->exists) {
             return response()->json([

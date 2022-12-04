@@ -150,7 +150,13 @@ class PrasaranaRuangService
 	public function show(object $prasarana_ruang)
 	{
 		$data = [
-			'id' => $prasarana_ruang->id, 'id_jenis_prasarana_ruang' => $prasarana_ruang->id_jenis_prasarana_ruang, 'jenis_prasarana' => $prasarana_ruang->jenis_prasarana, 'nama_prasarana_ruang' => $prasarana_ruang->nama_prasarana_ruang, 'nmupt' => $prasarana_ruang->nmupt, 'tgl_pengadaan' => $prasarana_ruang->tgl_pengadaan, 'keterangan' => $prasarana_ruang->keterangan
+			'id' => $prasarana_ruang->id,
+			'id_jenis_prasarana_ruang' => $prasarana_ruang->id_jenis_prasarana_ruang,
+			'nama_prasarana_ruang' => $prasarana_ruang->nama_prasarana_ruang,
+			'id_upt' => $prasarana_ruang->id_upt,
+			'tgl_pengadaan' => $prasarana_ruang->tgl_pengadaan,
+			'keterangan' => $prasarana_ruang->keterangan,
+
 		];
 		return $data;
 	}

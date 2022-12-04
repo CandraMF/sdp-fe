@@ -262,7 +262,7 @@ class MitraController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota', 'mitra.id_dati2', 'provinsi.id_provinsi'];
+        $defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota', 'mitra.id_dati2', 'mitra.no_hp', 'mitra.email', 'mitra.keterangan', 'provinsi.id_provinsi'];
         $mitra = Mitra::query();
         $mitra = $mitra->select($defaultColumn);
         $mitra = $mitra->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');

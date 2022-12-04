@@ -82,8 +82,8 @@ class PembinaanKepribadianService
 				'tempat_pelaksanaan' => $val['tempat_pelaksanaan'],
 				'tanggal' => $val['tanggal'],
 				'jam_mulai' => $val['jam_mulai'],
-				'jam_selesai ' => $val['jam_selesai '],
-				'status  ' => $val['status  ']
+				'jam_selesai ' => $val['jam_selesai'],
+				'status  ' => $val['status']
 			];
 		}
 
@@ -109,7 +109,7 @@ class PembinaanKepribadianService
 		$q = PembinaanKepribadian::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('daftar_referensi', 'pembinaan_kepribadian.id_jenis_pembinaan_kepribadian', '=', 'daftar_referensi.id_lookup');
-		$q = $q->join('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
+		$q = $q->leftJoin('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
 
 		$q = $q->where('daftar_referensi.groups', '=', 'jenis pembinaan kepribadian');
 		$data = $this->mapping($q);
@@ -153,8 +153,29 @@ class PembinaanKepribadianService
 	public function show(object $pembinaan_kepribadian)
 	{
 		$data = [
-			'id' => $pembinaan_kepribadian->id, 'nama_program' => $pembinaan_kepribadian->nama_program, 'jnskegiatan' => $pembinaan_kepribadian->jnskegiatan, 'tempat_pelaksanaan' => $pembinaan_kepribadian->tempat_pelaksanaan, 'tanggal' => $pembinaan_kepribadian->tanggal, 'jam_mulai' => $pembinaan_kepribadian->jam_mulai, 'jam_selesai ' => $pembinaan_kepribadian->jam_selesai, 'status  ' => $pembinaan_kepribadian->status
+			'id' => $pembinaan_kepribadian->id,
+			'id_jenis_pembinaan_kepribadian' => $pembinaan_kepribadian->id_jenis_pembinaan_kepribadian,
+			'id_upt' => $pembinaan_kepribadian->id_upt,
+			'id_mitra' => $pembinaan_kepribadian->id_mitra,
+			'nama_program' => $pembinaan_kepribadian->nama_program,
+			'program_wajib' => $pembinaan_kepribadian->program_wajib,
+			'materi_pembinaan_kepribadian' => $pembinaan_kepribadian->materi_pembinaan_kepribadian,
+			'id_instruktur' => $pembinaan_kepribadian->id_instruktur,
+			'penangung_jawab' => $pembinaan_kepribadian->penangung_jawab,
+			'tanggal_mulai' => $pembinaan_kepribadian->tanggal_mulai,
+			'tanggal_selesai' => $pembinaan_kepribadian->tanggal_selesai,
+			'tempat_pelaksanaan' => $pembinaan_kepribadian->tempat_pelaksanaan,
+			'perlu_kelulusan' => $pembinaan_kepribadian->perlu_kelulusan,
+			'id_sarana' => $pembinaan_kepribadian->id_sarana,
+			'id_prasarana' => $pembinaan_kepribadian->id_prasarana,
+			'realisasi_anggaran' => $pembinaan_kepribadian->realisasi_anggaran,
+			'id_jenis_anggaran' => $pembinaan_kepribadian->id_jenis_anggaran,
+			'foto' => $pembinaan_kepribadian->foto,
+			'keterangan' => $pembinaan_kepribadian->keterangan,
+			'status' => $pembinaan_kepribadian->status
 		];
+
+
 		return $data;
 	}
 
@@ -170,7 +191,7 @@ class PembinaanKepribadianService
 		$q = PembinaanKepribadian::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('daftar_referensi', 'pembinaan_kepribadian.id_jenis_pembinaan_kepribadian', '=', 'daftar_referensi.id_lookup');
-		$q = $q->join('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
+		$q = $q->leftJoin('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
 
 		$q = $q->where('daftar_referensi.groups', '=', 'jenis pembinaan kepribadian');
 		$data = $this->mapping($q);
@@ -222,7 +243,7 @@ class PembinaanKepribadianService
 		$q = PembinaanKepribadian::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('daftar_referensi', 'pembinaan_kepribadian.id_jenis_pembinaan_kepribadian', '=', 'daftar_referensi.id_lookup');
-		$q = $q->join('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
+		$q = $q->leftJoin('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
 
 		$q = $q->where('daftar_referensi.groups', '=', 'jenis pembinaan kepribadian');
 		$data = $this->mapping($q);

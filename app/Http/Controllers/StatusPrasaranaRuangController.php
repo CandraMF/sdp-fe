@@ -332,11 +332,7 @@ class StatusPrasaranaRuangController extends Controller
    */
   public function show($id)
   {
-    $defaultColumn = ['status_prasarana_ruang.id', 'status_prasarana_ruang.id_prasarana_ruang', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_ruang.status', 'status_prasarana_ruang.kepemilikan', 'status_prasarana_ruang.luas', 'status_prasarana_ruang.jumlah_lantai', 'status_prasarana_ruang.jumlah_ruang', 'status_prasarana_ruang.kondisi_baik', 'status_prasarana_ruang.kondisi_rusak'];
-    $statusprasaranaruang = StatusPrasaranaRuang::query();
-    $statusprasaranaruang = $statusprasaranaruang->select($defaultColumn);
-    $statusprasaranaruang = $statusprasaranaruang->join('prasarana_ruang', 'status_prasarana_ruang.id_prasarana_ruang', '=', 'prasarana_ruang.id');
-    $statusprasaranaruang = $statusprasaranaruang->where('status_prasarana_ruang.id', $id)->firstOrFail();
+    $statusprasaranaruang = StatusPrasaranaRuang::where('id', $id)->firstOrFail();
 
     if (!$statusprasaranaruang->exists) {
       return response()->json([

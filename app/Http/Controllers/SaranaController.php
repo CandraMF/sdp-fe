@@ -232,12 +232,7 @@ class SaranaController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['sarana.id', 'sarana.nama_sarana', 'sarana.id_jenis_sarana', 'daftar_referensi.deskripsi as jenis_sarana', 'upt.uraian as nmupt', 'sarana.tgl_pengadaan'];
-        $sarana = Sarana::query();
-        $sarana = $sarana->select($defaultColumn);
-        $sarana = $sarana->join('daftar_referensi', 'sarana.id_jenis_sarana', '=', 'daftar_referensi.id_lookup');
-        $sarana = $sarana->join('upt', 'sarana.id_upt', '=', 'upt.id_upt');
-        $sarana = $sarana->where('sarana.id', $id)->firstOrFail();
+        $sarana = Sarana::where('id', $id)->firstOrFail();
 
         if (!$sarana->exists) {
             return response()->json([

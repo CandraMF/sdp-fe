@@ -153,7 +153,23 @@ class StatusPrasaranaRuangService
 	public function show(object $status_prasarana_ruang)
 	{
 		$data = [
-			'id' => $status_prasarana_ruang->id, 'id_prasarana_ruang' => $status_prasarana_ruang->id_prasarana_ruang, 'nama_prasarana_ruang' => $status_prasarana_ruang->nama_prasarana_ruang, 'status' => $status_prasarana_ruang->status, 'kepemilikan' => $status_prasarana_ruang->kepemilikan, 'luas' => $status_prasarana_ruang->luas, 'jumlah_lantai' => $status_prasarana_ruang->jumlah_lantai, 'jumlah_ruang' => $status_prasarana_ruang->jumlah_ruang, 'kondisi_baik' => $status_prasarana_ruang->kondisi_baik, 'kondisi_rusak' => $status_prasarana_ruang->kondisi_rusak
+			'id' => $status_prasarana_ruang->id,
+			'id_prasarana_ruang' => $status_prasarana_ruang->id_prasarana_ruang,
+			'tanggal' => $status_prasarana_ruang->tanggal,
+			'status' => $status_prasarana_ruang->status,
+			'kepemilikan' => $status_prasarana_ruang->kepemilikan,
+			'luas' => $status_prasarana_ruang->luas,
+			'satuan_luas' => $status_prasarana_ruang->satuan_luas,
+			'jumlah_lantai' => $status_prasarana_ruang->jumlah_lantai,
+			'jumlah_ruang' => $status_prasarana_ruang->jumlah_ruang,
+			'kondisi_baik' => $status_prasarana_ruang->kondisi_baik,
+			'kondisi_rusak' => $status_prasarana_ruang->kondisi_rusak,
+			'satuan_kondisi' => $status_prasarana_ruang->satuan_kondisi,
+			'foto' => $status_prasarana_ruang->foto,
+			'pendaftaran_disnaker' => $status_prasarana_ruang->pendaftaran_disnaker,
+			'catatan_disnaker' => $status_prasarana_ruang->catatan_disnaker,
+			'keterangan' => $status_prasarana_ruang->keterangan
+
 		];
 		return $data;
 	}

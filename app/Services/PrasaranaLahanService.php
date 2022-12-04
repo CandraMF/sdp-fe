@@ -151,7 +151,13 @@ class PrasaranaLahanService
 	public function show(object $prasarana_lahan)
 	{
 		$data = [
-			'id' => $prasarana_lahan->id, 'id_jenis_prasarana_lahan' => $prasarana_lahan->id_jenis_prasarana_lahan, 'jenis_prasarana' => $prasarana_lahan->jenis_prasarana, 'nama_prasarana_lahan' => $prasarana_lahan->nama_prasarana_lahan, 'nmupt' => $prasarana_lahan->nmupt, 'tgl_pengadaan' => $prasarana_lahan->tgl_pengadaan, 'keterangan' => $prasarana_lahan->keterangan
+			'id' => $prasarana_lahan->id,
+			'id_jenis_prasarana_lahan' => $prasarana_lahan->id_jenis_prasarana_lahan,
+			'nama_prasarana_lahan' => $prasarana_lahan->nama_prasarana_lahan,
+			'id_upt' => $prasarana_lahan->id_upt,
+			'tgl_pengadaan' => $prasarana_lahan->tgl_pengadaan,
+			'keterangan' => $prasarana_lahan->keterangan,
+
 		];
 		return $data;
 	}

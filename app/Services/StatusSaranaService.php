@@ -152,7 +152,17 @@ class StatusSaranaService
 	public function show(object $status_sarana)
 	{
 		$data = [
-			'id' => $status_sarana->id, 'id_sarana' => $status_sarana->id_sarana, 'nama_sarana' => $status_sarana->nama_sarana, 'status' => $status_sarana->status, 'kepemilikan' => $status_sarana->kepemilikan, 'jumlah' => $status_sarana->jumlah, 'kondisi_baik' => $status_sarana->kondisi_baik, 'kondisi_rusak' => $status_sarana->kondisi_rusak, 'foto' => $status_sarana->foto
+			'id' => $status_sarana->id,
+			'id_sarana' => $status_sarana->id_sarana,
+			'tanggal' => $status_sarana->tanggal,
+			'status' => $status_sarana->status,
+			'kepemilikan' => $status_sarana->kepemilikan,
+			'jumlah' => $status_sarana->jumlah,
+			'satuan' => $status_sarana->satuan,
+			'kondisi_baik' => $status_sarana->kondisi_baik,
+			'kondisi_rusak' => $status_sarana->kondisi_rusak,
+			'foto' => $status_sarana->foto,
+			'keterangan' => $status_sarana->keterangan
 		];
 		return $data;
 	}

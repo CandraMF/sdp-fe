@@ -151,7 +151,17 @@ class StatusPrasaranaLahanService
 	public function show(object $status_prasarana_lahan)
 	{
 		$data = [
-			'id' => $status_prasarana_lahan->id, 'id_prasarana_lahan ' => $status_prasarana_lahan->id_prasarana_lahan, 'nama_prasarana_ruang ' => $status_prasarana_lahan->nama_prasarana_ruang, 'status' => $status_prasarana_lahan->status, 'kepemilikan' => $status_prasarana_lahan->kepemilikan, 'luas_dipakai' => $status_prasarana_lahan->luas_dipakai, 'lahan_tidur' => $status_prasarana_lahan->lahan_tidur, 'foto' => $status_prasarana_lahan->foto
+			'id' => $status_prasarana_lahan->id,
+			'id_prasarana_lahan' => $status_prasarana_lahan->id_prasarana_lahan,
+			'tanggal' => $status_prasarana_lahan->tanggal,
+			'status' => $status_prasarana_lahan->status,
+			'kepemilikan' => $status_prasarana_lahan->kepemilikan,
+			'luas_dipakai' => $status_prasarana_lahan->luas_dipakai,
+			'lahan_tidur' => $status_prasarana_lahan->lahan_tidur,
+			'satuan' => $status_prasarana_lahan->satuan,
+			'foto' => $status_prasarana_lahan->foto,
+			'keterangan' => $status_prasarana_lahan->keterangan
+
 		];
 		return $data;
 	}

@@ -232,12 +232,7 @@ class PrasaranaRuangController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['prasarana_ruang.id', 'prasarana_ruang.id_jenis_prasarana_ruang', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_ruang.nama_prasarana_ruang', 'upt.uraian as nmupt', 'prasarana_ruang.tgl_pengadaan', 'prasarana_ruang.keterangan'];
-        $prasaranaruang = PrasaranaRuang::query();
-        $prasaranaruang = $prasaranaruang->select($defaultColumn);
-        $prasaranaruang = $prasaranaruang->join('daftar_referensi', 'prasarana_ruang.id_jenis_prasarana_ruang', '=', 'daftar_referensi.id_lookup');
-        $prasaranaruang = $prasaranaruang->join('upt', 'prasarana_ruang.id_upt', '=', 'upt.id_upt');
-        $prasaranaruang = $prasaranaruang->where('id', $id)->firstOrFail();
+        $prasaranaruang = PrasaranaRuang::where('id', $id)->firstOrFail();
 
         if (!$prasaranaruang->exists) {
             return response()->json([
