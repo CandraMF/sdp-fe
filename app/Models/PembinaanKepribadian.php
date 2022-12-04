@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="PembinaanKepribadian Model",
  *      type="object",
  *      title="PembinaanKepribadian Model",
-     *      @OA\Property(property="id_pembinaan_kepribadian", type="string"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_jenis_pembinaan_kepribadian", type="string"),
      *      @OA\Property(property="id_upt", type="string"),
      *      @OA\Property(property="id_mitra", type="string"),
@@ -36,11 +36,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="foto", type="string"),
      *      @OA\Property(property="keterangan", type="string"),
      *      @OA\Property(property="status", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property string id_pembinaan_kepribadian
+     * @property bigint id
      * @property string id_jenis_pembinaan_kepribadian
      * @property string id_upt
      * @property string id_mitra
@@ -60,8 +60,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property string foto
      * @property string keterangan
      * @property string status
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class PembinaanKepribadian extends Model
 {
@@ -69,20 +69,20 @@ class PembinaanKepribadian extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "pembinaan_kepribadian";
-    protected $primaryKey = "id_pembinaan_kepribadian";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
     ];
 
     /**
@@ -92,7 +92,7 @@ class PembinaanKepribadian extends Model
      */
     public function getKey()
     {
-        return $this->id_pembinaan_kepribadian;
+        return $this->id;
     }
 
     /**

@@ -21,13 +21,11 @@ class DaftarPesertaPembinaanKepribadianFactory extends Factory
     public function definition()
     {
         return [
-        	'id_daftar_ppk' => ' - ' 
-			,'id_jadwal_pk' => ' - ' 
+        	'id_jadwal_pk' => ' - ' 
 			,'id_peserta' => ' - ' 
 			,'status' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			,'verifikasi_oleh' => ' - ' 
 			
         ];

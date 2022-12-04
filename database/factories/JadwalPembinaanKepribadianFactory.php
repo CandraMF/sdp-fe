@@ -21,9 +21,7 @@ class JadwalPembinaanKepribadianFactory extends Factory
     public function definition()
     {
         return [
-        	'id_jadwal_pk' => ' - ' 
-			,'id_pembinaan_kepribadian' => ' - ' 
-			,'hari' => ' - ' 
+        	'id_pembinaan_kepribadian' => ' - ' 
 			,'tanggal' => ' - ' 
 			,'jam_mulai' => ' - ' 
 			,'jam_selesai' => ' - ' 
@@ -31,8 +29,7 @@ class JadwalPembinaanKepribadianFactory extends Factory
 			,'materi_pembinaan_kepribadian' => ' - ' 
 			,'foto' => ' - ' 
 			,'status' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

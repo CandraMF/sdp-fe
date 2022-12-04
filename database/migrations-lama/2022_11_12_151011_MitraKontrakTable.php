@@ -11,7 +11,7 @@
 				$table->bigIncrements('id');
 				$table->string('id_mitra',32);
 				$table->string('jenis_mitra',32);
-				$table->enum('kontrak_dengan',['DITJEN', 'KANWIL', 'UPT']);
+				$table->string('kontrak_dengan',50);
 				$table->integer('id_kanwil')->nullable();
 				$table->integer('id_upt')->nullable();
 				$table->string('nomor_kontrak',200);

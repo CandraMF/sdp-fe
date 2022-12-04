@@ -21,14 +21,12 @@ class PrasaranaLahanFactory extends Factory
     public function definition()
     {
         return [
-        	'id_prasarana_lahan' => ' - ' 
-			,'id_jenis_prasarana_lahan' => ' - ' 
+        	'id_jenis_prasarana_lahan' => ' - ' 
 			,'nama_prasarana_lahan' => ' - ' 
 			,'id_upt' => ' - ' 
 			,'tgl_pengadaan' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

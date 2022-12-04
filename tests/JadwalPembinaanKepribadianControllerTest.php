@@ -22,7 +22,7 @@ class JadwalPembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(JadwalPembinaanKepribadian::class)->create();
         $properties = [
-                'id_jadwal_pk' => '1' , 'id_pembinaan_kepribadian' => '1' , 'hari' => '1' , 'tanggal' => '1' , 'jam_mulai' => '1' , 'jam_selesai' => '1' , 'id_instruktur' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'foto' => '1' , 'status' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_pembinaan_kepribadian' => '1' , 'tanggal' => '1' , 'jam_mulai' => '1' , 'jam_selesai' => '1' , 'id_instruktur' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'foto' => '1' , 'status' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/jadwalpembinaankepribadian', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class JadwalPembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(JadwalPembinaanKepribadian::class)->create();
         $properties = [
-                'id_jadwal_pk' => '1' , 'id_pembinaan_kepribadian' => '1' , 'hari' => '1' , 'tanggal' => '1' , 'jam_mulai' => '1' , 'jam_selesai' => '1' , 'id_instruktur' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'foto' => '1' , 'status' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_pembinaan_kepribadian' => '1' , 'tanggal' => '1' , 'jam_mulai' => '1' , 'jam_selesai' => '1' , 'id_instruktur' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'foto' => '1' , 'status' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/jadwalpembinaankepribadian/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

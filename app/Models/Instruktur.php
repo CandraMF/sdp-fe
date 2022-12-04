@@ -16,34 +16,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="Instruktur Model",
  *      type="object",
  *      title="Instruktur Model",
-     *      @OA\Property(property="id_instruktur", type="integer"),
-     *      @OA\Property(property="id_pembinaan_kepribadian", type="integer"),
-     *      @OA\Property(property="jenis_instruktur", type="string"),
-     *      @OA\Property(property="id_napi", type="string"),
-     *      @OA\Property(property="id_petugas", type="string"),
-     *      @OA\Property(property="id_mitra", type="integer"),
-     *      @OA\Property(property="nama_instruktur", type="string"),
-     *      @OA\Property(property="asal_institusi_instruktur", type="string"),
-     *      @OA\Property(property="no_telp", type="string"),
-     *      @OA\Property(property="email", type="string"),
-     *      @OA\Property(property="keterangan", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+ *      @OA\Property(property="id", type="bigint"),
+ *      @OA\Property(property="jenis_pembinaan_kepribadian", type="string"),
+ *      @OA\Property(property="jenis_instruktur", type="string"),
+ *      @OA\Property(property="id_napi", type="string"),
+ *      @OA\Property(property="id_petugas", type="string"),
+ *      @OA\Property(property="id_mitra", type="integer"),
+ *      @OA\Property(property="nama_instruktur", type="string"),
+ *      @OA\Property(property="asal_institusi_instruktur", type="string"),
+ *      @OA\Property(property="no_telp", type="string"),
+ *      @OA\Property(property="email", type="string"),
+ *      @OA\Property(property="keterangan", type="string"),
+ *      @OA\Property(property="updated_at", type="datetime"),
+ *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_instruktur
-     * @property integer id_pembinaan_kepribadian
-     * @property string jenis_instruktur
-     * @property string id_napi
-     * @property string id_petugas
-     * @property integer id_mitra
-     * @property string nama_instruktur
-     * @property string asal_institusi_instruktur
-     * @property string no_telp
-     * @property string email
-     * @property string keterangan
-     * @property datetime update_terakhir
-     * @property string update_oleh
+ * @property bigint id
+ * @property string jenis_pembinaan_kepribadian
+ * @property string jenis_instruktur
+ * @property string id_napi
+ * @property string id_petugas
+ * @property integer id_mitra
+ * @property string nama_instruktur
+ * @property string asal_institusi_instruktur
+ * @property string no_telp
+ * @property string email
+ * @property string keterangan
+ * @property datetime updated_at
+ * @property string updated_by
  */
 class Instruktur extends Model
 {
@@ -51,20 +51,20 @@ class Instruktur extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "instruktur";
-    protected $primaryKey = "id_instruktur";
+    protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
-        'id_pembinaan_kepribadian' ,'jenis_instruktur' ,'id_napi' ,'id_petugas' ,'id_mitra' ,'nama_instruktur' ,'asal_institusi_instruktur' ,'no_telp' ,'email' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_pembinaan_kepribadian' ,'jenis_instruktur' ,'id_napi' ,'id_petugas' ,'id_mitra' ,'nama_instruktur' ,'asal_institusi_instruktur' ,'no_telp' ,'email' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_pembinaan_kepribadian' ,'jenis_instruktur' ,'id_napi' ,'id_petugas' ,'id_mitra' ,'nama_instruktur' ,'asal_institusi_instruktur' ,'no_telp' ,'email' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
     ];
 
     /**
@@ -74,7 +74,7 @@ class Instruktur extends Model
      */
     public function getKey()
     {
-        return $this->id_instruktur;
+        return $this->id;
     }
 
     /**

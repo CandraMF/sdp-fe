@@ -16,9 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="JadwalPembinaanKepribadian Model",
  *      type="object",
  *      title="JadwalPembinaanKepribadian Model",
-     *      @OA\Property(property="id_jadwal_pk", type="integer"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_pembinaan_kepribadian", type="integer"),
-     *      @OA\Property(property="hari", type="string"),
      *      @OA\Property(property="tanggal", type="date"),
      *      @OA\Property(property="jam_mulai", type="time"),
      *      @OA\Property(property="jam_selesai", type="time"),
@@ -26,13 +25,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="materi_pembinaan_kepribadian", type="string"),
      *      @OA\Property(property="foto", type="string"),
      *      @OA\Property(property="status", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_jadwal_pk
+     * @property bigint id
      * @property integer id_pembinaan_kepribadian
-     * @property string hari
      * @property date tanggal
      * @property time jam_mulai
      * @property time jam_selesai
@@ -40,8 +38,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property string materi_pembinaan_kepribadian
      * @property string foto
      * @property string status
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class JadwalPembinaanKepribadian extends Model
 {
@@ -49,20 +47,20 @@ class JadwalPembinaanKepribadian extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "jadwal_pembinaan_kepribadian";
-    protected $primaryKey = "id_jadwal_pk";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_pembinaan_kepribadian' ,'hari' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_pembinaan_kepribadian' ,'hari' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_pembinaan_kepribadian' ,'hari' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
     ];
 
     /**
@@ -72,7 +70,7 @@ class JadwalPembinaanKepribadian extends Model
      */
     public function getKey()
     {
-        return $this->id_jadwal_pk;
+        return $this->id;
     }
 
     /**

@@ -22,7 +22,7 @@ class MitraKontrakControllerTest extends TestCase
     {
         $data = factory(MitraKontrak::class)->create();
         $properties = [
-                'id_kontrak' => '1' , 'id_mitra' => '1' , 'jenis_mitra' => '1' , 'kontrak_dengan' => '1' , 'id_kanwil' => '1' , 'id_upt' => '1' , 'nomor_kontrak' => '1' , 'kontrak_awal' => '1' , 'kontrak_akhir' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_mitra' => '1' , 'jenis_mitra' => '1' , 'kontrak_dengan' => '1' , 'id_kanwil' => '1' , 'id_upt' => '1' , 'nomor_kontrak' => '1' , 'kontrak_awal' => '1' , 'kontrak_akhir' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/mitrakontrak', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class MitraKontrakControllerTest extends TestCase
     {
         $data = factory(MitraKontrak::class)->create();
         $properties = [
-                'id_kontrak' => '1' , 'id_mitra' => '1' , 'jenis_mitra' => '1' , 'kontrak_dengan' => '1' , 'id_kanwil' => '1' , 'id_upt' => '1' , 'nomor_kontrak' => '1' , 'kontrak_awal' => '1' , 'kontrak_akhir' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_mitra' => '1' , 'jenis_mitra' => '1' , 'kontrak_dengan' => '1' , 'id_kanwil' => '1' , 'id_upt' => '1' , 'nomor_kontrak' => '1' , 'kontrak_awal' => '1' , 'kontrak_akhir' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/mitrakontrak/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

@@ -21,8 +21,7 @@ class MitraFactory extends Factory
     public function definition()
     {
         return [
-        	'id_mitra' => ' - ' 
-			,'nama_mitra' => ' - ' 
+        	'nama_mitra' => ' - ' 
 			,'nama_pic' => ' - ' 
 			,'alamat' => ' - ' 
 			,'id_dati2' => ' - ' 
@@ -30,8 +29,7 @@ class MitraFactory extends Factory
 			,'no_hp' => ' - ' 
 			,'email' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

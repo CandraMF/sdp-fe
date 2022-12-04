@@ -21,20 +21,17 @@ class StatusSaranaFactory extends Factory
     public function definition()
     {
         return [
-        	'id_status_sarana' => ' - ' 
-			,'id_sarana' => ' - ' 
-			,'tahun' => ' - ' 
-			,'bulan' => ' - ' 
+        	'id_sarana' => ' - ' 
+			,'tanggal' => ' - ' 
 			,'status' => ' - ' 
-			,'kepemilkan' => ' - ' 
+			,'kepemilikan' => ' - ' 
 			,'jumlah' => ' - ' 
 			,'satuan' => ' - ' 
 			,'kondisi_baik' => ' - ' 
 			,'kondisi_rusak' => ' - ' 
 			,'foto' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

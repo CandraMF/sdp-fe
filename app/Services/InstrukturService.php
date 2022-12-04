@@ -74,9 +74,17 @@ class InstrukturService
 			return [];
 		}
 		foreach ($instruktur as $val) {
-			$result[] = array(
-				'id_instruktur ' => $val['id_instruktur '],  'nama_program' => $val['nama_program'],  'nama_instruktur' => $val['nama_instruktur'],  'asal_institusi_instruktur' => $val['asal_institusi_instruktur'],  'jenis_instruktur' => $val['jenis_instruktur'],  'keterangan' => $val['keterangan'],  'no_telp' => $val['no_telp'],  'email' => $val['email'],  'keterangan' => $val['keterangan']
-			);
+			$result[] = [
+				'id ' => $val['id'],
+				'jenis_pembinaan_kepribadian' => $val['jenis_pembinaan_kepribadian'],
+				'nama_instruktur' => $val['nama_instruktur'],
+				'asal_institusi_instruktur' => $val['asal_institusi_instruktur'],
+				'jenis_instruktur' => $val['jenis_instruktur'],
+				'keterangan' => $val['keterangan'],
+				'no_telp' => $val['no_telp'],
+				'email' => $val['email'],
+				'keterangan' => $val['keterangan']
+			];
 		}
 
 		return $result;
@@ -95,12 +103,11 @@ class InstrukturService
 		$perPage = isset($data['per_page']) ? (int) $data['per_page'] : 10;
 		$keyword = isset($data['keyword']) ? $data['keyword'] : NULL;
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
-		$column = isset($data['column']) ? $data['column'] : 'id_instruktur';
+		$column = isset($data['column']) ? $data['column'] : 'id';
 
-		$defaultColumn = ['instruktur.id_instruktur', 'pembinaan_kepribadian.nama_program', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
+		$defaultColumn = ['instruktur.id', 'instruktur.jenis_pembinaan_kepribadian', 'instruktur.jenis_instruktur', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
 		$q = Instruktur::query();
 		$q = $q->select($defaultColumn);
-		$q = $q->join('pembinaan_kepribadian', 'instruktur.id_pembinaan_kepribadian', '=', 'pembinaan_kepribadian.id_pembinaan_kepribadian');
 
 
 		$data = $this->mapping($q);
@@ -143,9 +150,9 @@ class InstrukturService
 	 */
 	public function show(object $instruktur)
 	{
-		$data = array(
-			'id_instruktur ' => $instruktur->id_instruktur, 'nama_program' => $instruktur->nama_program, 'nama_instruktur' => $instruktur->nama_instruktur, 'asal_institusi_instruktur' => $instruktur->asal_institusi_instruktur, 'jenis_instruktur' => $instruktur->jenis_instruktur, 'keterangan' => $instruktur->keterangan, 'no_telp' => $instruktur->no_telp, 'email' => $instruktur->email, 'keterangan' => $instruktur->keterangan
-		);
+		$data = [
+			'id ' => $instruktur->id, 'jenis_pembinaan_kepribadian' => $instruktur->jenis_pembinaan_kepribadian, 'jenis_instruktur' => $instruktur->jenis_instruktur, 'nama_instruktur' => $instruktur->nama_instruktur, 'asal_institusi_instruktur' => $instruktur->asal_institusi_instruktur, 'jenis_instruktur' => $instruktur->jenis_instruktur, 'keterangan' => $instruktur->keterangan, 'no_telp' => $instruktur->no_telp, 'email' => $instruktur->email, 'keterangan' => $instruktur->keterangan
+		];
 		return $data;
 	}
 
@@ -157,10 +164,9 @@ class InstrukturService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['instruktur.id_instruktur', 'pembinaan_kepribadian.nama_program', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
+		$defaultColumn = ['instruktur.id', 'instruktur.jenis_pembinaan_kepribadian',  'instruktur.jenis_instruktur', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
 		$q = Instruktur::query();
 		$q = $q->select($defaultColumn);
-		$q = $q->join('pembinaan_kepribadian', 'instruktur.id_pembinaan_kepribadian', '=', 'pembinaan_kepribadian.id_pembinaan_kepribadian');
 
 
 		$data = $this->mapping($q);
@@ -208,11 +214,9 @@ class InstrukturService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['instruktur.id_instruktur', 'pembinaan_kepribadian.nama_program', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
+		$defaultColumn = ['instruktur.id', 'instruktur.jenis_pembinaan_kepribadian', 'instruktur.jenis_instruktur', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
 		$q = Instruktur::query();
 		$q = $q->select($defaultColumn);
-		$q = $q->join('pembinaan_kepribadian', 'instruktur.id_pembinaan_kepribadian', '=', 'pembinaan_kepribadian.id_pembinaan_kepribadian');
-
 
 		$data = $this->mapping($q);
 		$collection = collect(array_values($data));
@@ -249,9 +253,20 @@ class InstrukturService
 		$judul = 'Instruktur';
 		$columns = ["Jenis Program", "Nama Instruktur", "Asal Institusi", "Jenis Instruktur", "Keterangan", "No Telpon", "Email", "Keterangan"];
 
-		$columnOfValues = ['instruktur.id_instruktur', 'pembinaan_kepribadian.nama_program', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
+		$columnOfValues = ['instruktur.id', 'instruktur.jenis_pembinaan_kepribadian', 'instruktur.jenis_instruktur', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
 		$sizeCellcolumns = ["Jenis Program" => 1000, "Nama Instruktur" => 1000, "Asal Institusi" => 1000, "Jenis Instruktur" => 1000, "Keterangan" => 1000, "No Telpon" => 1000, "Email" => 1000, "Keterangan" => 1000];
-		$sizeCells = ['id_instruktur ' => 1000, 'nama_program' => 1000, 'nama_instruktur' => 1000, 'asal_institusi_instruktur' => 1000, 'jenis_instruktur' => 1000, 'keterangan' => 1000, 'no_telp' => 1000, 'email' => 1000, 'keterangan' => 1000];
+		$sizeCells = [
+			'id ' => 1000,
+			'jenis_pembinaan_kepribadian' => 1000,
+			'jenis_instruktur' => 1000,
+			'nama_instruktur' => 1000,
+			'asal_institusi_instruktur' => 1000,
+			'jenis_instruktur' => 1000,
+			'keterangan' => 1000,
+			'no_telp' => 1000,
+			'email' => 1000,
+			'keterangan' => 1000
+		];
 		$collection = json_decode(json_encode($collection), true);
 
 		setlocale(LC_TIME, 'id_ID');

@@ -17,18 +17,16 @@ class InstrukturController extends Controller
     {
         $this->service = new InstrukturService();
         $this->rules = array(
-            'id_pembinaan_kepribadian' => 'nullable',
-            'jenis_instruktur' => 'nullable',
+            'jenis_pembinaan_kepribadian' => 'required',
+            'jenis_instruktur' => 'required',
             'id_napi' => 'nullable',
             'id_petugas' => 'nullable',
             'id_mitra' => 'nullable',
-            'nama_instruktur' => 'nullable',
+            'nama_instruktur' => 'required',
             'asal_institusi_instruktur' => 'nullable',
             'no_telp' => 'nullable',
             'email' => 'nullable',
-            'keterangan' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
+            'keterangan' => 'required',
         );
     }
 
@@ -40,8 +38,8 @@ class InstrukturController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_instruktur:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_pembinaan_kepribadian,jenis_instruktur,id_napi,id_petugas,id_mitra,nama_instruktur,asal_institusi_instruktur,no_telp,email,keterangan,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="jenis_pembinaan_kepribadian:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="jenis_pembinaan_kepribadian,jenis_instruktur,id_napi,id_petugas,id_mitra,nama_instruktur,asal_institusi_instruktur,no_telp,email,keterangan"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -90,8 +88,8 @@ class InstrukturController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_instruktur"];
-        $columns[] = "id_instruktur";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["jenis_pembinaan_kepribadian"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -135,18 +133,18 @@ class InstrukturController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_instruktur',
-                'Type' => 'INT()',
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
                 'Default' => NULL,
-                'Extra' => '',
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
             ),
             1 =>
             array(
-                'Field' => 'id_pembinaan_kepribadian',
-                'Type' => 'INT()',
-                'Null' => 'YES',
+                'Field' => 'jenis_pembinaan_kepribadian',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -155,7 +153,7 @@ class InstrukturController extends Controller
             array(
                 'Field' => 'jenis_instruktur',
                 'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -191,7 +189,7 @@ class InstrukturController extends Controller
             array(
                 'Field' => 'nama_instruktur',
                 'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -227,25 +225,25 @@ class InstrukturController extends Controller
             array(
                 'Field' => 'keterangan',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             11 =>
             array(
-                'Field' => 'update_terakhir',
+                'Field' => 'updated_at',
                 'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             12 =>
             array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -254,7 +252,7 @@ class InstrukturController extends Controller
         $schema = array(
             'name' => 'instruktur',
             'module' => 'lain-lain',
-            'primary_key' => 'id_instruktur',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/instruktur'
@@ -284,7 +282,7 @@ class InstrukturController extends Controller
      */
     public function show($id)
     {
-        $instruktur = Instruktur::where('id_instruktur', $id)->firstOrFail();
+        $instruktur = Instruktur::where('id', $id)->firstOrFail();
         if (!$instruktur->exists) {
             return response()->json([
                 'status' => 500,
@@ -312,7 +310,10 @@ class InstrukturController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="jenis_pembinaan_kepribadian", ref="#/components/schemas/Instruktur/properties/jenis_pembinaan_kepribadian"),
+     *              @OA\Property(property="jenis_instruktur", ref="#/components/schemas/Instruktur/properties/jenis_instruktur"),
+     *              @OA\Property(property="nama_instruktur", ref="#/components/schemas/Instruktur/properties/nama_instruktur"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/Instruktur/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -326,7 +327,10 @@ class InstrukturController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="jenis_pembinaan_kepribadian", type="array", @OA\Items(example={"jenis_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="jenis_instruktur", type="array", @OA\Items(example={"Jenis_instruktur field is required."})),
+     *              @OA\Property(property="nama_instruktur", type="array", @OA\Items(example={"Nama_instruktur field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -336,10 +340,9 @@ class InstrukturController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-        
         $instruktur = Instruktur::create($request->all());
         if ($instruktur->exists) {
             return response()->json([
@@ -367,7 +370,10 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="jenis_pembinaan_kepribadian", ref="#/components/schemas/Instruktur/properties/jenis_pembinaan_kepribadian"),
+     *              @OA\Property(property="jenis_instruktur", ref="#/components/schemas/Instruktur/properties/jenis_instruktur"),
+     *              @OA\Property(property="nama_instruktur", ref="#/components/schemas/Instruktur/properties/nama_instruktur"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/Instruktur/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -381,7 +387,10 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="jenis_pembinaan_kepribadian", type="array", @OA\Items(example={"jenis_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="jenis_instruktur", type="array", @OA\Items(example={"Jenis_instruktur field is required."})),
+     *              @OA\Property(property="nama_instruktur", type="array", @OA\Items(example={"Nama_instruktur field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -392,11 +401,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-        
-        $instruktur = Instruktur::where('id_instruktur', $id)->firstOrFail();
+        $instruktur = Instruktur::where('id', $id)->firstOrFail();
         if ($instruktur->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -433,7 +441,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $instruktur = Instruktur::where('id_instruktur', $id)->firstOrFail();
+        $instruktur = Instruktur::where('id', $id)->firstOrFail();
 
         if ($instruktur->delete()) {
             return response()->json([
@@ -449,6 +457,7 @@ $this->validate($request, $this->rules);
             ]);
         }
     }
+
     public function exportExcel(Request $request)
     {
         $data = $request->toArray();

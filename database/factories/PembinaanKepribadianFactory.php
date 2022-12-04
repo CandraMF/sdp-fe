@@ -21,8 +21,7 @@ class PembinaanKepribadianFactory extends Factory
     public function definition()
     {
         return [
-        	'id_pembinaan_kepribadian' => ' - ' 
-			,'id_jenis_pembinaan_kepribadian' => ' - ' 
+        	'id_jenis_pembinaan_kepribadian' => ' - ' 
 			,'id_upt' => ' - ' 
 			,'id_mitra' => ' - ' 
 			,'nama_program' => ' - ' 
@@ -41,8 +40,7 @@ class PembinaanKepribadianFactory extends Factory
 			,'foto' => ' - ' 
 			,'keterangan' => ' - ' 
 			,'status' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

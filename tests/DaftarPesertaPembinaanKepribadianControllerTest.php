@@ -22,7 +22,7 @@ class DaftarPesertaPembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(DaftarPesertaPembinaanKepribadian::class)->create();
         $properties = [
-                'id_daftar_ppk' => '1' , 'id_jadwal_pk' => '1' , 'id_peserta' => '1' , 'status' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1' , 'verifikasi_oleh' => '1'
+                'id_jadwal_pk' => '1' , 'id_peserta' => '1' , 'status' => '1' , 'keterangan' => '1' , 'updated_by' => '1' , 'verifikasi_oleh' => '1'
         ];
         $this->json('POST', '/daftarpesertapembinaankepribadian', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class DaftarPesertaPembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(DaftarPesertaPembinaanKepribadian::class)->create();
         $properties = [
-                'id_daftar_ppk' => '1' , 'id_jadwal_pk' => '1' , 'id_peserta' => '1' , 'status' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1' , 'verifikasi_oleh' => '1'
+                'id_jadwal_pk' => '1' , 'id_peserta' => '1' , 'status' => '1' , 'keterangan' => '1' , 'updated_by' => '1' , 'verifikasi_oleh' => '1'
             ];
         $this->json('PATCH', '/daftarpesertapembinaankepribadian/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

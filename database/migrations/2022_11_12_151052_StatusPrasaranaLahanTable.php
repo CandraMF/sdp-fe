@@ -8,20 +8,19 @@
 		public function up()
 		{
 			Schema::create('status_prasarana_lahan', function (Blueprint $table) {
+				$table->bigIncrements('id');
+				$table->integer('id_prasarana_lahan');
+				$table->date('tanggal');
+				$table->enum('status',['TIDUR', 'DIMANFAATKAN', 'SENGKETA', 'DISEWAKAN']);			
+				$table->enum('kepemilikan',['UPT', 'KANWIL', 'DITJEN', 'KEMENTERIAN', 'MITRA']);			
+				$table->decimal('luas_dipakai',6, 0);
+				$table->decimal('lahan_tidur',6, 0);
+				$table->string('satuan',50);
+				$table->string('foto',200);
+				$table->string('keterangan',200);
+				$table->dateTime('updated_at');
+				$table->string('updated_by',32);
 				
-				$table->integer('id_prasarana_lahan')->nullable();
-				$table->integer('tahun')->nullable();
-				$table->string('bulan',50)->nullable();
-				$table->string('status',50)->nullable();
-				$table->string('kepemilikan',50)->nullable();
-				$table->decimal('luas_dipakai',6, 0)->nullable();
-				$table->decimal('lahan_tidur',6, 0)->nullable();
-				$table->string('satuan',50)->nullable();
-				$table->string('foto',200)->nullable();
-				$table->string('keterangan',200)->nullable();
-				$table->dateTime('update_terakhir')->nullable();
-				$table->string('update_oleh',32)->nullable();
-				$table->bigIncrements('id_status_prasarana_lahan')->primary();
 			});
 		}
 

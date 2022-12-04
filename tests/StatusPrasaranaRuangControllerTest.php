@@ -22,7 +22,7 @@ class StatusPrasaranaRuangControllerTest extends TestCase
     {
         $data = factory(StatusPrasaranaRuang::class)->create();
         $properties = [
-                'id_status_prasarana_ruang' => '1' , 'id_prasarana_ruang' => '1' , 'tahun' => '1' , 'bulan' => '1' , 'status' => '1' , 'kepemilkan' => '1' , 'luas' => '1' , 'satuan_luas' => '1' , 'jumlah_lantai' => '1' , 'jumlah_ruang' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'satuan_kondisi' => '1' , 'foto' => '1' , 'pendaftaran_disnaker' => '1' , 'catatan_disnaker' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_prasarana_ruang' => '1' , 'tanggal' => '1' , 'status' => '1' , 'kepemilikan' => '1' , 'luas' => '1' , 'satuan_luas' => '1' , 'jumlah_lantai' => '1' , 'jumlah_ruang' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'satuan_kondisi' => '1' , 'foto' => '1' , 'pendaftaran_disnaker' => '1' , 'catatan_disnaker' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/statusprasaranaruang', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class StatusPrasaranaRuangControllerTest extends TestCase
     {
         $data = factory(StatusPrasaranaRuang::class)->create();
         $properties = [
-                'id_status_prasarana_ruang' => '1' , 'id_prasarana_ruang' => '1' , 'tahun' => '1' , 'bulan' => '1' , 'status' => '1' , 'kepemilkan' => '1' , 'luas' => '1' , 'satuan_luas' => '1' , 'jumlah_lantai' => '1' , 'jumlah_ruang' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'satuan_kondisi' => '1' , 'foto' => '1' , 'pendaftaran_disnaker' => '1' , 'catatan_disnaker' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_prasarana_ruang' => '1' , 'tanggal' => '1' , 'status' => '1' , 'kepemilikan' => '1' , 'luas' => '1' , 'satuan_luas' => '1' , 'jumlah_lantai' => '1' , 'jumlah_ruang' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'satuan_kondisi' => '1' , 'foto' => '1' , 'pendaftaran_disnaker' => '1' , 'catatan_disnaker' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/statusprasaranaruang/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

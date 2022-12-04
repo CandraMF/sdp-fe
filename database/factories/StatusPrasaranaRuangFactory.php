@@ -21,12 +21,10 @@ class StatusPrasaranaRuangFactory extends Factory
     public function definition()
     {
         return [
-        	'id_status_prasarana_ruang' => ' - ' 
-			,'id_prasarana_ruang' => ' - ' 
-			,'tahun' => ' - ' 
-			,'bulan' => ' - ' 
+        	'id_prasarana_ruang' => ' - ' 
+			,'tanggal' => ' - ' 
 			,'status' => ' - ' 
-			,'kepemilkan' => ' - ' 
+			,'kepemilikan' => ' - ' 
 			,'luas' => ' - ' 
 			,'satuan_luas' => ' - ' 
 			,'jumlah_lantai' => ' - ' 
@@ -38,8 +36,7 @@ class StatusPrasaranaRuangFactory extends Factory
 			,'pendaftaran_disnaker' => ' - ' 
 			,'catatan_disnaker' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

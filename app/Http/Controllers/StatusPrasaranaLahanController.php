@@ -17,18 +17,15 @@ class StatusPrasaranaLahanController extends Controller
     {
         $this->service = new StatusPrasaranaLahanService();
         $this->rules = array(
-            'id_prasarana_lahan' => 'nullable',
-            'tahun' => 'nullable',
-            'bulan' => 'nullable',
-            'status' => 'nullable',
-            'kepemilikan' => 'nullable',
-            'luas_dipakai' => 'nullable',
-            'lahan_tidur' => 'nullable',
-            'satuan' => 'nullable',
-            'foto' => 'nullable',
-            'keterangan' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
+            'id_prasarana_lahan' => 'required',
+            'tanggal' => 'required',
+            'status' => 'required',
+            'kepemilikan' => 'required',
+            'luas_dipakai' => 'required',
+            'lahan_tidur' => 'required',
+            'satuan' => 'required',
+            'foto' => 'required',
+            'keterangan' => 'required',
         );
     }
 
@@ -40,8 +37,8 @@ class StatusPrasaranaLahanController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_status_prasarana_lahan:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_prasarana_lahan,tahun,bulan,status,kepemilikan,luas_dipakai,lahan_tidur,satuan,foto,keterangan,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_prasarana_lahan:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_prasarana_lahan,tanggal,status,kepemilikan,luas_dipakai,lahan_tidur,satuan,foto,keterangan"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -90,8 +87,8 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_status_prasarana_lahan"];
-        $columns[] = "id_status_prasarana_lahan";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_prasarana_lahan"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -135,117 +132,108 @@ class StatusPrasaranaLahanController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_status_prasarana_lahan',
-                'Type' => 'INT()',
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
                 'Default' => NULL,
-                'Extra' => '',
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
             ),
             1 =>
             array(
                 'Field' => 'id_prasarana_lahan',
                 'Type' => 'INT()',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             2 =>
             array(
-                'Field' => 'tahun',
-                'Type' => 'INT()',
-                'Null' => 'YES',
+                'Field' => 'tanggal',
+                'Type' => 'DATETIME',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             3 =>
             array(
-                'Field' => 'bulan',
+                'Field' => 'status',
                 'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             4 =>
             array(
-                'Field' => 'status',
+                'Field' => 'kepemilikan',
                 'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             5 =>
             array(
-                'Field' => 'kepemilikan',
-                'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Field' => 'luas_dipakai',
+                'Type' => 'DECIMAL(, 6)',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             6 =>
             array(
-                'Field' => 'luas_dipakai',
+                'Field' => 'lahan_tidur',
                 'Type' => 'DECIMAL(, 6)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             7 =>
             array(
-                'Field' => 'lahan_tidur',
-                'Type' => 'DECIMAL(, 6)',
-                'Null' => 'YES',
+                'Field' => 'satuan',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             8 =>
             array(
-                'Field' => 'satuan',
-                'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Field' => 'foto',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             9 =>
             array(
-                'Field' => 'foto',
+                'Field' => 'keterangan',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             10 =>
             array(
-                'Field' => 'keterangan',
-                'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Field' => 'updated_at',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             11 =>
             array(
-                'Field' => 'update_terakhir',
-                'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            12 =>
-            array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -254,7 +242,7 @@ class StatusPrasaranaLahanController extends Controller
         $schema = array(
             'name' => 'statusprasaranalahan',
             'module' => 'lain-lain',
-            'primary_key' => 'id_status_prasarana_lahan',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/statusprasaranalahan'
@@ -284,7 +272,12 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function show($id)
     {
-        $statusprasaranalahan = StatusPrasaranaLahan::where('id_status_prasarana_lahan', $id)->firstOrFail();
+        $defaultColumn = ['status_prasarana_lahan.id', 'status_prasarana_lahan.id_prasarana_lahan', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
+        $statusprasaranalahan = StatusPrasaranaLahan::query();
+        $statusprasaranalahan = $statusprasaranalahan->select($defaultColumn);
+        $statusprasaranalahan = $statusprasaranalahan->join('prasarana_ruang', 'status_prasarana_lahan.id_prasarana_lahan', '=', 'prasarana_ruang.id');
+        $statusprasaranalahan = $statusprasaranalahan->where('status_prasarana_lahan.id', $id)->firstOrFail();
+
         if (!$statusprasaranalahan->exists) {
             return response()->json([
                 'status' => 500,
@@ -312,7 +305,15 @@ class StatusPrasaranaLahanController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_prasarana_lahan", ref="#/components/schemas/StatusPrasaranaLahan/properties/id_prasarana_lahan"),
+     *              @OA\Property(property="tanggal", ref="#/components/schemas/StatusPrasaranaLahan/properties/tanggal"),
+     *              @OA\Property(property="status", ref="#/components/schemas/StatusPrasaranaLahan/properties/status"),
+     *              @OA\Property(property="kepemilikan", ref="#/components/schemas/StatusPrasaranaLahan/properties/kepemilikan"),
+     *              @OA\Property(property="luas_dipakai", ref="#/components/schemas/StatusPrasaranaLahan/properties/luas_dipakai"),
+     *              @OA\Property(property="lahan_tidur", ref="#/components/schemas/StatusPrasaranaLahan/properties/lahan_tidur"),
+     *              @OA\Property(property="satuan", ref="#/components/schemas/StatusPrasaranaLahan/properties/satuan"),
+     *              @OA\Property(property="foto", ref="#/components/schemas/StatusPrasaranaLahan/properties/foto"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/StatusPrasaranaLahan/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -326,7 +327,15 @@ class StatusPrasaranaLahanController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_prasarana_lahan", type="array", @OA\Items(example={"Id_prasarana_lahan field is required."})),
+     *              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
+     *              @OA\Property(property="kepemilikan", type="array", @OA\Items(example={"Kepemilikan field is required."})),
+     *              @OA\Property(property="luas_dipakai", type="array", @OA\Items(example={"Luas_dipakai field is required."})),
+     *              @OA\Property(property="lahan_tidur", type="array", @OA\Items(example={"Lahan_tidur field is required."})),
+     *              @OA\Property(property="satuan", type="array", @OA\Items(example={"Satuan field is required."})),
+     *              @OA\Property(property="foto", type="array", @OA\Items(example={"Foto field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -336,26 +345,8 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
-
-
-        //   $request->foto->store('status_prasarana_lahan', 'public');
-
-
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $allowedfileExtention = ['png', 'jpg', 'jpeg'];
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedfileExtention);
-
-            if ($check) {
-                $name = time() . $file->getClientOriginalExtension();
-                $file->move('images', $name);
-                $request->merge(['foto' => $name]);
-            }
-        }
-
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
         $statusprasaranalahan = StatusPrasaranaLahan::create($request->all());
         if ($statusprasaranalahan->exists) {
@@ -384,7 +375,15 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_prasarana_lahan", ref="#/components/schemas/StatusPrasaranaLahan/properties/id_prasarana_lahan"),
+     *              @OA\Property(property="tanggal", ref="#/components/schemas/StatusPrasaranaLahan/properties/tanggal"),
+     *              @OA\Property(property="status", ref="#/components/schemas/StatusPrasaranaLahan/properties/status"),
+     *              @OA\Property(property="kepemilikan", ref="#/components/schemas/StatusPrasaranaLahan/properties/kepemilikan"),
+     *              @OA\Property(property="luas_dipakai", ref="#/components/schemas/StatusPrasaranaLahan/properties/luas_dipakai"),
+     *              @OA\Property(property="lahan_tidur", ref="#/components/schemas/StatusPrasaranaLahan/properties/lahan_tidur"),
+     *              @OA\Property(property="satuan", ref="#/components/schemas/StatusPrasaranaLahan/properties/satuan"),
+     *              @OA\Property(property="foto", ref="#/components/schemas/StatusPrasaranaLahan/properties/foto"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/StatusPrasaranaLahan/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -398,7 +397,15 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_prasarana_lahan", type="array", @OA\Items(example={"Id_prasarana_lahan field is required."})),
+     *              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
+     *              @OA\Property(property="kepemilikan", type="array", @OA\Items(example={"Kepemilikan field is required."})),
+     *              @OA\Property(property="luas_dipakai", type="array", @OA\Items(example={"Luas_dipakai field is required."})),
+     *              @OA\Property(property="lahan_tidur", type="array", @OA\Items(example={"Lahan_tidur field is required."})),
+     *              @OA\Property(property="satuan", type="array", @OA\Items(example={"Satuan field is required."})),
+     *              @OA\Property(property="foto", type="array", @OA\Items(example={"Foto field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -409,25 +416,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-
-        $statusprasaranalahan = StatusPrasaranaLahan::where('id_status_prasarana_lahan', $id)->firstOrFail();
-
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $allowedfileExtention = ['png', 'jpg', 'jpeg'];
-            $extension = $file->getClientOriginalExtension();
-            $check = in_array($extension, $allowedfileExtention);
-
-            if ($check) {
-                $name = time() . $file->getClientOriginalExtension();
-                $file->move('images', $name);
-                $request->merge(['foto' => $name]);
-            }
-        }
-
+        $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();
         if ($statusprasaranalahan->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -464,7 +456,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $statusprasaranalahan = StatusPrasaranaLahan::where('id_status_prasarana_lahan', $id)->firstOrFail();
+        $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();
 
         if ($statusprasaranalahan->delete()) {
             return response()->json([

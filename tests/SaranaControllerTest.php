@@ -22,7 +22,7 @@ class SaranaControllerTest extends TestCase
     {
         $data = factory(Sarana::class)->create();
         $properties = [
-                'id_sarana' => '1' , 'id_jenis_sarana' => '1' , 'nama_sarana' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_sarana' => '1' , 'nama_sarana' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/sarana', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class SaranaControllerTest extends TestCase
     {
         $data = factory(Sarana::class)->create();
         $properties = [
-                'id_sarana' => '1' , 'id_jenis_sarana' => '1' , 'nama_sarana' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_sarana' => '1' , 'nama_sarana' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/sarana/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

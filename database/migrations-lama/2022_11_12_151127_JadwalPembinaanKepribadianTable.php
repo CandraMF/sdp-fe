@@ -16,7 +16,7 @@
 				$table->string('id_instruktur',32);
 				$table->string('materi_pembinaan_kepribadian',200);
 				$table->string('foto',200)->nullable();
-				$table->enum('status', ['RENCANA', 'PELAKSANAAN', 'TERLAKSANA', 'SELESAI']);
+				$table->string('status', 50);
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				

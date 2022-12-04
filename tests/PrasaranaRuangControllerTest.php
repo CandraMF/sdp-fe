@@ -22,7 +22,7 @@ class PrasaranaRuangControllerTest extends TestCase
     {
         $data = factory(PrasaranaRuang::class)->create();
         $properties = [
-                'id_prasarana_ruang' => '1' , 'id_jenis_prasarana_ruang' => '1' , 'nama_prasarana_ruang' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_prasarana_ruang' => '1' , 'nama_prasarana_ruang' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/prasaranaruang', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class PrasaranaRuangControllerTest extends TestCase
     {
         $data = factory(PrasaranaRuang::class)->create();
         $properties = [
-                'id_prasarana_ruang' => '1' , 'id_jenis_prasarana_ruang' => '1' , 'nama_prasarana_ruang' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_prasarana_ruang' => '1' , 'nama_prasarana_ruang' => '1' , 'id_upt' => '1' , 'tgl_pengadaan' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/prasaranaruang/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

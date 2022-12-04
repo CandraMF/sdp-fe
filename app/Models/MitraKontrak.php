@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="MitraKontrak Model",
  *      type="object",
  *      title="MitraKontrak Model",
-     *      @OA\Property(property="id_kontrak", type="integer"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_mitra", type="string"),
      *      @OA\Property(property="jenis_mitra", type="string"),
      *      @OA\Property(property="kontrak_dengan", type="string"),
@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="nomor_kontrak", type="string"),
      *      @OA\Property(property="kontrak_awal", type="date"),
      *      @OA\Property(property="kontrak_akhir", type="date"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_kontrak
+     * @property bigint id
      * @property string id_mitra
      * @property string jenis_mitra
      * @property string kontrak_dengan
@@ -38,8 +38,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property string nomor_kontrak
      * @property date kontrak_awal
      * @property date kontrak_akhir
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class MitraKontrak extends Model
 {
@@ -47,20 +47,20 @@ class MitraKontrak extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "mitra_kontrak";
-    protected $primaryKey = "id_kontrak";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'update_terakhir' ,'update_oleh'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'update_terakhir' ,'update_oleh'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'update_terakhir' ,'update_oleh'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
     ];
 
     /**
@@ -70,7 +70,7 @@ class MitraKontrak extends Model
      */
     public function getKey()
     {
-        return $this->id_kontrak;
+        return $this->id;
     }
 
     /**

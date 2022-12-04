@@ -16,11 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="LaporanPembinaanKepribadian Model",
  *      type="object",
  *      title="LaporanPembinaanKepribadian Model",
-     *      @OA\Property(property="id_laporan_pk", type="integer"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_pembinaan_kepribadian", type="integer"),
      *      @OA\Property(property="id_upt", type="string"),
-     *      @OA\Property(property="bulan", type="string"),
-     *      @OA\Property(property="tahun", type="integer"),
+     *      @OA\Property(property="periode", type="date"),
      *      @OA\Property(property="jumlah_hari", type="decimal"),
      *      @OA\Property(property="jumlah_pembinaan_kepribadian", type="decimal"),
      *      @OA\Property(property="jumlah_peserta", type="decimal"),
@@ -33,15 +32,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="verifikasi_upt", type="string"),
      *      @OA\Property(property="verifikasi_kanwil", type="string"),
      *      @OA\Property(property="verifikasi_ditjen", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_laporan_pk
+     * @property bigint id
      * @property integer id_pembinaan_kepribadian
      * @property string id_upt
-     * @property string bulan
-     * @property integer tahun
+     * @property date periode
      * @property decimal jumlah_hari
      * @property decimal jumlah_pembinaan_kepribadian
      * @property decimal jumlah_peserta
@@ -54,8 +52,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property string verifikasi_upt
      * @property string verifikasi_kanwil
      * @property string verifikasi_ditjen
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class LaporanPembinaanKepribadian extends Model
 {
@@ -63,20 +61,20 @@ class LaporanPembinaanKepribadian extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "laporan_pembinaan_kepribadian";
-    protected $primaryKey = "id_laporan_pk";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'bulan' ,'tahun' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'bulan' ,'tahun' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'bulan' ,'tahun' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'update_terakhir' ,'update_oleh'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
     ];
 
     /**
@@ -86,7 +84,7 @@ class LaporanPembinaanKepribadian extends Model
      */
     public function getKey()
     {
-        return $this->id_laporan_pk;
+        return $this->id;
     }
 
     /**

@@ -16,24 +16,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="PrasaranaLahan Model",
  *      type="object",
  *      title="PrasaranaLahan Model",
-     *      @OA\Property(property="id_prasarana_lahan", type="integer"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_jenis_prasarana_lahan", type="string"),
      *      @OA\Property(property="nama_prasarana_lahan", type="string"),
      *      @OA\Property(property="id_upt", type="string"),
      *      @OA\Property(property="tgl_pengadaan", type="date"),
      *      @OA\Property(property="keterangan", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_prasarana_lahan
+     * @property bigint id
      * @property string id_jenis_prasarana_lahan
      * @property string nama_prasarana_lahan
      * @property string id_upt
      * @property date tgl_pengadaan
      * @property string keterangan
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class PrasaranaLahan extends Model
 {
@@ -41,20 +41,20 @@ class PrasaranaLahan extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "prasarana_lahan";
-    protected $primaryKey = "id_prasarana_lahan";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'update_terakhir' ,'update_oleh'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
     ];
 
     /**
@@ -64,7 +64,7 @@ class PrasaranaLahan extends Model
      */
     public function getKey()
     {
-        return $this->id_prasarana_lahan;
+        return $this->id;
     }
 
     /**

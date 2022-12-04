@@ -74,9 +74,14 @@ class MitraKontrakService
 			return [];
 		}
 		foreach ($mitra_kontrak as $val) {
-			$result[] = array(
-				'id_kontrak' => $val['id_kontrak'],  'jenis_mitra' => $val['jenis_mitra'],  'nomor_kontrak' => $val['nomor_kontrak'],  'kontrak_awal' => $val['kontrak_awal'],  'kontrak_akhir' => $val['kontrak_akhir'],  'update_terakhir' => $val['update_terakhir'],  'update_oleh' => $val['update_oleh']
-			);
+			$result[] = [
+
+				'id' => $val['id'],
+				'jenis_mitra' => $val['jenis_mitra'],
+				'nomor_kontrak' => $val['nomor_kontrak'],
+				'kontrak_awal' => $val['kontrak_awal'],
+				'kontrak_akhir' => $val['kontrak_akhir']
+			];
 		}
 
 		return $result;
@@ -95,11 +100,11 @@ class MitraKontrakService
 		$perPage = isset($data['per_page']) ? (int) $data['per_page'] : 10;
 		$keyword = isset($data['keyword']) ? $data['keyword'] : NULL;
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
-		$column = isset($data['column']) ? $data['column'] : 'id_kontrak';
+		$column = isset($data['column']) ? $data['column'] : 'id';
 		$id_mitra = isset($data['id_mitra']) ? $data['id_mitra'] : NULL;
 
 
-		$defaultColumn = ['mitra_kontrak.id_kontrak', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir', 'mitra_kontrak.update_terakhir', 'mitra_kontrak.update_oleh'];
+		$defaultColumn = ['mitra_kontrak.id', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir'];
 		$q = MitraKontrak::query();
 		$q = $q->select($defaultColumn);
 
@@ -144,9 +149,9 @@ class MitraKontrakService
 	 */
 	public function show(object $mitra_kontrak)
 	{
-		$data = array(
-			'id_kontrak' => $mitra_kontrak->id_kontrak, 'jenis_mitra' => $mitra_kontrak->jenis_mitra, 'nomor_kontrak' => $mitra_kontrak->nomor_kontrak, 'kontrak_awal' => $mitra_kontrak->kontrak_awal, 'kontrak_akhir' => $mitra_kontrak->kontrak_akhir, 'update_terakhir' => $mitra_kontrak->update_terakhir, 'update_oleh' => $mitra_kontrak->update_oleh
-		);
+		$data = [
+			'id' => $mitra_kontrak->id, 'jenis_mitra' => $mitra_kontrak->jenis_mitra, 'nomor_kontrak' => $mitra_kontrak->nomor_kontrak, 'kontrak_awal' => $mitra_kontrak->kontrak_awal, 'kontrak_akhir' => $mitra_kontrak->kontrak_akhir
+		];
 		return $data;
 	}
 
@@ -158,7 +163,7 @@ class MitraKontrakService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['mitra_kontrak.id_kontrak', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir', 'mitra_kontrak.update_terakhir', 'mitra_kontrak.update_oleh'];
+		$defaultColumn = ['mitra_kontrak.id', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir'];
 		$q = MitraKontrak::query();
 		$q = $q->select($defaultColumn);
 
@@ -208,7 +213,7 @@ class MitraKontrakService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['mitra_kontrak.id_kontrak', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir', 'mitra_kontrak.update_terakhir', 'mitra_kontrak.update_oleh'];
+		$defaultColumn = ['mitra_kontrak.id', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir'];
 		$q = MitraKontrak::query();
 		$q = $q->select($defaultColumn);
 
@@ -246,11 +251,16 @@ class MitraKontrakService
 		}
 
 		$judul = 'Mitra Kontrak';
-		$columns = ["Jenis Mitra", "No. Kontrak", "Tgl Kontrak Awal", "Tgl Kontrak Akhir", "Update Terakhir", "Update Oleh"];
+		$columns = ["Jenis Mitra", "No. Kontrak", "Tgl Kontrak Awal", "Tgl Kontrak Akhir"];
 
-		$columnOfValues = ['mitra_kontrak.id_kontrak', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir', 'mitra_kontrak.update_terakhir', 'mitra_kontrak.update_oleh'];
-		$sizeCellcolumns = ["Jenis Mitra" => 1000, "No. Kontrak" => 1000, "Tgl Kontrak Awal" => 1000, "Tgl Kontrak Akhir" => 1000, "Update Terakhir" => 1000, "Update Oleh" => 1000];
-		$sizeCells = ['jenis_mitra' => 1000, 'nomor_kontrak' => 1000, 'kontrak_awal' => 1000, 'kontrak_akhir' => 1000, 'update_terakhir' => 1000, 'update_oleh' => 1000];
+		$columnOfValues = ['mitra_kontrak.id', 'mitra_kontrak.jenis_mitra', 'mitra_kontrak.nomor_kontrak', 'mitra_kontrak.kontrak_awal', 'mitra_kontrak.kontrak_akhir'];
+		$sizeCellcolumns = ["Jenis Mitra" => 1000, "No. Kontrak" => 1000, "Tgl Kontrak Awal" => 1000, "Tgl Kontrak Akhir" => 1000];
+		$sizeCells = [
+			'jenis_mitra' => 1000,
+			'nomor_kontrak' => 1000,
+			'kontrak_awal' => 1000,
+			'kontrak_akhir' => 1000
+		];
 		$collection = json_decode(json_encode($collection), true);
 
 		setlocale(LC_TIME, 'id_ID');

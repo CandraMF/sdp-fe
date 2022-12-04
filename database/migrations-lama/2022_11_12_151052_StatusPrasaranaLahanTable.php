@@ -3,20 +3,19 @@
 	use Illuminate\Database\Schema\Blueprint;
 	use Illuminate\Support\Facades\Schema;
 
-	class StatusSaranaTable extends Migration
+	class StatusPrasaranaLahanTable extends Migration
 	{
 		public function up()
 		{
-			Schema::create('status_sarana', function (Blueprint $table) {
+			Schema::create('status_prasarana_lahan', function (Blueprint $table) {
 				$table->bigIncrements('id');
-				$table->integer('id_sarana');
+				$table->integer('id_prasarana_lahan');
 				$table->date('tanggal');
-				$table->enum('status',['AKTIF', 'TIDAK AKTIF', 'SEBAGIAN']);			
-				$table->enum('kepemilikan',['UPT', 'KANWIL', 'DITJEN', 'KEMENTERIAN', 'MITRA']);			
-				$table->integer('jumlah');
+				$table->string('status',50);			
+				$table->string('kepemilikan',50);			
+				$table->decimal('luas_dipakai',6, 0);
+				$table->decimal('lahan_tidur',6, 0);
 				$table->string('satuan',50);
-				$table->integer('kondisi_baik');
-				$table->integer('kondisi_rusak');
 				$table->string('foto',200);
 				$table->string('keterangan',200);
 				$table->dateTime('updated_at');
@@ -27,6 +26,6 @@
 
 		public function down()
 		{
-			Schema::dropIfExists('status_sarana');
+			Schema::dropIfExists('status_prasarana_lahan');
 		}
 	}

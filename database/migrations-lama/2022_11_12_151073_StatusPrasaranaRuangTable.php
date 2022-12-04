@@ -12,8 +12,8 @@ class StatusPrasaranaRuangTable extends Migration
 			$table->bigIncrements('id');
 			$table->integer('id_prasarana_ruang');
 			$table->date('tanggal');
-			$table->enum('status',['TIDUR', 'DIMANFAATKAN', 'SENGKETA', 'DISEWAKAN']);			
-			$table->enum('kepemilikan',['UPT', 'KANWIL', 'DITJEN', 'KEMENTERIAN', 'MITRA']);			
+			$table->string('status',50);			
+			$table->string('kepemilikan',50);			
 			$table->decimal('luas', 6, 0);
 			$table->string('satuan_luas', 50);
 			$table->decimal('jumlah_lantai', 3,0);
@@ -22,7 +22,7 @@ class StatusPrasaranaRuangTable extends Migration
 			$table->decimal('kondisi_rusak', 6,0);
 			$table->string('satuan_kondisi', 50);
 			$table->string('foto', 200);
-			$table->enum('pendaftaran_disnaker', ['BELUM', 'PENDAFTARAN', 'TERDAFTAR'])->nullable();
+			$table->string('pendaftaran_disnaker', 50)->nullable();
 			$table->string('catatan_disnaker', 200)->nullable();
 			$table->string('keterangan', 200);
 			$table->dateTime('updated_at');

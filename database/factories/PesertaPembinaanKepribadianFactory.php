@@ -21,16 +21,14 @@ class PesertaPembinaanKepribadianFactory extends Factory
     public function definition()
     {
         return [
-        	'id_peserta_pk' => ' - ' 
-			,'id_daftar_pembinaan_kepribadian' => ' - ' 
+        	'id_daftar_pembinaan_kepribadian' => ' - ' 
 			,'id_wbp' => ' - ' 
 			,'kehadiran' => ' - ' 
 			,'no_sertifikat' => ' - ' 
 			,'file_sertifikat' => ' - ' 
 			,'nilai' => ' - ' 
 			,'predikat' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

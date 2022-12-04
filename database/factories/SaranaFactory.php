@@ -21,14 +21,12 @@ class SaranaFactory extends Factory
     public function definition()
     {
         return [
-        	'id_sarana' => ' - ' 
-			,'id_jenis_sarana' => ' - ' 
+        	'id_jenis_sarana' => ' - ' 
 			,'nama_sarana' => ' - ' 
 			,'id_upt' => ' - ' 
 			,'tgl_pengadaan' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

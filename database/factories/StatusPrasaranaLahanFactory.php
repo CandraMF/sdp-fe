@@ -21,19 +21,16 @@ class StatusPrasaranaLahanFactory extends Factory
     public function definition()
     {
         return [
-        	'id_status_prasarana_lahan' => ' - ' 
-			,'id_prasarana_lahan' => ' - ' 
-			,'tahun' => ' - ' 
-			,'bulan' => ' - ' 
+        	'id_prasarana_lahan' => ' - ' 
+			,'tanggal' => ' - ' 
 			,'status' => ' - ' 
-			,'kepemilkan' => ' - ' 
+			,'kepemilikan' => ' - ' 
 			,'luas_dipakai' => ' - ' 
 			,'lahan_tidur' => ' - ' 
 			,'satuan' => ' - ' 
 			,'foto' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

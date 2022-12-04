@@ -17,16 +17,14 @@ class MitraController extends Controller
     {
         $this->service = new MitraService();
         $this->rules = array(
-            'nama_mitra' => 'nullable',
-            'nama_pic' => 'nullable',
-            'alamat' => 'nullable',
-            'id_dati2' => 'nullable',
+            'nama_mitra' => 'required',
+            'nama_pic' => 'required',
+            'alamat' => 'required',
+            'id_dati2' => 'required',
             'no_telp' => 'nullable',
-            'no_hp' => 'nullable',
-            'email' => 'nullable',
+            'no_hp' => 'required',
+            'email' => 'required',
             'keterangan' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
         );
     }
 
@@ -38,8 +36,8 @@ class MitraController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_mitra:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="nama_mitra,nama_pic,alamat,id_dati2,no_telp,no_hp,email,keterangan,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="nama_mitra:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="nama_mitra,nama_pic,alamat,id_dati2,no_telp,no_hp,email,keterangan"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -88,8 +86,8 @@ class MitraController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_mitra"];
-        $columns[] = "id_mitra";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["nama_mitra"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -133,7 +131,7 @@ class MitraController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_mitra',
+                'Field' => 'id',
                 'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
@@ -144,7 +142,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'nama_mitra',
                 'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -153,7 +151,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'nama_pic',
                 'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -162,7 +160,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'alamat',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -171,7 +169,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'id_dati2',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -189,7 +187,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'no_hp',
                 'Type' => 'VARCHAR(20)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -198,7 +196,7 @@ class MitraController extends Controller
             array(
                 'Field' => 'email',
                 'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -214,18 +212,18 @@ class MitraController extends Controller
             ),
             9 =>
             array(
-                'Field' => 'update_terakhir',
+                'Field' => 'updated_at',
                 'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             10 =>
             array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -234,7 +232,7 @@ class MitraController extends Controller
         $schema = array(
             'name' => 'mitra',
             'module' => 'lain-lain',
-            'primary_key' => 'id_mitra',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/mitra'
@@ -264,7 +262,13 @@ class MitraController extends Controller
      */
     public function show($id)
     {
-        $mitra = Mitra::where('id_mitra', $id)->firstOrFail();
+        $defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota', 'mitra.id_dati2', 'provinsi.id_provinsi'];
+        $mitra = Mitra::query();
+        $mitra = $mitra->select($defaultColumn);
+        $mitra = $mitra->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');
+        $mitra = $mitra->join('provinsi', 'dati2.id_provinsi', '=', 'provinsi.id_provinsi');
+        $mitra = $mitra->where('mitra.id', $id)->firstOrFail();
+
         if (!$mitra->exists) {
             return response()->json([
                 'status' => 500,
@@ -292,7 +296,12 @@ class MitraController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="nama_mitra", ref="#/components/schemas/Mitra/properties/nama_mitra"),
+     *              @OA\Property(property="nama_pic", ref="#/components/schemas/Mitra/properties/nama_pic"),
+     *              @OA\Property(property="alamat", ref="#/components/schemas/Mitra/properties/alamat"),
+     *              @OA\Property(property="id_dati2", ref="#/components/schemas/Mitra/properties/id_dati2"),
+     *              @OA\Property(property="no_hp", ref="#/components/schemas/Mitra/properties/no_hp"),
+     *              @OA\Property(property="email", ref="#/components/schemas/Mitra/properties/email"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -306,7 +315,12 @@ class MitraController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="nama_mitra", type="array", @OA\Items(example={"Nama_mitra field is required."})),
+     *              @OA\Property(property="nama_pic", type="array", @OA\Items(example={"Nama_pic field is required."})),
+     *              @OA\Property(property="alamat", type="array", @OA\Items(example={"Alamat field is required."})),
+     *              @OA\Property(property="id_dati2", type="array", @OA\Items(example={"Id_dati2 field is required."})),
+     *              @OA\Property(property="no_hp", type="array", @OA\Items(example={"No_hp field is required."})),
+     *              @OA\Property(property="email", type="array", @OA\Items(example={"Email field is required."}))
      *          ),
      *      ),
      * )
@@ -316,20 +330,17 @@ class MitraController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
         $this->validate($request, $this->rules);
 
-
-
         $mitra = Mitra::create($request->all());
-
         if ($mitra->exists) {
-            $id_mitra = Mitra::latest('update_terakhir')->first()->id_mitra;
+            $id_mitra = Mitra::latest('updated_at')->first()->id;
             $data_mitra = ['id_mitra' =>  $id_mitra];
             return response()->json([
                 'status' => 200,
                 'message' => "Mitra berhasil ditambahkan.",
-                'data' =>  $data_mitra
+                'data' => $data_mitra
             ]);
         } else {
             return response()->json([
@@ -351,7 +362,12 @@ class MitraController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="nama_mitra", ref="#/components/schemas/Mitra/properties/nama_mitra"),
+     *              @OA\Property(property="nama_pic", ref="#/components/schemas/Mitra/properties/nama_pic"),
+     *              @OA\Property(property="alamat", ref="#/components/schemas/Mitra/properties/alamat"),
+     *              @OA\Property(property="id_dati2", ref="#/components/schemas/Mitra/properties/id_dati2"),
+     *              @OA\Property(property="no_hp", ref="#/components/schemas/Mitra/properties/no_hp"),
+     *              @OA\Property(property="email", ref="#/components/schemas/Mitra/properties/email"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -365,7 +381,12 @@ class MitraController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="nama_mitra", type="array", @OA\Items(example={"Nama_mitra field is required."})),
+     *              @OA\Property(property="nama_pic", type="array", @OA\Items(example={"Nama_pic field is required."})),
+     *              @OA\Property(property="alamat", type="array", @OA\Items(example={"Alamat field is required."})),
+     *              @OA\Property(property="id_dati2", type="array", @OA\Items(example={"Id_dati2 field is required."})),
+     *              @OA\Property(property="no_hp", type="array", @OA\Items(example={"No_hp field is required."})),
+     *              @OA\Property(property="email", type="array", @OA\Items(example={"Email field is required."}))
      *          ),
      *      ),
      * )
@@ -376,13 +397,10 @@ class MitraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
         $this->validate($request, $this->rules);
 
-
-
-
-        $mitra = Mitra::where('id_mitra', $id)->firstOrFail();
+        $mitra = Mitra::where('id', $id)->firstOrFail();
         if ($mitra->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -419,7 +437,7 @@ class MitraController extends Controller
      */
     public function destroy($id)
     {
-        $mitra = Mitra::where('id_mitra', $id)->firstOrFail();
+        $mitra = Mitra::where('id', $id)->firstOrFail();
 
         if ($mitra->delete()) {
             return response()->json([
@@ -434,22 +452,5 @@ class MitraController extends Controller
                 'data' => null
             ]);
         }
-    }
-
-    public function exportExcel(Request $request)
-    {
-        $data = $request->toArray();
-        $export = $this->service->exportExcel($data);
-
-        return $export;
-    }
-
-
-    public function exportPdf(Request $request)
-    {
-        $data = $request->toArray();
-        $export = $this->service->printPDF($data);
-
-        return $export;
     }
 }

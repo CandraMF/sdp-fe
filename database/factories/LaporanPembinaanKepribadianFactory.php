@@ -21,11 +21,9 @@ class LaporanPembinaanKepribadianFactory extends Factory
     public function definition()
     {
         return [
-        	'id_laporan_pk' => ' - ' 
-			,'id_pembinaan_kepribadian' => ' - ' 
+        	'id_pembinaan_kepribadian' => ' - ' 
 			,'id_upt' => ' - ' 
-			,'bulan' => ' - ' 
-			,'tahun' => ' - ' 
+			,'periode' => ' - ' 
 			,'jumlah_hari' => ' - ' 
 			,'jumlah_pembinaan_kepribadian' => ' - ' 
 			,'jumlah_peserta' => ' - ' 
@@ -38,8 +36,7 @@ class LaporanPembinaanKepribadianFactory extends Factory
 			,'verifikasi_upt' => ' - ' 
 			,'verifikasi_kanwil' => ' - ' 
 			,'verifikasi_ditjen' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

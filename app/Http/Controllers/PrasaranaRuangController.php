@@ -17,13 +17,11 @@ class PrasaranaRuangController extends Controller
     {
         $this->service = new PrasaranaRuangService();
         $this->rules = array(
-            'id_jenis_prasarana_ruang' => 'nullable',
-            'nama_prasarana_ruang' => 'nullable',
-            'id_upt' => 'nullable',
-            'tgl_pengadaan' => 'nullable',
-            'keterangan' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
+            'id_jenis_prasarana_ruang' => 'required',
+            'nama_prasarana_ruang' => 'required',
+            'id_upt' => 'required',
+            'tgl_pengadaan' => 'required',
+            'keterangan' => 'required',
         );
     }
 
@@ -35,8 +33,8 @@ class PrasaranaRuangController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_prasarana_ruang:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_prasarana_ruang,nama_prasarana_ruang,id_upt,tgl_pengadaan,keterangan,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_jenis_prasarana_ruang:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_prasarana_ruang,nama_prasarana_ruang,id_upt,tgl_pengadaan,keterangan"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -85,8 +83,8 @@ class PrasaranaRuangController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_prasarana_ruang"];
-        $columns[] = "id_prasarana_ruang";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_jenis_prasarana_ruang"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -130,18 +128,18 @@ class PrasaranaRuangController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_prasarana_ruang',
-                'Type' => 'INT()',
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
                 'Default' => NULL,
-                'Extra' => '',
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
             ),
             1 =>
             array(
                 'Field' => 'id_jenis_prasarana_ruang',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -150,7 +148,7 @@ class PrasaranaRuangController extends Controller
             array(
                 'Field' => 'nama_prasarana_ruang',
                 'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -159,7 +157,7 @@ class PrasaranaRuangController extends Controller
             array(
                 'Field' => 'id_upt',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -168,7 +166,7 @@ class PrasaranaRuangController extends Controller
             array(
                 'Field' => 'tgl_pengadaan',
                 'Type' => 'DATETIME',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -177,25 +175,25 @@ class PrasaranaRuangController extends Controller
             array(
                 'Field' => 'keterangan',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             6 =>
             array(
-                'Field' => 'update_terakhir',
+                'Field' => 'updated_at',
                 'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             7 =>
             array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -204,7 +202,7 @@ class PrasaranaRuangController extends Controller
         $schema = array(
             'name' => 'prasaranaruang',
             'module' => 'lain-lain',
-            'primary_key' => 'id_prasarana_ruang',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/prasaranaruang'
@@ -234,7 +232,13 @@ class PrasaranaRuangController extends Controller
      */
     public function show($id)
     {
-        $prasaranaruang = PrasaranaRuang::where('id_prasarana_ruang', $id)->firstOrFail();
+        $defaultColumn = ['prasarana_ruang.id', 'prasarana_ruang.id_jenis_prasarana_ruang', 'daftar_referensi.deskripsi as jenis_prasarana', 'prasarana_ruang.nama_prasarana_ruang', 'upt.uraian as nmupt', 'prasarana_ruang.tgl_pengadaan', 'prasarana_ruang.keterangan'];
+        $prasaranaruang = PrasaranaRuang::query();
+        $prasaranaruang = $prasaranaruang->select($defaultColumn);
+        $prasaranaruang = $prasaranaruang->join('daftar_referensi', 'prasarana_ruang.id_jenis_prasarana_ruang', '=', 'daftar_referensi.id_lookup');
+        $prasaranaruang = $prasaranaruang->join('upt', 'prasarana_ruang.id_upt', '=', 'upt.id_upt');
+        $prasaranaruang = $prasaranaruang->where('id', $id)->firstOrFail();
+
         if (!$prasaranaruang->exists) {
             return response()->json([
                 'status' => 500,
@@ -262,7 +266,11 @@ class PrasaranaRuangController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_prasarana_ruang", ref="#/components/schemas/PrasaranaRuang/properties/id_jenis_prasarana_ruang"),
+     *              @OA\Property(property="nama_prasarana_ruang", ref="#/components/schemas/PrasaranaRuang/properties/nama_prasarana_ruang"),
+     *              @OA\Property(property="id_upt", ref="#/components/schemas/PrasaranaRuang/properties/id_upt"),
+     *              @OA\Property(property="tgl_pengadaan", ref="#/components/schemas/PrasaranaRuang/properties/tgl_pengadaan"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/PrasaranaRuang/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -276,7 +284,11 @@ class PrasaranaRuangController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_prasarana_ruang", type="array", @OA\Items(example={"Id_jenis_prasarana_ruang field is required."})),
+     *              @OA\Property(property="nama_prasarana_ruang", type="array", @OA\Items(example={"Nama_prasarana_ruang field is required."})),
+     *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
+     *              @OA\Property(property="tgl_pengadaan", type="array", @OA\Items(example={"Tgl_pengadaan field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -286,9 +298,8 @@ class PrasaranaRuangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
-
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
         $prasaranaruang = PrasaranaRuang::create($request->all());
         if ($prasaranaruang->exists) {
@@ -317,7 +328,11 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_prasarana_ruang", ref="#/components/schemas/PrasaranaRuang/properties/id_jenis_prasarana_ruang"),
+     *              @OA\Property(property="nama_prasarana_ruang", ref="#/components/schemas/PrasaranaRuang/properties/nama_prasarana_ruang"),
+     *              @OA\Property(property="id_upt", ref="#/components/schemas/PrasaranaRuang/properties/id_upt"),
+     *              @OA\Property(property="tgl_pengadaan", ref="#/components/schemas/PrasaranaRuang/properties/tgl_pengadaan"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/PrasaranaRuang/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -331,7 +346,11 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_prasarana_ruang", type="array", @OA\Items(example={"Id_jenis_prasarana_ruang field is required."})),
+     *              @OA\Property(property="nama_prasarana_ruang", type="array", @OA\Items(example={"Nama_prasarana_ruang field is required."})),
+     *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
+     *              @OA\Property(property="tgl_pengadaan", type="array", @OA\Items(example={"Tgl_pengadaan field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -342,11 +361,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-
-        $prasaranaruang = PrasaranaRuang::where('id_prasarana_ruang', $id)->firstOrFail();
+        $prasaranaruang = PrasaranaRuang::where('id', $id)->firstOrFail();
         if ($prasaranaruang->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -383,7 +401,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $prasaranaruang = PrasaranaRuang::where('id_prasarana_ruang', $id)->firstOrFail();
+        $prasaranaruang = PrasaranaRuang::where('id', $id)->firstOrFail();
 
         if ($prasaranaruang->delete()) {
             return response()->json([

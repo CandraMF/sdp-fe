@@ -22,7 +22,7 @@ class PembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(PembinaanKepribadian::class)->create();
         $properties = [
-                'id_pembinaan_kepribadian' => '1' , 'id_jenis_pembinaan_kepribadian' => '1' , 'id_upt' => '1' , 'id_mitra' => '1' , 'nama_program' => '1' , 'program_wajib' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'id_instruktur' => '1' , 'penangung_jawab' => '1' , 'tanggal_mulai' => '1' , 'tanggal_selesai' => '1' , 'tempat_pelaksanaan' => '1' , 'perlu_kelulusan' => '1' , 'id_sarana' => '1' , 'id_prasarana' => '1' , 'realisasi_anggaran' => '1' , 'id_jenis_anggaran' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'status' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_pembinaan_kepribadian' => '1' , 'id_upt' => '1' , 'id_mitra' => '1' , 'nama_program' => '1' , 'program_wajib' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'id_instruktur' => '1' , 'penangung_jawab' => '1' , 'tanggal_mulai' => '1' , 'tanggal_selesai' => '1' , 'tempat_pelaksanaan' => '1' , 'perlu_kelulusan' => '1' , 'id_sarana' => '1' , 'id_prasarana' => '1' , 'realisasi_anggaran' => '1' , 'id_jenis_anggaran' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'status' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/pembinaankepribadian', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class PembinaanKepribadianControllerTest extends TestCase
     {
         $data = factory(PembinaanKepribadian::class)->create();
         $properties = [
-                'id_pembinaan_kepribadian' => '1' , 'id_jenis_pembinaan_kepribadian' => '1' , 'id_upt' => '1' , 'id_mitra' => '1' , 'nama_program' => '1' , 'program_wajib' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'id_instruktur' => '1' , 'penangung_jawab' => '1' , 'tanggal_mulai' => '1' , 'tanggal_selesai' => '1' , 'tempat_pelaksanaan' => '1' , 'perlu_kelulusan' => '1' , 'id_sarana' => '1' , 'id_prasarana' => '1' , 'realisasi_anggaran' => '1' , 'id_jenis_anggaran' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'status' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_jenis_pembinaan_kepribadian' => '1' , 'id_upt' => '1' , 'id_mitra' => '1' , 'nama_program' => '1' , 'program_wajib' => '1' , 'materi_pembinaan_kepribadian' => '1' , 'id_instruktur' => '1' , 'penangung_jawab' => '1' , 'tanggal_mulai' => '1' , 'tanggal_selesai' => '1' , 'tempat_pelaksanaan' => '1' , 'perlu_kelulusan' => '1' , 'id_sarana' => '1' , 'id_prasarana' => '1' , 'realisasi_anggaran' => '1' , 'id_jenis_anggaran' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'status' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/pembinaankepribadian/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

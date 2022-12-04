@@ -17,13 +17,11 @@ class SaranaController extends Controller
     {
         $this->service = new SaranaService();
         $this->rules = array(
-            'id_jenis_sarana' => 'nullable',
-            'nama_sarana' => 'nullable',
-            'id_upt' => 'nullable',
-            'tgl_pengadaan' => 'nullable',
-            'keterangan' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
+            'id_jenis_sarana' => 'required',
+            'nama_sarana' => 'required',
+            'id_upt' => 'required',
+            'tgl_pengadaan' => 'required',
+            'keterangan' => 'required',
         );
     }
 
@@ -35,8 +33,8 @@ class SaranaController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_sarana:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_sarana,nama_sarana,id_upt,tgl_pengadaan,keterangan,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_jenis_sarana:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_sarana,nama_sarana,id_upt,tgl_pengadaan,keterangan"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -85,8 +83,8 @@ class SaranaController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_sarana"];
-        $columns[] = "id_sarana";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_jenis_sarana"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -130,18 +128,18 @@ class SaranaController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_sarana',
-                'Type' => 'INT()',
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
                 'Default' => NULL,
-                'Extra' => '',
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
             ),
             1 =>
             array(
                 'Field' => 'id_jenis_sarana',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -150,7 +148,7 @@ class SaranaController extends Controller
             array(
                 'Field' => 'nama_sarana',
                 'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -159,7 +157,7 @@ class SaranaController extends Controller
             array(
                 'Field' => 'id_upt',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -168,7 +166,7 @@ class SaranaController extends Controller
             array(
                 'Field' => 'tgl_pengadaan',
                 'Type' => 'DATETIME',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -177,25 +175,25 @@ class SaranaController extends Controller
             array(
                 'Field' => 'keterangan',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             6 =>
             array(
-                'Field' => 'update_terakhir',
+                'Field' => 'updated_at',
                 'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             7 =>
             array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -204,7 +202,7 @@ class SaranaController extends Controller
         $schema = array(
             'name' => 'sarana',
             'module' => 'lain-lain',
-            'primary_key' => 'id_sarana',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/sarana'
@@ -234,7 +232,13 @@ class SaranaController extends Controller
      */
     public function show($id)
     {
-        $sarana = Sarana::where('id_sarana', $id)->firstOrFail();
+        $defaultColumn = ['sarana.id', 'sarana.nama_sarana', 'sarana.id_jenis_sarana', 'daftar_referensi.deskripsi as jenis_sarana', 'upt.uraian as nmupt', 'sarana.tgl_pengadaan'];
+        $sarana = Sarana::query();
+        $sarana = $sarana->select($defaultColumn);
+        $sarana = $sarana->join('daftar_referensi', 'sarana.id_jenis_sarana', '=', 'daftar_referensi.id_lookup');
+        $sarana = $sarana->join('upt', 'sarana.id_upt', '=', 'upt.id_upt');
+        $sarana = $sarana->where('sarana.id', $id)->firstOrFail();
+
         if (!$sarana->exists) {
             return response()->json([
                 'status' => 500,
@@ -262,7 +266,11 @@ class SaranaController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_sarana", ref="#/components/schemas/Sarana/properties/id_jenis_sarana"),
+     *              @OA\Property(property="nama_sarana", ref="#/components/schemas/Sarana/properties/nama_sarana"),
+     *              @OA\Property(property="id_upt", ref="#/components/schemas/Sarana/properties/id_upt"),
+     *              @OA\Property(property="tgl_pengadaan", ref="#/components/schemas/Sarana/properties/tgl_pengadaan"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/Sarana/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -276,7 +284,11 @@ class SaranaController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_sarana", type="array", @OA\Items(example={"Id_jenis_sarana field is required."})),
+     *              @OA\Property(property="nama_sarana", type="array", @OA\Items(example={"Nama_sarana field is required."})),
+     *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
+     *              @OA\Property(property="tgl_pengadaan", type="array", @OA\Items(example={"Tgl_pengadaan field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -286,9 +298,8 @@ class SaranaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
-
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
         $sarana = Sarana::create($request->all());
         if ($sarana->exists) {
@@ -317,7 +328,11 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_sarana", ref="#/components/schemas/Sarana/properties/id_jenis_sarana"),
+     *              @OA\Property(property="nama_sarana", ref="#/components/schemas/Sarana/properties/nama_sarana"),
+     *              @OA\Property(property="id_upt", ref="#/components/schemas/Sarana/properties/id_upt"),
+     *              @OA\Property(property="tgl_pengadaan", ref="#/components/schemas/Sarana/properties/tgl_pengadaan"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/Sarana/properties/keterangan"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -331,7 +346,11 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_jenis_sarana", type="array", @OA\Items(example={"Id_jenis_sarana field is required."})),
+     *              @OA\Property(property="nama_sarana", type="array", @OA\Items(example={"Nama_sarana field is required."})),
+     *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
+     *              @OA\Property(property="tgl_pengadaan", type="array", @OA\Items(example={"Tgl_pengadaan field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."}))
      *          ),
      *      ),
      * )
@@ -342,11 +361,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-
-        $sarana = Sarana::where('id_sarana', $id)->firstOrFail();
+        $sarana = Sarana::where('id', $id)->firstOrFail();
         if ($sarana->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -383,7 +401,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $sarana = Sarana::where('id_sarana', $id)->firstOrFail();
+        $sarana = Sarana::where('id', $id)->firstOrFail();
 
         if ($sarana->delete()) {
             return response()->json([

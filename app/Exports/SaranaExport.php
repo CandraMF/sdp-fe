@@ -37,13 +37,13 @@
 					$valueSheet = [];
 					$valueSheet[] = [$this->judul, ''];
 					$valueSheet[] = [''];
-					$valueSheet[] = ['No', "Nama Sarana", "Jenis Sarana", "UPT", "Tgl Pengadaan", "Update Terakhir", "Update Oleh"
+					$valueSheet[] = ['No', "Nama Sarana", "Jenis Sarana", "UPT", "Tgl Pengadaan"]
 ];
 
 					//data
 					foreach ($this->data as $index => $item) {
 						$no = $index + 1;
-						$valueSheet[] = [$no, $item['nama_sarana'], $item['jenis_sarana'], $item['nmupt'], $item['tgl_pengadaan'], $item['update_terakhir'], $item['update_oleh']];
+						$valueSheet[] = [$no, $item['nama_sarana'], $item['jenis_sarana'], $item['nmupt'], $item['tgl_pengadaan']];
 					}
 
 					$this->lastRow = 4 + (count($valueSheet) - 3);

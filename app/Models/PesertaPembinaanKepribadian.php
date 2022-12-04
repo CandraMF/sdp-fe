@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="PesertaPembinaanKepribadian Model",
  *      type="object",
  *      title="PesertaPembinaanKepribadian Model",
-     *      @OA\Property(property="id_peserta_pk", type="integer"),
+     *      @OA\Property(property="id", type="bigint"),
      *      @OA\Property(property="id_daftar_pembinaan_kepribadian", type="integer"),
      *      @OA\Property(property="id_wbp", type="integer"),
      *      @OA\Property(property="kehadiran", type="boolean"),
@@ -24,11 +24,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="file_sertifikat", type="string"),
      *      @OA\Property(property="nilai", type="decimal"),
      *      @OA\Property(property="predikat", type="string"),
-     *      @OA\Property(property="update_terakhir", type="datetime"),
-     *      @OA\Property(property="update_oleh", type="string"),
+     *      @OA\Property(property="updated_at", type="datetime"),
+     *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property integer id_peserta_pk
+     * @property bigint id
      * @property integer id_daftar_pembinaan_kepribadian
      * @property integer id_wbp
      * @property boolean kehadiran
@@ -36,8 +36,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property string file_sertifikat
      * @property decimal nilai
      * @property string predikat
-     * @property datetime update_terakhir
-     * @property string update_oleh
+     * @property datetime updated_at
+     * @property string updated_by
  */
 class PesertaPembinaanKepribadian extends Model
 {
@@ -45,20 +45,20 @@ class PesertaPembinaanKepribadian extends Model
     use HasFactory; //, SoftDeletes;
 
     protected $table = "peserta_pembinaan_kepribadian";
-    protected $primaryKey = "id_peserta_pk";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'update_terakhir' ,'update_oleh'
+        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'update_terakhir' ,'update_oleh'
+        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'update_terakhir' ,'update_oleh'
+        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     /**
@@ -68,7 +68,7 @@ class PesertaPembinaanKepribadian extends Model
      */
     public function getKey()
     {
-        return $this->id_peserta_pk;
+        return $this->id;
     }
 
     /**

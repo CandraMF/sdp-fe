@@ -21,8 +21,7 @@ class InstrukturFactory extends Factory
     public function definition()
     {
         return [
-        	'id_instruktur' => ' - ' 
-			,'id_pembinaan_kepribadian' => ' - ' 
+        	'id_pembinaan_kepribadian' => ' - ' 
 			,'jenis_instruktur' => ' - ' 
 			,'id_napi' => ' - ' 
 			,'id_petugas' => ' - ' 
@@ -32,8 +31,7 @@ class InstrukturFactory extends Factory
 			,'no_telp' => ' - ' 
 			,'email' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

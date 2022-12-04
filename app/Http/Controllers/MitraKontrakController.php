@@ -17,16 +17,14 @@ class MitraKontrakController extends Controller
     {
         $this->service = new MitraKontrakService();
         $this->rules = array(
-            'id_mitra' => 'nullable',
-            'jenis_mitra' => 'nullable',
-            'kontrak_dengan' => 'nullable',
+            'id_mitra' => 'required',
+            'jenis_mitra' => 'required',
+            'kontrak_dengan' => 'required',
             'id_kanwil' => 'nullable',
             'id_upt' => 'nullable',
-            'nomor_kontrak' => 'nullable',
-            'kontrak_awal' => 'nullable',
-            'kontrak_akhir' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
+            'nomor_kontrak' => 'required',
+            'kontrak_awal' => 'required',
+            'kontrak_akhir' => 'required',
         );
     }
 
@@ -38,8 +36,8 @@ class MitraKontrakController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_kontrak:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_mitra,jenis_mitra,kontrak_dengan,id_kanwil,id_upt,nomor_kontrak,kontrak_awal,kontrak_akhir,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_mitra:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_mitra,jenis_mitra,kontrak_dengan,id_kanwil,id_upt,nomor_kontrak,kontrak_awal,kontrak_akhir"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -88,8 +86,8 @@ class MitraKontrakController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_kontrak"];
-        $columns[] = "id_kontrak";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_mitra"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -133,18 +131,18 @@ class MitraKontrakController extends Controller
         $fields = array(
             0 =>
             array(
-                'Field' => 'id_kontrak',
-                'Type' => 'INT()',
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
                 'Null' => 'NO',
                 'Key' => 'PRI',
                 'Default' => NULL,
-                'Extra' => '',
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
             ),
             1 =>
             array(
                 'Field' => 'id_mitra',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -153,7 +151,7 @@ class MitraKontrakController extends Controller
             array(
                 'Field' => 'jenis_mitra',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -161,8 +159,8 @@ class MitraKontrakController extends Controller
             3 =>
             array(
                 'Field' => 'kontrak_dengan',
-                'Type' => 'VARCHAR(100)',
-                'Null' => 'YES',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -189,7 +187,7 @@ class MitraKontrakController extends Controller
             array(
                 'Field' => 'nomor_kontrak',
                 'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -198,7 +196,7 @@ class MitraKontrakController extends Controller
             array(
                 'Field' => 'kontrak_awal',
                 'Type' => 'DATETIME',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -207,25 +205,25 @@ class MitraKontrakController extends Controller
             array(
                 'Field' => 'kontrak_akhir',
                 'Type' => 'DATETIME',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             9 =>
             array(
-                'Field' => 'update_terakhir',
+                'Field' => 'updated_at',
                 'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
             ),
             10 =>
             array(
-                'Field' => 'update_oleh',
+                'Field' => 'updated_by',
                 'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
+                'Null' => 'NO',
                 'Key' => NULL,
                 'Default' => NULL,
                 'Extra' => '',
@@ -234,7 +232,7 @@ class MitraKontrakController extends Controller
         $schema = array(
             'name' => 'mitrakontrak',
             'module' => 'lain-lain',
-            'primary_key' => 'id_kontrak',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/mitrakontrak'
@@ -264,7 +262,7 @@ class MitraKontrakController extends Controller
      */
     public function show($id)
     {
-        $mitrakontrak = MitraKontrak::where('id_kontrak', $id)->firstOrFail();
+        $mitrakontrak = MitraKontrak::where('id', $id)->firstOrFail();
         if (!$mitrakontrak->exists) {
             return response()->json([
                 'status' => 500,
@@ -292,7 +290,12 @@ class MitraKontrakController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_mitra", ref="#/components/schemas/MitraKontrak/properties/id_mitra"),
+     *              @OA\Property(property="jenis_mitra", ref="#/components/schemas/MitraKontrak/properties/jenis_mitra"),
+     *              @OA\Property(property="kontrak_dengan", ref="#/components/schemas/MitraKontrak/properties/kontrak_dengan"),
+     *              @OA\Property(property="nomor_kontrak", ref="#/components/schemas/MitraKontrak/properties/nomor_kontrak"),
+     *              @OA\Property(property="kontrak_awal", ref="#/components/schemas/MitraKontrak/properties/kontrak_awal"),
+     *              @OA\Property(property="kontrak_akhir", ref="#/components/schemas/MitraKontrak/properties/kontrak_akhir"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -306,7 +309,12 @@ class MitraKontrakController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_mitra", type="array", @OA\Items(example={"Id_mitra field is required."})),
+     *              @OA\Property(property="jenis_mitra", type="array", @OA\Items(example={"Jenis_mitra field is required."})),
+     *              @OA\Property(property="kontrak_dengan", type="array", @OA\Items(example={"Kontrak_dengan field is required."})),
+     *              @OA\Property(property="nomor_kontrak", type="array", @OA\Items(example={"Nomor_kontrak field is required."})),
+     *              @OA\Property(property="kontrak_awal", type="array", @OA\Items(example={"Kontrak_awal field is required."})),
+     *              @OA\Property(property="kontrak_akhir", type="array", @OA\Items(example={"Kontrak_akhir field is required."}))
      *          ),
      *      ),
      * )
@@ -316,9 +324,8 @@ class MitraKontrakController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
-
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
         $mitrakontrak = MitraKontrak::create($request->all());
         if ($mitrakontrak->exists) {
@@ -347,7 +354,12 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_mitra", ref="#/components/schemas/MitraKontrak/properties/id_mitra"),
+     *              @OA\Property(property="jenis_mitra", ref="#/components/schemas/MitraKontrak/properties/jenis_mitra"),
+     *              @OA\Property(property="kontrak_dengan", ref="#/components/schemas/MitraKontrak/properties/kontrak_dengan"),
+     *              @OA\Property(property="nomor_kontrak", ref="#/components/schemas/MitraKontrak/properties/nomor_kontrak"),
+     *              @OA\Property(property="kontrak_awal", ref="#/components/schemas/MitraKontrak/properties/kontrak_awal"),
+     *              @OA\Property(property="kontrak_akhir", ref="#/components/schemas/MitraKontrak/properties/kontrak_akhir"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -361,7 +373,12 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_mitra", type="array", @OA\Items(example={"Id_mitra field is required."})),
+     *              @OA\Property(property="jenis_mitra", type="array", @OA\Items(example={"Jenis_mitra field is required."})),
+     *              @OA\Property(property="kontrak_dengan", type="array", @OA\Items(example={"Kontrak_dengan field is required."})),
+     *              @OA\Property(property="nomor_kontrak", type="array", @OA\Items(example={"Nomor_kontrak field is required."})),
+     *              @OA\Property(property="kontrak_awal", type="array", @OA\Items(example={"Kontrak_awal field is required."})),
+     *              @OA\Property(property="kontrak_akhir", type="array", @OA\Items(example={"Kontrak_akhir field is required."}))
      *          ),
      *      ),
      * )
@@ -372,11 +389,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $this->validate($request, $this->rules);
 
-
-        $mitrakontrak = MitraKontrak::where('id_kontrak', $id)->firstOrFail();
+        $mitrakontrak = MitraKontrak::where('id', $id)->firstOrFail();
         if ($mitrakontrak->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -413,7 +429,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $mitrakontrak = MitraKontrak::where('id_kontrak', $id)->firstOrFail();
+        $mitrakontrak = MitraKontrak::where('id', $id)->firstOrFail();
 
         if ($mitrakontrak->delete()) {
             return response()->json([
@@ -429,6 +445,7 @@ $this->validate($request, $this->rules);
             ]);
         }
     }
+
     public function exportExcel(Request $request)
     {
         $data = $request->toArray();

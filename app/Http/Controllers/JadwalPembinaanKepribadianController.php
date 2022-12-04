@@ -16,19 +16,16 @@ class JadwalPembinaanKepribadianController extends Controller
     public function __construct()
     {
         $this->service = new JadwalPembinaanKepribadianService();
-        $this->rules = array(
-            'id_pembinaan_kepribadian' => 'nullable',
-            'hari' => 'nullable',
-            'tanggal' => 'nullable',
-            'jam_mulai' => 'nullable',
-            'jam_selesai' => 'nullable',
-            'id_instruktur' => 'nullable',
-            'materi_pembinaan_kepribadian' => 'nullable',
-            'foto' => 'nullable',
-            'status' => 'nullable',
-            'update_terakhir' => 'nullable',
-            'update_oleh' => 'nullable',
-        );
+        $this->rules = array (
+  'id_pembinaan_kepribadian' => 'required',
+  'tanggal' => 'required',
+  'jam_mulai' => 'required',
+  'jam_selesai' => 'required',
+  'id_instruktur' => 'required',
+  'materi_pembinaan_kepribadian' => 'required',
+  'foto' => 'nullable',
+  'status' => 'required',
+);
     }
 
     /**
@@ -39,8 +36,8 @@ class JadwalPembinaanKepribadianController extends Controller
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_jadwal_pk:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_pembinaan_kepribadian,hari,tanggal,jam_mulai,jam_selesai,id_instruktur,materi_pembinaan_kepribadian,foto,status,update_terakhir,update_oleh"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_pembinaan_kepribadian:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_pembinaan_kepribadian,tanggal,jam_mulai,jam_selesai,id_instruktur,materi_pembinaan_kepribadian,foto,status"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
@@ -89,8 +86,8 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_jadwal_pk"];
-        $columns[] = "id_jadwal_pk";
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_pembinaan_kepribadian"];
+        $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
@@ -131,120 +128,111 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array(
-            0 =>
-            array(
-                'Field' => 'id_jadwal_pk',
-                'Type' => 'INT()',
-                'Null' => 'NO',
-                'Key' => 'PRI',
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            1 =>
-            array(
-                'Field' => 'id_pembinaan_kepribadian',
-                'Type' => 'INT()',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            2 =>
-            array(
-                'Field' => 'hari',
-                'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            3 =>
-            array(
-                'Field' => 'tanggal',
-                'Type' => 'DATETIME',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            4 =>
-            array(
-                'Field' => 'jam_mulai',
-                'Type' => 'TIME',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            5 =>
-            array(
-                'Field' => 'jam_selesai',
-                'Type' => 'TIME',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            6 =>
-            array(
-                'Field' => 'id_instruktur',
-                'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            7 =>
-            array(
-                'Field' => 'materi_pembinaan_kepribadian',
-                'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            8 =>
-            array(
-                'Field' => 'foto',
-                'Type' => 'VARCHAR(200)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            9 =>
-            array(
-                'Field' => 'status',
-                'Type' => 'VARCHAR(50)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            10 =>
-            array(
-                'Field' => 'update_terakhir',
-                'Type' => 'TIMESTAMP',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-            11 =>
-            array(
-                'Field' => 'update_oleh',
-                'Type' => 'VARCHAR(32)',
-                'Null' => 'YES',
-                'Key' => NULL,
-                'Default' => NULL,
-                'Extra' => '',
-            ),
-        );
+        $fields = array (
+  0 => 
+  array (
+    'Field' => 'id',
+    'Type' => 'BIGINT()',
+    'Null' => 'NO',
+    'Key' => 'PRI',
+    'Default' => NULL,
+    'Extra' => ' UNSIGNED AUTO_INCREMENT',
+  ),
+  1 => 
+  array (
+    'Field' => 'id_pembinaan_kepribadian',
+    'Type' => 'INT()',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  2 => 
+  array (
+    'Field' => 'tanggal',
+    'Type' => 'DATETIME',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  3 => 
+  array (
+    'Field' => 'jam_mulai',
+    'Type' => 'TIME',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  4 => 
+  array (
+    'Field' => 'jam_selesai',
+    'Type' => 'TIME',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  5 => 
+  array (
+    'Field' => 'id_instruktur',
+    'Type' => 'VARCHAR(32)',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  6 => 
+  array (
+    'Field' => 'materi_pembinaan_kepribadian',
+    'Type' => 'VARCHAR(200)',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  7 => 
+  array (
+    'Field' => 'foto',
+    'Type' => 'VARCHAR(200)',
+    'Null' => 'YES',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  8 => 
+  array (
+    'Field' => 'status',
+    'Type' => 'VARCHAR(50)',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  9 => 
+  array (
+    'Field' => 'updated_at',
+    'Type' => 'TIMESTAMP',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+  10 => 
+  array (
+    'Field' => 'updated_by',
+    'Type' => 'VARCHAR(32)',
+    'Null' => 'NO',
+    'Key' => NULL,
+    'Default' => NULL,
+    'Extra' => '',
+  ),
+);
         $schema = array(
-            'name' => 'jadwalpembinaankepribadian',
-            'module' => 'lain-lain',
-            'primary_key' => 'id_jadwal_pk',
+            'name' => 'jadwalpembinaankepribadian', 
+            'module' => 'lain-lain', 
+            'primary_key' => 'id', 
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/jadwalpembinaankepribadian'
@@ -274,7 +262,7 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function show($id)
     {
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id_jadwal_pk', $id)->firstOrFail();
+        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
         if (!$jadwalpembinaankepribadian->exists) {
             return response()->json([
                 'status' => 500,
@@ -302,7 +290,13 @@ class JadwalPembinaanKepribadianController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_pembinaan_kepribadian"),
+*              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/tanggal"),
+*              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_mulai"),
+*              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_selesai"),
+*              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_instruktur"),
+*              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
+*              @OA\Property(property="status", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -316,7 +310,13 @@ class JadwalPembinaanKepribadianController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_pembinaan_kepribadian field is required."})),
+*              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
+*              @OA\Property(property="jam_mulai", type="array", @OA\Items(example={"Jam_mulai field is required."})),
+*              @OA\Property(property="jam_selesai", type="array", @OA\Items(example={"Jam_selesai field is required."})),
+*              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
+*              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
      * )
@@ -326,10 +326,9 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
 $this->validate($request, $this->rules);
 
-        
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::create($request->all());
         if ($jadwalpembinaankepribadian->exists) {
             return response()->json([
@@ -344,6 +343,7 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
+
     }
 
 
@@ -357,7 +357,13 @@ $this->validate($request, $this->rules);
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+     *              @OA\Property(property="id_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_pembinaan_kepribadian"),
+*              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/tanggal"),
+*              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_mulai"),
+*              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_selesai"),
+*              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_instruktur"),
+*              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
+*              @OA\Property(property="status", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -371,7 +377,13 @@ $this->validate($request, $this->rules);
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+     *              @OA\Property(property="id_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_pembinaan_kepribadian field is required."})),
+*              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
+*              @OA\Property(property="jam_mulai", type="array", @OA\Items(example={"Jam_mulai field is required."})),
+*              @OA\Property(property="jam_selesai", type="array", @OA\Items(example={"Jam_selesai field is required."})),
+*              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
+*              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
      * )
@@ -382,11 +394,10 @@ $this->validate($request, $this->rules);
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_terakhir' => date('Y-m-d H:i:s')]);
+        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
 $this->validate($request, $this->rules);
 
-        
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id_jadwal_pk', $id)->firstOrFail();
+        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
         if ($jadwalpembinaankepribadian->update($request->all())) {
             return response()->json([
                 'status' => 200,
@@ -400,6 +411,7 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
+
     }
 
 
@@ -423,7 +435,7 @@ $this->validate($request, $this->rules);
      */
     public function destroy($id)
     {
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id_jadwal_pk', $id)->firstOrFail();
+        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
 
         if ($jadwalpembinaankepribadian->delete()) {
             return response()->json([
@@ -438,5 +450,24 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
+
     }
+
+	public function exportExcel(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->exportExcel($data);
+
+        return $export;
+    }
+
+
+    public function exportPdf(Request $request)
+    {
+        $data = $request->toArray();
+        $export = $this->service->printPDF($data);
+
+        return $export;
+    }
+
 }

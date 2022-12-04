@@ -21,14 +21,12 @@ class PrasaranaRuangFactory extends Factory
     public function definition()
     {
         return [
-        	'id_prasarana_ruang' => ' - ' 
-			,'id_jenis_prasarana_ruang' => ' - ' 
+        	'id_jenis_prasarana_ruang' => ' - ' 
 			,'nama_prasarana_ruang' => ' - ' 
 			,'id_upt' => ' - ' 
 			,'tgl_pengadaan' => ' - ' 
 			,'keterangan' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }

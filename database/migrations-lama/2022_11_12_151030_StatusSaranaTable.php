@@ -11,8 +11,8 @@
 				$table->bigIncrements('id');
 				$table->integer('id_sarana');
 				$table->date('tanggal');
-				$table->enum('status',['AKTIF', 'TIDAK AKTIF', 'SEBAGIAN']);			
-				$table->enum('kepemilikan',['UPT', 'KANWIL', 'DITJEN', 'KEMENTERIAN', 'MITRA']);			
+				$table->string('status',50);			
+				$table->string('kepemilikan',50);			
 				$table->integer('jumlah');
 				$table->string('satuan',50);
 				$table->integer('kondisi_baik');

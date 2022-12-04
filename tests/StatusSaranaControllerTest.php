@@ -22,7 +22,7 @@ class StatusSaranaControllerTest extends TestCase
     {
         $data = factory(StatusSarana::class)->create();
         $properties = [
-                'id_status_sarana' => '1' , 'id_sarana' => '1' , 'tahun' => '1' , 'bulan' => '1' , 'status' => '1' , 'kepemilkan' => '1' , 'jumlah' => '1' , 'satuan' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_sarana' => '1' , 'tanggal' => '1' , 'status' => '1' , 'kepemilikan' => '1' , 'jumlah' => '1' , 'satuan' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/statussarana', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class StatusSaranaControllerTest extends TestCase
     {
         $data = factory(StatusSarana::class)->create();
         $properties = [
-                'id_status_sarana' => '1' , 'id_sarana' => '1' , 'tahun' => '1' , 'bulan' => '1' , 'status' => '1' , 'kepemilkan' => '1' , 'jumlah' => '1' , 'satuan' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'id_sarana' => '1' , 'tanggal' => '1' , 'status' => '1' , 'kepemilikan' => '1' , 'jumlah' => '1' , 'satuan' => '1' , 'kondisi_baik' => '1' , 'kondisi_rusak' => '1' , 'foto' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/statussarana/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

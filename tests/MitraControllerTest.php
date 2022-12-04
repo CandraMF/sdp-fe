@@ -22,7 +22,7 @@ class MitraControllerTest extends TestCase
     {
         $data = factory(Mitra::class)->create();
         $properties = [
-                'id_mitra' => '1' , 'nama_mitra' => '1' , 'nama_pic' => '1' , 'alamat' => '1' , 'id_dati2' => '1' , 'no_telp' => '1' , 'no_hp' => '1' , 'email' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'nama_mitra' => '1' , 'nama_pic' => '1' , 'alamat' => '1' , 'id_dati2' => '1' , 'no_telp' => '1' , 'no_hp' => '1' , 'email' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
         ];
         $this->json('POST', '/mitra', $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);
@@ -39,7 +39,7 @@ class MitraControllerTest extends TestCase
     {
         $data = factory(Mitra::class)->create();
         $properties = [
-                'id_mitra' => '1' , 'nama_mitra' => '1' , 'nama_pic' => '1' , 'alamat' => '1' , 'id_dati2' => '1' , 'no_telp' => '1' , 'no_hp' => '1' , 'email' => '1' , 'keterangan' => '1' , 'update_terakhir' => '1' , 'update_oleh' => '1'
+                'nama_mitra' => '1' , 'nama_pic' => '1' , 'alamat' => '1' , 'id_dati2' => '1' , 'no_telp' => '1' , 'no_hp' => '1' , 'email' => '1' , 'keterangan' => '1' , 'updated_by' => '1'
             ];
         $this->json('PATCH', '/mitra/'.$data->id, $this->setupPayloads($properties) , $this->postHeaders);
         $this->seeStatusCode(200);

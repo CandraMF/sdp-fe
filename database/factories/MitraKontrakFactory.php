@@ -21,8 +21,7 @@ class MitraKontrakFactory extends Factory
     public function definition()
     {
         return [
-        	'id_kontrak' => ' - ' 
-			,'id_mitra' => ' - ' 
+        	'id_mitra' => ' - ' 
 			,'jenis_mitra' => ' - ' 
 			,'kontrak_dengan' => ' - ' 
 			,'id_kanwil' => ' - ' 
@@ -30,8 +29,7 @@ class MitraKontrakFactory extends Factory
 			,'nomor_kontrak' => ' - ' 
 			,'kontrak_awal' => ' - ' 
 			,'kontrak_akhir' => ' - ' 
-			,'update_terakhir' => ' - ' 
-			,'update_oleh' => ' - ' 
+			,'updated_by' => ' - ' 
 			
         ];
     }
