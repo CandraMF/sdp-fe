@@ -176,3 +176,16 @@ $router->post("/daftarpesertapembinaankepribadian", "DaftarPesertaPembinaanKepri
 $router->get("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@show");
 $router->put("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@update");
 $router->delete("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@destroy");
+
+/**
+ * DaftarReferensi routes
+ */
+$router->get("/daftarreferensi/schema", "DaftarReferensiController@schema");
+$router->get("/daftarreferensi", "DaftarReferensiController@index");
+$router->get("/daftarreferensi/dropdown", "DaftarReferensiController@dropdown");
+$router->post("/daftarreferensi", "DaftarReferensiController@store");
+$router->get("/daftarreferensi/{id}", "DaftarReferensiController@show");
+$router->put("/daftarreferensi/{id}", "DaftarReferensiController@update");
+$router->delete("/daftarreferensi/{id}", "DaftarReferensiController@destroy");
+$router->get("/daftarreferensi/export/excel", "DaftarReferensiController@exportExcel");
+$router->get("/daftarreferensi/export/pdf", "DaftarReferensiController@exportPdf");
