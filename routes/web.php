@@ -189,3 +189,46 @@ $router->put("/daftarreferensi/{id}", "DaftarReferensiController@update");
 $router->delete("/daftarreferensi/{id}", "DaftarReferensiController@destroy");
 $router->get("/daftarreferensi/export/excel", "DaftarReferensiController@exportExcel");
 $router->get("/daftarreferensi/export/pdf", "DaftarReferensiController@exportPdf");
+/**
+* PrasaranaLahanPembinaanKepribadian routes
+*/
+$router->get("/prasaranalahanpembinaankepribadian/schema", "PrasaranaLahanPembinaanKepribadianController@schema");
+$router->get("/prasaranalahanpembinaankepribadian", "PrasaranaLahanPembinaanKepribadianController@index");
+$router->get("/prasaranalahanpembinaankepribadian/dropdown", "PrasaranaLahanPembinaanKepribadianController@dropdown");
+$router->post("/prasaranalahanpembinaankepribadian", "PrasaranaLahanPembinaanKepribadianController@store");
+$router->get("/prasaranalahanpembinaankepribadian/{id}", "PrasaranaLahanPembinaanKepribadianController@show");
+$router->put("/prasaranalahanpembinaankepribadian/{id}", "PrasaranaLahanPembinaanKepribadianController@update");
+$router->delete("/prasaranalahanpembinaankepribadian/{id}", "PrasaranaLahanPembinaanKepribadianController@destroy");
+
+/**
+* PrasaranaRuangPembinaanKepribadian routes
+*/
+$router->get("/prasaranaruangpembinaankepribadian/schema", "PrasaranaRuangPembinaanKepribadianController@schema");
+$router->get("/prasaranaruangpembinaankepribadian", "PrasaranaRuangPembinaanKepribadianController@index");
+$router->get("/prasaranaruangpembinaankepribadian/dropdown", "PrasaranaRuangPembinaanKepribadianController@dropdown");
+$router->post("/prasaranaruangpembinaankepribadian", "PrasaranaRuangPembinaanKepribadianController@store");
+$router->get("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@show");
+$router->put("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@update");
+$router->delete("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@destroy");
+
+/**
+* SaranaPembinaanKepribadian routes
+*/
+$router->get("/saranapembinaankepribadian/schema", "SaranaPembinaanKepribadianController@schema");
+$router->get("/saranapembinaankepribadian", "SaranaPembinaanKepribadianController@index");
+$router->get("/saranapembinaankepribadian/dropdown", "SaranaPembinaanKepribadianController@dropdown");
+$router->post("/saranapembinaankepribadian", "SaranaPembinaanKepribadianController@store");
+$router->get("/saranapembinaankepribadian/{id}", "SaranaPembinaanKepribadianController@show");
+$router->put("/saranapembinaankepribadian/{id}", "SaranaPembinaanKepribadianController@update");
+$router->delete("/saranapembinaankepribadian/{id}", "SaranaPembinaanKepribadianController@destroy");
+
+/**
+* InstrukturPembinaanKepribadian routes
+*/
+$router->get("/instrukturpembinaankepribadian/schema", "InstrukturPembinaanKepribadianController@schema");
+$router->get("/instrukturpembinaankepribadian", "InstrukturPembinaanKepribadianController@index");
+$router->get("/instrukturpembinaankepribadian/dropdown", "InstrukturPembinaanKepribadianController@dropdown");
+$router->post("/instrukturpembinaankepribadian", "InstrukturPembinaanKepribadianController@store");
+$router->get("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@show");
+$router->put("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@update");
+$router->delete("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@destroy");

@@ -16,13 +16,13 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function __construct()
     {
         $this->service = new DaftarPesertaPembinaanKepribadianService();
-        $this->rules = array (
-  'id_jadwal_pk' => 'required',
-  'id_peserta' => 'required',
-  'status' => 'required',
-  'keterangan' => 'required',
-  'verifikasi_oleh' => 'required',
-);
+        $this->rules = array(
+            'id_jadwal_pk' => 'required',
+            'id_peserta' => 'required',
+            'status' => 'required',
+            'keterangan' => 'required',
+            'verifikasi_oleh' => 'required',
+        );
     }
 
     /**
@@ -125,84 +125,84 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function schema(Request $request)
     {
-        $fields = array (
-  0 => 
-  array (
-    'Field' => 'id',
-    'Type' => 'BIGINT()',
-    'Null' => 'NO',
-    'Key' => 'PRI',
-    'Default' => NULL,
-    'Extra' => ' UNSIGNED AUTO_INCREMENT',
-  ),
-  1 => 
-  array (
-    'Field' => 'id_jadwal_pk',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  2 => 
-  array (
-    'Field' => 'id_peserta',
-    'Type' => 'INT()',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  3 => 
-  array (
-    'Field' => 'status',
-    'Type' => 'VARCHAR(50)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  4 => 
-  array (
-    'Field' => 'keterangan',
-    'Type' => 'VARCHAR(200)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  5 => 
-  array (
-    'Field' => 'updated_at',
-    'Type' => 'TIMESTAMP',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  6 => 
-  array (
-    'Field' => 'updated_by',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-  7 => 
-  array (
-    'Field' => 'verifikasi_oleh',
-    'Type' => 'VARCHAR(32)',
-    'Null' => 'NO',
-    'Key' => NULL,
-    'Default' => NULL,
-    'Extra' => '',
-  ),
-);
+        $fields = array(
+            0 =>
+            array(
+                'Field' => 'id',
+                'Type' => 'BIGINT()',
+                'Null' => 'NO',
+                'Key' => 'PRI',
+                'Default' => NULL,
+                'Extra' => ' UNSIGNED AUTO_INCREMENT',
+            ),
+            1 =>
+            array(
+                'Field' => 'id_jadwal_pk',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            2 =>
+            array(
+                'Field' => 'id_peserta',
+                'Type' => 'INT()',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            3 =>
+            array(
+                'Field' => 'status',
+                'Type' => 'VARCHAR(50)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            4 =>
+            array(
+                'Field' => 'keterangan',
+                'Type' => 'VARCHAR(200)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            5 =>
+            array(
+                'Field' => 'updated_at',
+                'Type' => 'TIMESTAMP',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            6 =>
+            array(
+                'Field' => 'updated_by',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+            7 =>
+            array(
+                'Field' => 'verifikasi_oleh',
+                'Type' => 'VARCHAR(32)',
+                'Null' => 'NO',
+                'Key' => NULL,
+                'Default' => NULL,
+                'Extra' => '',
+            ),
+        );
         $schema = array(
-            'name' => 'daftarpesertapembinaankepribadian', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id', 
+            'name' => 'daftarpesertapembinaankepribadian',
+            'module' => 'lain-lain',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/daftarpesertapembinaankepribadian'
@@ -261,10 +261,10 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      *         required=true,
      *         @OA\JsonContent(
      *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_jadwal_pk"),
-*              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
-*              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
-*              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
-*              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
+     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
+     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
+     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -279,10 +279,10 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      *          description="error",
      *          @OA\JsonContent(
      *              @OA\Property(property="id_jadwal_pk", type="array", @OA\Items(example={"Id_jadwal_pk field is required."})),
-*              @OA\Property(property="id_peserta", type="array", @OA\Items(example={"Id_peserta field is required."})),
-*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
-*              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."})),
-*              @OA\Property(property="verifikasi_oleh", type="array", @OA\Items(example={"Verifikasi_oleh field is required."}))
+     *              @OA\Property(property="id_peserta", type="array", @OA\Items(example={"Id_peserta field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."})),
+     *              @OA\Property(property="verifikasi_oleh", type="array", @OA\Items(example={"Verifikasi_oleh field is required."}))
      *          ),
      *      ),
      * )
@@ -293,7 +293,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function store(Request $request)
     {
         $request->merge(['update_at' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::create($request->all());
         if ($daftarpesertapembinaankepribadian->exists) {
@@ -309,7 +309,6 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -324,10 +323,10 @@ $this->validate($request, $this->rules);
      *         required=true,
      *         @OA\JsonContent(
      *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_jadwal_pk"),
-*              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
-*              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
-*              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
-*              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
+     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
+     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
+     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
      *         ),
      *      ),
      *      @OA\Response(
@@ -342,10 +341,10 @@ $this->validate($request, $this->rules);
      *          description="error",
      *          @OA\JsonContent(
      *              @OA\Property(property="id_jadwal_pk", type="array", @OA\Items(example={"Id_jadwal_pk field is required."})),
-*              @OA\Property(property="id_peserta", type="array", @OA\Items(example={"Id_peserta field is required."})),
-*              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
-*              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."})),
-*              @OA\Property(property="verifikasi_oleh", type="array", @OA\Items(example={"Verifikasi_oleh field is required."}))
+     *              @OA\Property(property="id_peserta", type="array", @OA\Items(example={"Id_peserta field is required."})),
+     *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."})),
+     *              @OA\Property(property="keterangan", type="array", @OA\Items(example={"Keterangan field is required."})),
+     *              @OA\Property(property="verifikasi_oleh", type="array", @OA\Items(example={"Verifikasi_oleh field is required."}))
      *          ),
      *      ),
      * )
@@ -357,7 +356,7 @@ $this->validate($request, $this->rules);
     public function update(Request $request, $id)
     {
         $request->merge(['update_at' => date('Y-m-d H:i:s')]);
-$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id', $id)->firstOrFail();
         if ($daftarpesertapembinaankepribadian->update($request->all())) {
@@ -373,7 +372,6 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
-
     }
 
 
@@ -412,10 +410,9 @@ $this->validate($request, $this->rules);
                 'data' => null
             ]);
         }
-
     }
 
-	public function exportExcel(Request $request)
+    public function exportExcel(Request $request)
     {
         $data = $request->toArray();
         $export = $this->service->exportExcel($data);
@@ -431,5 +428,4 @@ $this->validate($request, $this->rules);
 
         return $export;
     }
-
 }

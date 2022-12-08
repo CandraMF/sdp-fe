@@ -272,7 +272,7 @@ class StatusPrasaranaLahanController extends Controller
      */
     public function show($id)
     {
-       $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();
+        $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();
 
         if (!$statusprasaranalahan->exists) {
             return response()->json([

@@ -266,7 +266,7 @@ class DaftarReferensiController extends Controller
     public function store(Request $request)
     {
 
-		$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
 
 
@@ -340,7 +340,7 @@ class DaftarReferensiController extends Controller
      */
     public function update(Request $request, $id)
     {
-		$this->validate($request, $this->rules);
+        $this->validate($request, $this->rules);
 
 
         $daftarreferensi = DaftarReferensi::where('id_lookup', $id)->firstOrFail();
