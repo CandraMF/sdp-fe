@@ -12,8 +12,7 @@
 				$table->integer('id_instruktur');
 				$table->integer('id_pembinaan_kepribadian');
 				$table->dateTime('updated_at');
-				$table->string('updated_by',32);
-				
+				$table->string('updated_by',32);				
 			});
 		}
 
