@@ -77,7 +77,7 @@ class StatusPrasaranaLahanService
 			$result[] = [
 
 				'id' => $val['id'],
-				'nama_prasarana_ruang ' => $val['nama_prasarana_ruang'],
+				'nama_prasarana_ruang' => $val['nama_prasarana_ruang'],
 				'status' => $val['status'],
 				'kepemilikan' => $val['kepemilikan'],
 				'luas_dipakai' => $val['luas_dipakai'],
@@ -269,7 +269,7 @@ class StatusPrasaranaLahanService
 		$columnOfValues = ['status_prasarana_lahan.id', 'prasarana_ruang.nama_prasarana_ruang', 'status_prasarana_lahan.status', 'status_prasarana_lahan.kepemilikan', 'status_prasarana_lahan.luas_dipakai', 'status_prasarana_lahan.lahan_tidur', 'status_prasarana_lahan.foto'];
 		$sizeCellcolumns = ["Nama Prasarana" => 1000, "Status" => 1000, "Kepemilikan" => 1000, "Luas Dipakai" => 1000, "Lahan Tidur" => 1000, "Foto" => 1000];
 		$sizeCells = [
-			'nama_prasarana_ruang ' => 1000,
+			'nama_prasarana_ruang' => 1000,
 			'status' => 1000,
 			'kepemilikan' => 1000,
 			'luas_dipakai' => 1000,

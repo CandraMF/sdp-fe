@@ -75,7 +75,7 @@ class InstrukturService
 		}
 		foreach ($instruktur as $val) {
 			$result[] = [
-				'id ' => $val['id'],
+				'id' => $val['id'],
 				'jenis_pembinaan_kepribadian' => $val['jenis_pembinaan_kepribadian'],
 				'nama_instruktur' => $val['nama_instruktur'],
 				'asal_institusi_instruktur' => $val['asal_institusi_instruktur'],
@@ -266,7 +266,7 @@ class InstrukturService
 		$columnOfValues = ['instruktur.id', 'instruktur.jenis_pembinaan_kepribadian', 'instruktur.jenis_instruktur', 'instruktur.nama_instruktur', 'instruktur.asal_institusi_instruktur', 'instruktur.jenis_instruktur', 'instruktur.keterangan', 'instruktur.no_telp', 'instruktur.email', 'instruktur.keterangan'];
 		$sizeCellcolumns = ["Jenis Program" => 1000, "Nama Instruktur" => 1000, "Asal Institusi" => 1000, "Jenis Instruktur" => 1000, "Keterangan" => 1000, "No Telpon" => 1000, "Email" => 1000, "Keterangan" => 1000];
 		$sizeCells = [
-			'id ' => 1000,
+			'id' => 1000,
 			'jenis_pembinaan_kepribadian' => 1000,
 			'jenis_instruktur' => 1000,
 			'nama_instruktur' => 1000,

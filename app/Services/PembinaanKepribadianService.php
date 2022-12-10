@@ -82,8 +82,8 @@ class PembinaanKepribadianService
 				'tempat_pelaksanaan' => $val['tempat_pelaksanaan'],
 				'tanggal' => $val['tanggal'],
 				'jam_mulai' => $val['jam_mulai'],
-				'jam_selesai ' => $val['jam_selesai'],
-				'status  ' => $val['status']
+				'jam_selesai' => $val['jam_selesai'],
+				'status' => $val['status']
 			];
 		}
 
@@ -289,8 +289,8 @@ class PembinaanKepribadianService
 			'tempat_pelaksanaan' => 1000,
 			'tanggal' => 1000,
 			'jam_mulai' => 1000,
-			'jam_selesai ' => 1000,
-			'status  ' => 1000
+			'jam_selesai' => 1000,
+			'status' => 1000
 		];
 		$collection = json_decode(json_encode($collection), true);
 

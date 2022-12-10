@@ -273,7 +273,7 @@ class MitraService
 		$columnOfValues = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota'];
 		$sizeCellcolumns = ["Nama" => 1000, "Mitra" => 1000, "Penanggung Jawab" => 1000, "Alamat" => 1000, "No Telpon" => 1000, "Provinsi" => 1000, "Kota" => 1000];
 		$sizeCells = [
-			'nama_mitra ' => 1000,
+			'nama_mitra' => 1000,
 			'nama_pic' => 1000,
 			'alamat' => 1000,
 			'no_telp' => 1000,
