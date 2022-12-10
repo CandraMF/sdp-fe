@@ -412,7 +412,7 @@ class LaporanPembinaanKepribadianController extends Controller
    */
   public function store(Request $request)
   {
-    $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+    $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
     $this->validate($request, $this->rules);
 
     $laporanpembinaankepribadian = LaporanPembinaanKepribadian::create($request->all());
@@ -495,7 +495,7 @@ class LaporanPembinaanKepribadianController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+    $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
     $this->validate($request, $this->rules);
 
     $laporanpembinaankepribadian = LaporanPembinaanKepribadian::where('id', $id)->firstOrFail();

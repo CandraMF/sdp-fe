@@ -326,7 +326,7 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
         $this->validate($request, $this->rules);
 
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::create($request->all());
@@ -393,7 +393,7 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->merge(['update_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
         $this->validate($request, $this->rules);
 
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();

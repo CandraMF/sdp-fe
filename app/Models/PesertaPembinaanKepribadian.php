@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      type="object",
  *      title="PesertaPembinaanKepribadian Model",
      *      @OA\Property(property="id", type="bigint"),
-     *      @OA\Property(property="id_daftar_pembinaan_kepribadian", type="integer"),
+     *      @OA\Property(property="id_daftar_peserta_pembinaan_kepribadian", type="integer"),
      *      @OA\Property(property="id_wbp", type="integer"),
      *      @OA\Property(property="kehadiran", type="boolean"),
      *      @OA\Property(property="no_sertifikat", type="string"),
@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * )
  * @property int id
      * @property bigint id
-     * @property integer id_daftar_pembinaan_kepribadian
+     * @property integer id_daftar_peserta_pembinaan_kepribadian
      * @property integer id_wbp
      * @property boolean kehadiran
      * @property string no_sertifikat
@@ -50,15 +50,15 @@ class PesertaPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     protected $orderable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     protected $searchable = [
-        'id_daftar_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
     ];
 
     /**

@@ -9,7 +9,7 @@
 		{
 			Schema::create('peserta_pembinaan_kepribadian', function (Blueprint $table) {
 				$table->bigIncrements('id');
-				$table->integer('id_daftar_pembinaan_kepribadian');
+				$table->integer('id_daftar_peserta_pembinaan_kepribadian');
 				$table->integer('id_wbp');
 				$table->boolean('kehadiran');
 				$table->string('no_sertifikat',50);
