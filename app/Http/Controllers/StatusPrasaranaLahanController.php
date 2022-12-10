@@ -25,7 +25,7 @@ class StatusPrasaranaLahanController extends Controller
             'lahan_tidur' => 'required',
             'satuan' => 'required',
             'foto' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         );
     }
 

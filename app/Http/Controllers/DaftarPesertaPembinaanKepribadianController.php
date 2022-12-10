@@ -20,7 +20,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
             'id_jadwal_pk' => 'required',
             'id_peserta' => 'required',
             'status' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
             'verifikasi_oleh' => 'required',
         );
     }

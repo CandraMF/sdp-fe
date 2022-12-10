@@ -19,7 +19,7 @@
 				$table->decimal('jumlah_instruktur_napi',4,0);
 				$table->decimal('jumlah_instruktur_instansi_lain',4,0);
 				$table->decimal('jumlah_instruktur_mitra',4,0);
-				$table->string('keterangan',200);
+				$table->string('keterangan',200)->nullable();
 				$table->string('status',50);
 				$table->string('verifikasi_upt',32);
 				$table->string('verifikasi_kanwil',32);

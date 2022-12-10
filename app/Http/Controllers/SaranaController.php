@@ -21,7 +21,7 @@ class SaranaController extends Controller
             'nama_sarana' => 'required',
             'id_upt' => 'required',
             'tgl_pengadaan' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         );
     }
 

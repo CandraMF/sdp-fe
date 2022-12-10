@@ -18,7 +18,7 @@
 				$table->integer('kondisi_baik');
 				$table->integer('kondisi_rusak');
 				$table->string('foto',200);
-				$table->string('keterangan',200);
+				$table->string('keterangan',200)->nullable();
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				

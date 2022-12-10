@@ -21,7 +21,7 @@ class PrasaranaRuangController extends Controller
             'nama_prasarana_ruang' => 'required',
             'id_upt' => 'required',
             'tgl_pengadaan' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         );
     }
 

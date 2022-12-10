@@ -31,7 +31,7 @@ class StatusPrasaranaRuangController extends Controller
       'foto' => 'required',
       'pendaftaran_disnaker' => 'nullable',
       'catatan_disnaker' => 'nullable',
-      'keterangan' => 'required',
+      'keterangan' => 'nullable',
     );
   }
 

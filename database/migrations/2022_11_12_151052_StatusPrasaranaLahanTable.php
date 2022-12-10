@@ -17,7 +17,7 @@
 				$table->decimal('lahan_tidur',6, 0);
 				$table->string('satuan',50);
 				$table->string('foto',200);
-				$table->string('keterangan',200);
+				$table->string('keterangan',200)->nullable();
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				

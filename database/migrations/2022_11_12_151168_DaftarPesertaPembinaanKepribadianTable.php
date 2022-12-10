@@ -12,7 +12,7 @@
 				$table->integer('id_jadwal_pk');
 				$table->integer('id_peserta');
 				$table->enum('status', ['RENCANA', 'SETUJU', 'REVISI']);
-				$table->string('keterangan',200);
+				$table->string('keterangan',200)->nullable();
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				$table->string('verifikasi_oleh',32);

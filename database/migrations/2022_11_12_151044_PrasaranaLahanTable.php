@@ -13,7 +13,7 @@
 				$table->string('nama_prasarana_lahan',100);
 				$table->string('id_upt',32);
 				$table->date('tgl_pengadaan');
-				$table->string('keterangan',200);
+				$table->string('keterangan',200)->nullable();
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				

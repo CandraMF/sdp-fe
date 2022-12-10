@@ -26,7 +26,7 @@ class InstrukturController extends Controller
             'asal_institusi_instruktur' => 'nullable',
             'no_telp' => 'nullable',
             'email' => 'nullable',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         );
     }
 

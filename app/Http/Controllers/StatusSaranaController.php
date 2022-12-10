@@ -26,7 +26,7 @@ class StatusSaranaController extends Controller
             'kondisi_baik' => 'required',
             'kondisi_rusak' => 'required',
             'foto' => 'required',
-            'keterangan' => 'required',
+            'keterangan' => 'nullable',
         );
     }
 

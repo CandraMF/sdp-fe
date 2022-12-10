@@ -27,7 +27,7 @@ class LaporanPembinaanKepribadianController extends Controller
       'jumlah_instruktur_napi' => 'required',
       'jumlah_instruktur_instansi_lain' => 'required',
       'jumlah_instruktur_mitra' => 'required',
-      'keterangan' => 'required',
+      'keterangan' => 'nullable',
       'status' => 'required',
       'verifikasi_upt' => 'required',
       'verifikasi_kanwil' => 'required',
