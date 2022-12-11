@@ -451,21 +451,4 @@ class JadwalPembinaanKepribadianController extends Controller
             ]);
         }
     }
-
-    public function exportExcel(Request $request)
-    {
-        $data = $request->toArray();
-        $export = $this->service->exportExcel($data);
-
-        return $export;
-    }
-
-
-    public function exportPdf(Request $request)
-    {
-        $data = $request->toArray();
-        $export = $this->service->printPDF($data);
-
-        return $export;
-    }
 }
