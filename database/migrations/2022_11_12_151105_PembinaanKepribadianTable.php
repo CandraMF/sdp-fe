@@ -16,7 +16,7 @@
 				$table->boolean('program_wajib');
 				$table->string('materi_pembinaan_kepribadian',200);
 				$table->string('id_instruktur',32)->nullable();
-				$table->string('penangung_jawab',32);
+				$table->string('penanggung_jawab',32);
 				$table->date('tanggal_mulai');
 				$table->date('tanggal_selesai');
 				$table->string('tempat_pelaksanaan',200);

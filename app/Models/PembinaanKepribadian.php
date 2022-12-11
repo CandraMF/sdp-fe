@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      *      @OA\Property(property="program_wajib", type="boolean"),
      *      @OA\Property(property="materi_pembinaan_kepribadian", type="string"),
      *      @OA\Property(property="id_instruktur", type="string"),
-     *      @OA\Property(property="penangung_jawab", type="string"),
+     *      @OA\Property(property="penanggung_jawab", type="string"),
      *      @OA\Property(property="tanggal_mulai", type="date"),
      *      @OA\Property(property="tanggal_selesai", type="date"),
      *      @OA\Property(property="tempat_pelaksanaan", type="string"),
@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
      * @property boolean program_wajib
      * @property string materi_pembinaan_kepribadian
      * @property string id_instruktur
-     * @property string penangung_jawab
+     * @property string penanggung_jawab
      * @property date tanggal_mulai
      * @property date tanggal_selesai
      * @property string tempat_pelaksanaan
@@ -74,15 +74,15 @@ class PembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     /**

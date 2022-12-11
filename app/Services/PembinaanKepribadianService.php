@@ -161,7 +161,7 @@ class PembinaanKepribadianService
 			'program_wajib' => $pembinaan_kepribadian->program_wajib,
 			'materi_pembinaan_kepribadian' => $pembinaan_kepribadian->materi_pembinaan_kepribadian,
 			'id_instruktur' => $pembinaan_kepribadian->id_instruktur,
-			'penangung_jawab' => $pembinaan_kepribadian->penangung_jawab,
+			'penanggung_jawab' => $pembinaan_kepribadian->penanggung_jawab,
 			'tanggal_mulai' => $pembinaan_kepribadian->tanggal_mulai,
 			'tanggal_selesai' => $pembinaan_kepribadian->tanggal_selesai,
 			'tempat_pelaksanaan' => $pembinaan_kepribadian->tempat_pelaksanaan,
