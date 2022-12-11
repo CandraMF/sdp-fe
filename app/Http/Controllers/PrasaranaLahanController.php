@@ -294,6 +294,7 @@ class PrasaranaLahanController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $prasaranalahan = PrasaranaLahan::create($request->all());
@@ -357,6 +358,7 @@ class PrasaranaLahanController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $prasaranalahan = PrasaranaLahan::where('id', $id)->firstOrFail();

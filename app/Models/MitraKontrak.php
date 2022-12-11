@@ -52,15 +52,15 @@ class MitraKontrak extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' ,'updated_by'
+        'id_mitra' ,'jenis_mitra' ,'kontrak_dengan' ,'id_kanwil' ,'id_upt' ,'nomor_kontrak' ,'kontrak_awal' ,'kontrak_akhir' , 'updated_at', 'updated_by'
     ];
 
     /**

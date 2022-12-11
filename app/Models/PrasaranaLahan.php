@@ -46,15 +46,15 @@ class PrasaranaLahan extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' ,'updated_by'
+        'id_jenis_prasarana_lahan' ,'nama_prasarana_lahan' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     /**

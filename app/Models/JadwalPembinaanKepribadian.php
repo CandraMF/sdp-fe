@@ -52,15 +52,15 @@ class JadwalPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'tanggal' ,'jam_mulai' ,'jam_selesai' ,'id_instruktur' ,'materi_pembinaan_kepribadian' ,'foto' ,'status' , 'updated_at', 'updated_by'
     ];
 
     /**

@@ -40,15 +40,15 @@ class PrasaranaRuangPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_prasarana_ruang' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     /**

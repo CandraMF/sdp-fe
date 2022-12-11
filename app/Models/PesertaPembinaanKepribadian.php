@@ -50,15 +50,15 @@ class PesertaPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' ,'updated_by'
+        'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' , 'updated_at', 'updated_by'
     ];
 
     /**

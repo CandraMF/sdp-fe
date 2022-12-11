@@ -325,6 +325,7 @@ class MitraKontrakController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitrakontrak = MitraKontrak::create($request->all());
@@ -390,6 +391,7 @@ class MitraKontrakController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitrakontrak = MitraKontrak::where('id', $id)->firstOrFail();

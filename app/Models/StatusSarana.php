@@ -56,15 +56,15 @@ class StatusSarana extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' ,'updated_by'
+        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' ,'updated_by'
+        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' ,'updated_by'
+        'id_sarana' ,'tanggal' ,'status' ,'kepemilikan' ,'jumlah' ,'satuan' ,'kondisi_baik' ,'kondisi_rusak' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     /**

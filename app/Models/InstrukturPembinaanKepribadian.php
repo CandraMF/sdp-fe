@@ -40,15 +40,15 @@ class InstrukturPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_instruktur' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_instruktur' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_instruktur' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_instruktur' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_instruktur' ,'id_pembinaan_kepribadian' ,'updated_by'
+        'id_instruktur' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
     ];
 
     /**

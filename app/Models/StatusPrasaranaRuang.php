@@ -66,15 +66,15 @@ class StatusPrasaranaRuang extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' ,'updated_by'
+        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' ,'updated_by'
+        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' ,'updated_by'
+        'id_prasarana_ruang' ,'tanggal' ,'status' ,'kepemilikan' ,'luas' ,'satuan_luas' ,'jumlah_lantai' ,'jumlah_ruang' ,'kondisi_baik' ,'kondisi_rusak' ,'satuan_kondisi' ,'foto' ,'pendaftaran_disnaker' ,'catatan_disnaker' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     /**

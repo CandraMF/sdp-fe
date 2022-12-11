@@ -16,30 +16,30 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="Mitra Model",
  *      type="object",
  *      title="Mitra Model",
-     *      @OA\Property(property="id", type="bigint"),
-     *      @OA\Property(property="nama_mitra", type="string"),
-     *      @OA\Property(property="nama_pic", type="string"),
-     *      @OA\Property(property="alamat", type="string"),
-     *      @OA\Property(property="id_dati2", type="string"),
-     *      @OA\Property(property="no_telp", type="string"),
-     *      @OA\Property(property="no_hp", type="string"),
-     *      @OA\Property(property="email", type="string"),
-     *      @OA\Property(property="keterangan", type="string"),
-     *      @OA\Property(property="updated_at", type="datetime"),
-     *      @OA\Property(property="updated_by", type="string"),
+ *      @OA\Property(property="id", type="bigint"),
+ *      @OA\Property(property="nama_mitra", type="string"),
+ *      @OA\Property(property="nama_pic", type="string"),
+ *      @OA\Property(property="alamat", type="string"),
+ *      @OA\Property(property="id_dati2", type="string"),
+ *      @OA\Property(property="no_telp", type="string"),
+ *      @OA\Property(property="no_hp", type="string"),
+ *      @OA\Property(property="email", type="string"),
+ *      @OA\Property(property="keterangan", type="string"),
+ *      @OA\Property(property="updated_at", type="datetime"),
+ *      @OA\Property(property="updated_by", type="string"),
  * )
  * @property int id
-     * @property bigint id
-     * @property string nama_mitra
-     * @property string nama_pic
-     * @property string alamat
-     * @property string id_dati2
-     * @property string no_telp
-     * @property string no_hp
-     * @property string email
-     * @property string keterangan
-     * @property datetime updated_at
-     * @property string updated_by
+ * @property bigint id
+ * @property string nama_mitra
+ * @property string nama_pic
+ * @property string alamat
+ * @property string id_dati2
+ * @property string no_telp
+ * @property string no_hp
+ * @property string email
+ * @property string keterangan
+ * @property datetime updated_at
+ * @property string updated_by
  */
 class Mitra extends Model
 {
@@ -49,18 +49,18 @@ class Mitra extends Model
     protected $table = "mitra";
     protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
-        'nama_mitra' ,'nama_pic' ,'alamat' ,'id_dati2' ,'no_telp' ,'no_hp' ,'email' ,'keterangan' ,'updated_by'
+        'nama_mitra', 'nama_pic', 'alamat', 'id_dati2', 'no_telp', 'no_hp', 'email', 'keterangan', 'updated_at', 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'nama_mitra' ,'nama_pic' ,'alamat' ,'id_dati2' ,'no_telp' ,'no_hp' ,'email' ,'keterangan' ,'updated_by'
+        'nama_mitra', 'nama_pic', 'alamat', 'id_dati2', 'no_telp', 'no_hp', 'email', 'keterangan', 'updated_at', 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'nama_mitra' ,'nama_pic' ,'alamat' ,'id_dati2' ,'no_telp' ,'no_hp' ,'email' ,'keterangan' ,'updated_by'
+        'nama_mitra', 'nama_pic', 'alamat', 'id_dati2', 'no_telp', 'no_hp', 'email', 'keterangan', 'updated_at', 'updated_at', 'updated_by'
     ];
 
     /**

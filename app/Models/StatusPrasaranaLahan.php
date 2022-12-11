@@ -54,15 +54,15 @@ class StatusPrasaranaLahan extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' ,'updated_by'
+        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' ,'updated_by'
+        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' ,'updated_by'
+        'id_prasarana_lahan' ,'tanggal' ,'status' ,'kepemilikan' ,'luas_dipakai' ,'lahan_tidur' ,'satuan' ,'foto' ,'keterangan' , 'updated_at', 'updated_by'
     ];
 
     /**

@@ -74,15 +74,15 @@ class PembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' ,'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penangung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     /**

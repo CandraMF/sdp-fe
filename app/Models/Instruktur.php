@@ -56,15 +56,15 @@ class Instruktur extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_by'
+        'jenis_pembinaan_kepribadian', 'jenis_instruktur', 'id_napi', 'id_petugas', 'id_mitra', 'nama_instruktur', 'asal_institusi_instruktur', 'no_telp', 'email', 'keterangan', 'updated_at', 'updated_by'
     ];
 
     /**

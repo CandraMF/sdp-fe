@@ -46,15 +46,15 @@ class DaftarPesertaPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' ,'updated_by' ,'verifikasi_oleh'
+        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' , 'updated_at', 'updated_by' ,'verifikasi_oleh'
     ];
 
     protected $orderable = [
-        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' ,'updated_by' ,'verifikasi_oleh'
+        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' , 'updated_at', 'updated_by' ,'verifikasi_oleh'
     ];
 
     protected $searchable = [
-        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' ,'updated_by' ,'verifikasi_oleh'
+        'id_jadwal_pk' ,'id_peserta' ,'status' ,'keterangan' , 'updated_at', 'updated_by' ,'verifikasi_oleh'
     ];
 
     /**

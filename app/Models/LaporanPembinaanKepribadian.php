@@ -66,15 +66,15 @@ class LaporanPembinaanKepribadian extends Model
     public $incrementing = false;    
 
     protected $fillable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' ,'updated_by'
+        'id_pembinaan_kepribadian' ,'id_upt' ,'periode' ,'jumlah_hari' ,'jumlah_pembinaan_kepribadian' ,'jumlah_peserta' ,'jumlah_instruktur_petugas' ,'jumlah_instruktur_napi' ,'jumlah_instruktur_instansi_lain' ,'jumlah_instruktur_mitra' ,'keterangan' ,'status' ,'verifikasi_upt' ,'verifikasi_kanwil' ,'verifikasi_ditjen' , 'updated_at', 'updated_by'
     ];
 
     /**
