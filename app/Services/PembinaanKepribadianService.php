@@ -26,7 +26,7 @@ class PembinaanKepribadianService
 
 	/**
 	 * Make http client
-	 * 
+	 *
 	 * @param string $baseURI
 	 * @param bool $httpErrors
 	 * @param string $token
@@ -48,7 +48,7 @@ class PembinaanKepribadianService
 
 	/**
 	 * Create pagination
-	 * 
+	 *
 	 * @param array $items
 	 * @param int $perPage
 	 * @param int $page
@@ -63,7 +63,7 @@ class PembinaanKepribadianService
 
 	/**
 	 * Mapping index list
-	 * 
+	 *
 	 * @param object $data
 	 * @return mixed
 	 */
@@ -75,7 +75,7 @@ class PembinaanKepribadianService
 		}
 		foreach ($pembinaan_kepribadian as $val) {
 			$result[] = [
-
+                'id_jadwal_pembinaan_kepribadian' => $val['id_jadwal_pembinaan_kepribadian'],
 				'id' => $val['id'],
 				'nama_program' => $val['nama_program'],
 				'jnskegiatan' => $val['jnskegiatan'],
@@ -92,7 +92,7 @@ class PembinaanKepribadianService
 
 	/**
 	 * Get list
-	 * 
+	 *
 	 * @param array $data
 	 * @param string $url
 	 * @return mixed
@@ -105,7 +105,7 @@ class PembinaanKepribadianService
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
 		$column = isset($data['column']) ? $data['column'] : 'id';
 
-		$defaultColumn = ['pembinaan_kepribadian.id', 'pembinaan_kepribadian.nama_program', 'daftar_referensi.deskripsi as jnskegiatan', 'pembinaan_kepribadian.tempat_pelaksanaan', 'jadwal_pembinaan_kepribadian.tanggal', 'jadwal_pembinaan_kepribadian.jam_mulai', 'jadwal_pembinaan_kepribadian.jam_selesai', 'pembinaan_kepribadian.status'];
+		$defaultColumn = ['jadwal_pembinaan_kepribadian.id as id_jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', 'pembinaan_kepribadian.nama_program', 'daftar_referensi.groups as jnskegiatan', 'pembinaan_kepribadian.tempat_pelaksanaan', 'jadwal_pembinaan_kepribadian.tanggal', 'jadwal_pembinaan_kepribadian.jam_mulai', 'jadwal_pembinaan_kepribadian.jam_selesai', 'pembinaan_kepribadian.status'];
 		$q = PembinaanKepribadian::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('daftar_referensi', 'pembinaan_kepribadian.id_jenis_pembinaan_kepribadian', '=', 'daftar_referensi.id_lookup');
@@ -146,7 +146,7 @@ class PembinaanKepribadianService
 
 	/**
 	 * Mapping details
-	 * 
+	 *
 	 * @param object $pembinaan_kepribadian
 	 * @return mixed
 	 */
@@ -154,6 +154,7 @@ class PembinaanKepribadianService
 	{
 		$data = [
 			'id' => $pembinaan_kepribadian->id,
+            'id_jadwal_pembinaan_kepribadian' => $pembinaan_kepribadian->id_jadwal_pembinaan_kepribadian,
 			'id_jenis_pembinaan_kepribadian' => $pembinaan_kepribadian->id_jenis_pembinaan_kepribadian,
 			'id_upt' => $pembinaan_kepribadian->id_upt,
 			'id_mitra' => $pembinaan_kepribadian->id_mitra,

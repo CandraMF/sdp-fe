@@ -383,7 +383,7 @@ class PembinaanKepribadianController extends Controller
 
     $data = $this->service->show($pembinaankepribadian);
     //$collection = collect($pembinaankepribadian);
-    //$merge = $collection->merge($data);    
+    //$merge = $collection->merge($data);
     return response()->json([
       'status' => 200,
       'message' => "PembinaanKepribadian ditemukan.",
@@ -455,12 +455,13 @@ class PembinaanKepribadianController extends Controller
   public function store(Request $request)
   {
     $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        $request->merge(['updated_by' => 'admin']);
     $this->validate($request, $this->rules);
 
     $pembinaankepribadian = PembinaanKepribadian::create($request->all());
     if ($pembinaankepribadian->exists) {
+      $id = PembinaanKepribadian::latest('updated_at')->first()->id;
+      $pembinaankepribadian->id = $id;
       return response()->json([
         'status' => 200,
         'message' => "PembinaanKepribadian berhasil ditambahkan.",
@@ -542,8 +543,7 @@ class PembinaanKepribadianController extends Controller
   public function update(Request $request, $id)
   {
     $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        $request->merge(['updated_by' => 'admin']);
     $this->validate($request, $this->rules);
 
     $pembinaankepribadian = PembinaanKepribadian::where('id', $id)->firstOrFail();
