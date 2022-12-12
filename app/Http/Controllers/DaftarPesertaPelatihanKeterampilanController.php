@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DaftarPesertaPembinaanKepribadian;
-use App\Services\DaftarPesertaPembinaanKepribadianService;
+use App\Models\DaftarPesertaPelatihanKeterampilan;
+use App\Services\DaftarPesertaPelatihanKeterampilanService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DaftarPesertaPembinaanKepribadianController extends Controller
+class DaftarPesertaPelatihanKeterampilanController extends Controller
 {
 
     protected $service;
@@ -15,7 +15,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
     public function __construct()
     {
-        $this->service = new DaftarPesertaPembinaanKepribadianService();
+        $this->service = new DaftarPesertaPelatihanKeterampilanService();
         $this->rules = array(
             'id_jadwal_pk' => 'required',
             'id_peserta' => 'required',
@@ -27,9 +27,9 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/daftarpesertapembinaankepribadian",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="List of DaftarPesertaPembinaanKepribadian",
+     *      path="/daftarpesertapelatihanketerampilan",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="List of DaftarPesertaPelatihanKeterampilan",
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
@@ -39,7 +39,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian data successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan data successfully loaded"),
      *          ),
      *      ),
      * )
@@ -53,16 +53,16 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function index(Request $request)
     {
         $data = $request->toArray();
-        $daftarpesertapembinaankepribadian = $this->service->search($data, $request->url());
+        $daftarpesertapelatihanketerampilan = $this->service->search($data, $request->url());
 
-        return response()->json($daftarpesertapembinaankepribadian);
+        return response()->json($daftarpesertapelatihanketerampilan);
     }
 
     /**
      * @OA\Get(
-     *      path="/daftarpesertapembinaankepribadian/dropdown",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="List of DaftarPesertaPembinaanKepribadian",
+     *      path="/daftarpesertapelatihanketerampilan/dropdown",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="List of DaftarPesertaPelatihanKeterampilan",
      *      @OA\Parameter(in="query", required=false, name="sel_col", @OA\Schema(type="string"), description="select coloumn", example=""),
      *      @OA\Parameter(in="query", required=false, name="filter_col", @OA\Schema(type="string"), description="filter column", example=""),
      *      @OA\Parameter(in="query", required=false, name="filter_val", @OA\Schema(type="string"), description="filter value", example=""),
@@ -70,7 +70,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian data successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan data successfully loaded"),
      *          ),
      *      ),
      * )
@@ -89,7 +89,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
             $columns[] = $c;
         }
 
-        $data = DaftarPesertaPembinaanKepribadian::select($columns);
+        $data = DaftarPesertaPelatihanKeterampilan::select($columns);
         if ($request->has("filter_col") && $request->has("filter_val")) {
             $fcol = explode(",", $request->filter_col);
             $fval = explode(",", $request->filter_val);
@@ -98,21 +98,21 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
                 $data = $data->where($fcol[$i], "like", "%" . $filter_val . "%");
             }
         }
-        $daftarpesertapembinaankepribadian = $data->get();
+        $daftarpesertapelatihanketerampilan = $data->get();
 
-        return response()->json($daftarpesertapembinaankepribadian);
+        return response()->json($daftarpesertapelatihanketerampilan);
     }
 
     /**
      * @OA\Get(
-     *      path="/daftarpesertapembinaankepribadian/schema",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="Schema of DaftarPesertaPembinaanKepribadian",
+     *      path="/daftarpesertapelatihanketerampilan/schema",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="Schema of DaftarPesertaPelatihanKeterampilan",
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian schema successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan schema successfully loaded"),
      *          ),
      *      ),
      * )
@@ -200,12 +200,12 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
             ),
         );
         $schema = array(
-            'name' => 'daftarpesertapembinaankepribadian',
+            'name' => 'daftarpesertapelatihanketerampilan',
             'module' => 'lain-lain',
             'primary_key' => 'id',
             'api' => [
-                'endpoint' => 'pembinaan-kepribadian',
-                'url' => '/daftarpesertapembinaankepribadian'
+                'endpoint' => 'pelatihan-keterampilan',
+                'url' => '/daftarpesertapelatihanketerampilan'
             ],
             'scheme' => array_values($fields),
         );
@@ -214,15 +214,15 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/daftarpesertapembinaankepribadian/{id}",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="DaftarPesertaPembinaanKepribadian details",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="DaftarPesertaPembinaanKepribadian ID"),
+     *      path="/daftarpesertapelatihanketerampilan/{id}",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="DaftarPesertaPelatihanKeterampilan details",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="DaftarPesertaPelatihanKeterampilan ID"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan successfully loaded"),
      *          ),
      *      ),
      * )
@@ -232,46 +232,46 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function show($id)
     {
-        $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id', $id)->firstOrFail();
-        if (!$daftarpesertapembinaankepribadian->exists) {
+        $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::where('id', $id)->firstOrFail();
+        if (!$daftarpesertapelatihanketerampilan->exists) {
             return response()->json([
                 'status' => 500,
-                'message' => "DaftarPesertaPembinaanKepribadian tidak dapat ditemukan.",
+                'message' => "DaftarPesertaPelatihanKeterampilan tidak dapat ditemukan.",
                 'data' => null
             ]);
         }
 
-        $data = $this->service->show($daftarpesertapembinaankepribadian);
-        //$collection = collect($daftarpesertapembinaankepribadian);
+        $data = $this->service->show($daftarpesertapelatihanketerampilan);
+        //$collection = collect($daftarpesertapelatihanketerampilan);
         //$merge = $collection->merge($data);    
         return response()->json([
             'status' => 200,
-            'message' => "DaftarPesertaPembinaanKepribadian ditemukan.",
+            'message' => "DaftarPesertaPelatihanKeterampilan ditemukan.",
             'data' => $data //$merge->all()
         ]);
     }
 
     /**
      * @OA\Post(
-     *      path="/daftarpesertapembinaankepribadian",
-     *      tags={"Create DaftarPesertaPembinaanKepribadian"},
-     *      summary="Create DaftarPesertaPembinaanKepribadian",
+     *      path="/daftarpesertapelatihanketerampilan",
+     *      tags={"Create DaftarPesertaPelatihanKeterampilan"},
+     *      summary="Create DaftarPesertaPelatihanKeterampilan",
      *      @OA\RequestBody(
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_jadwal_pk"),
-     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
-     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
-     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
-     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
+     *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/id_jadwal_pk"),
+     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/id_peserta"),
+     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/status"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/keterangan"),
+     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/verifikasi_oleh"),
      *         ),
      *      ),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian successfully created"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan successfully created"),
      *          )
      *      ),
      *      @OA\Response(
@@ -297,17 +297,17 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
-        $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::create($request->all());
-        if ($daftarpesertapembinaankepribadian->exists) {
+        $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::create($request->all());
+        if ($daftarpesertapelatihanketerampilan->exists) {
             return response()->json([
                 'status' => 200,
-                'message' => "DaftarPesertaPembinaanKepribadian berhasil ditambahkan.",
-                'data' => $daftarpesertapembinaankepribadian
+                'message' => "DaftarPesertaPelatihanKeterampilan berhasil ditambahkan.",
+                'data' => $daftarpesertapelatihanketerampilan
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "DaftarPesertaPembinaanKepribadian tidak dapat ditambahkan.",
+                'message' => "DaftarPesertaPelatihanKeterampilan tidak dapat ditambahkan.",
                 'data' => null
             ]);
         }
@@ -316,26 +316,26 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/daftarpesertapembinaankepribadian/{id}",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="Update DaftarPesertaPembinaanKepribadian",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="DaftarPesertaPembinaanKepribadian ID"),
+     *      path="/daftarpesertapelatihanketerampilan/{id}",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="Update DaftarPesertaPelatihanKeterampilan",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="DaftarPesertaPelatihanKeterampilan ID"),
      *      @OA\RequestBody(
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_jadwal_pk"),
-     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/id_peserta"),
-     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/status"),
-     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/keterangan"),
-     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPembinaanKepribadian/properties/verifikasi_oleh"),
+     *              @OA\Property(property="id_jadwal_pk", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/id_jadwal_pk"),
+     *              @OA\Property(property="id_peserta", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/id_peserta"),
+     *              @OA\Property(property="status", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/status"),
+     *              @OA\Property(property="keterangan", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/keterangan"),
+     *              @OA\Property(property="verifikasi_oleh", ref="#/components/schemas/DaftarPesertaPelatihanKeterampilan/properties/verifikasi_oleh"),
      *         ),
      *      ),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian successfully updated"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan successfully updated"),
      *          )
      *      ),
      *      @OA\Response(
@@ -362,17 +362,17 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
-        $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id', $id)->firstOrFail();
-        if ($daftarpesertapembinaankepribadian->update($request->all())) {
+        $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::where('id', $id)->firstOrFail();
+        if ($daftarpesertapelatihanketerampilan->update($request->all())) {
             return response()->json([
                 'status' => 200,
-                'message' => "DaftarPesertaPembinaanKepribadian berhasil diubah.",
-                'data' => $daftarpesertapembinaankepribadian
+                'message' => "DaftarPesertaPelatihanKeterampilan berhasil diubah.",
+                'data' => $daftarpesertapelatihanketerampilan
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "DaftarPesertaPembinaanKepribadian tidak dapat diubah.",
+                'message' => "DaftarPesertaPelatihanKeterampilan tidak dapat diubah.",
                 'data' => null
             ]);
         }
@@ -381,15 +381,15 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/daftarpesertapembinaankepribadian/{id}",
-     *      tags={"DaftarPesertaPembinaanKepribadian"},
-     *      summary="DaftarPesertaPembinaanKepribadian Removal",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="DaftarPesertaPembinaanKepribadian ID"),
+     *      path="/daftarpesertapelatihanketerampilan/{id}",
+     *      tags={"DaftarPesertaPelatihanKeterampilan"},
+     *      summary="DaftarPesertaPelatihanKeterampilan Removal",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="DaftarPesertaPelatihanKeterampilan ID"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="DaftarPesertaPembinaanKepribadian deleted"),
+     *              @OA\Property(property="message", type="string", example="DaftarPesertaPelatihanKeterampilan deleted"),
      *          ),
      *      ),
      * )
@@ -399,18 +399,18 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
      */
     public function destroy($id)
     {
-        $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id', $id)->firstOrFail();
+        $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::where('id', $id)->firstOrFail();
 
-        if ($daftarpesertapembinaankepribadian->delete()) {
+        if ($daftarpesertapelatihanketerampilan->delete()) {
             return response()->json([
                 'status' => 200,
-                'message' => "DaftarPesertaPembinaanKepribadian berhasil dihapus.",
+                'message' => "DaftarPesertaPelatihanKeterampilan berhasil dihapus.",
                 'data' => null
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "DaftarPesertaPembinaanKepribadian tidak dapat dihapus.",
+                'message' => "DaftarPesertaPelatihanKeterampilan tidak dapat dihapus.",
                 'data' => null
             ]);
         }

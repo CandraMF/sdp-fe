@@ -331,7 +331,8 @@ class MitraController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $request->merge(['updated_by' => 'admin']);
+        $user = Auth::user();
+        $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
         $mitra = Mitra::create($request->all());
@@ -399,7 +400,8 @@ class MitraController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $request->merge(['updated_by' => 'admin']);
+        $user = Auth::user();
+        $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
         $mitra = Mitra::where('id', $id)->firstOrFail();

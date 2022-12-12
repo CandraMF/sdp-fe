@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JadwalPembinaanKepribadian;
-use App\Services\JadwalPembinaanKepribadianService;
+use App\Models\JadwalPelatihanKeterampilan;
+use App\Services\JadwalPelatihanKeterampilanService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class JadwalPembinaanKepribadianController extends Controller
+class JadwalPelatihanKeterampilanController extends Controller
 {
 
     protected $service;
@@ -15,14 +15,14 @@ class JadwalPembinaanKepribadianController extends Controller
 
     public function __construct()
     {
-        $this->service = new JadwalPembinaanKepribadianService();
+        $this->service = new JadwalPelatihanKeterampilanService();
         $this->rules = array(
-            'id_pembinaan_kepribadian' => 'required',
+            'id_pelatihan_keterampilan' => 'required',
             'tanggal' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
             'id_instruktur' => 'required',
-            'materi_pembinaan_kepribadian' => 'required',
+            'materi_pelatihan_keterampilan' => 'required',
             'foto' => 'nullable',
             'status' => 'required',
         );
@@ -30,19 +30,19 @@ class JadwalPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/jadwalpembinaankepribadian",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="List of JadwalPembinaanKepribadian",
+     *      path="/jadwalpelatihanketerampilan",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="List of JadwalPelatihanKeterampilan",
      *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
      *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
      *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_pembinaan_kepribadian:desc"),
-     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_pembinaan_kepribadian,tanggal,jam_mulai,jam_selesai,id_instruktur,materi_pembinaan_kepribadian,foto,status"),
+     *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_pelatihan_keterampilan:desc"),
+     *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_pelatihan_keterampilan,tanggal,jam_mulai,jam_selesai,id_instruktur,materi_pelatihan_keterampilan,foto,status"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian data successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan data successfully loaded"),
      *          ),
      *      ),
      * )
@@ -56,16 +56,16 @@ class JadwalPembinaanKepribadianController extends Controller
     public function index(Request $request)
     {
         $data = $request->toArray();
-        $jadwalpembinaankepribadian = $this->service->search($data, $request->url());
+        $jadwalpelatihanketerampilan = $this->service->search($data, $request->url());
 
-        return response()->json($jadwalpembinaankepribadian);
+        return response()->json($jadwalpelatihanketerampilan);
     }
 
     /**
      * @OA\Get(
-     *      path="/jadwalpembinaankepribadian/dropdown",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="List of JadwalPembinaanKepribadian",
+     *      path="/jadwalpelatihanketerampilan/dropdown",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="List of JadwalPelatihanKeterampilan",
      *      @OA\Parameter(in="query", required=false, name="sel_col", @OA\Schema(type="string"), description="select coloumn", example=""),
      *      @OA\Parameter(in="query", required=false, name="filter_col", @OA\Schema(type="string"), description="filter column", example=""),
      *      @OA\Parameter(in="query", required=false, name="filter_val", @OA\Schema(type="string"), description="filter value", example=""),
@@ -73,7 +73,7 @@ class JadwalPembinaanKepribadianController extends Controller
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian data successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan data successfully loaded"),
      *          ),
      *      ),
      * )
@@ -86,13 +86,13 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function dropdown(Request $request)
     {
-        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_pembinaan_kepribadian"];
+        $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_pelatihan_keterampilan"];
         $columns[] = "id";
         foreach ($col as $c) {
             $columns[] = $c;
         }
 
-        $data = JadwalPembinaanKepribadian::select($columns);
+        $data = JadwalPelatihanKeterampilan::select($columns);
         if ($request->has("filter_col") && $request->has("filter_val")) {
             $fcol = explode(",", $request->filter_col);
             $fval = explode(",", $request->filter_val);
@@ -101,21 +101,21 @@ class JadwalPembinaanKepribadianController extends Controller
                 $data = $data->where($fcol[$i], "like", "%" . $filter_val . "%");
             }
         }
-        $jadwalpembinaankepribadian = $data->get();
+        $jadwalpelatihanketerampilan = $data->get();
 
-        return response()->json($jadwalpembinaankepribadian);
+        return response()->json($jadwalpelatihanketerampilan);
     }
 
     /**
      * @OA\Get(
-     *      path="/jadwalpembinaankepribadian/schema",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="Schema of JadwalPembinaanKepribadian",
+     *      path="/jadwalpelatihanketerampilan/schema",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="Schema of JadwalPelatihanKeterampilan",
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian schema successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan schema successfully loaded"),
      *          ),
      *      ),
      * )
@@ -140,7 +140,7 @@ class JadwalPembinaanKepribadianController extends Controller
             ),
             1 =>
             array(
-                'Field' => 'id_pembinaan_kepribadian',
+                'Field' => 'id_pelatihan_keterampilan',
                 'Type' => 'INT()',
                 'Null' => 'NO',
                 'Key' => NULL,
@@ -185,7 +185,7 @@ class JadwalPembinaanKepribadianController extends Controller
             ),
             6 =>
             array(
-                'Field' => 'materi_pembinaan_kepribadian',
+                'Field' => 'materi_pelatihan_keterampilan',
                 'Type' => 'VARCHAR(200)',
                 'Null' => 'NO',
                 'Key' => NULL,
@@ -230,12 +230,12 @@ class JadwalPembinaanKepribadianController extends Controller
             ),
         );
         $schema = array(
-            'name' => 'jadwalpembinaankepribadian',
+            'name' => 'jadwalpelatihanketerampilan',
             'module' => 'lain-lain',
             'primary_key' => 'id',
             'api' => [
-                'endpoint' => 'pembinaan-kepribadian',
-                'url' => '/jadwalpembinaankepribadian'
+                'endpoint' => 'pelatihan-keterampilan',
+                'url' => '/jadwalpelatihanketerampilan'
             ],
             'scheme' => array_values($fields),
         );
@@ -244,15 +244,15 @@ class JadwalPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/jadwalpembinaankepribadian/{id}",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="JadwalPembinaanKepribadian details",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="JadwalPembinaanKepribadian ID"),
+     *      path="/jadwalpelatihanketerampilan/{id}",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="JadwalPelatihanKeterampilan details",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="JadwalPelatihanKeterampilan ID"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian successfully loaded"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan successfully loaded"),
      *          ),
      *      ),
      * )
@@ -262,60 +262,60 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function show($id)
     {
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
-        if (!$jadwalpembinaankepribadian->exists) {
+        $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::where('id', $id)->firstOrFail();
+        if (!$jadwalpelatihanketerampilan->exists) {
             return response()->json([
                 'status' => 500,
-                'message' => "JadwalPembinaanKepribadian tidak dapat ditemukan.",
+                'message' => "JadwalPelatihanKeterampilan tidak dapat ditemukan.",
                 'data' => null
             ]);
         }
 
-        $data = $this->service->show($jadwalpembinaankepribadian);
-        //$collection = collect($jadwalpembinaankepribadian);
+        $data = $this->service->show($jadwalpelatihanketerampilan);
+        //$collection = collect($jadwalpelatihanketerampilan);
         //$merge = $collection->merge($data);    
         return response()->json([
             'status' => 200,
-            'message' => "JadwalPembinaanKepribadian ditemukan.",
+            'message' => "JadwalPelatihanKeterampilan ditemukan.",
             'data' => $data //$merge->all()
         ]);
     }
 
     /**
      * @OA\Post(
-     *      path="/jadwalpembinaankepribadian",
-     *      tags={"Create JadwalPembinaanKepribadian"},
-     *      summary="Create JadwalPembinaanKepribadian",
+     *      path="/jadwalpelatihanketerampilan",
+     *      tags={"Create JadwalPelatihanKeterampilan"},
+     *      summary="Create JadwalPelatihanKeterampilan",
      *      @OA\RequestBody(
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     *              @OA\Property(property="id_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_pembinaan_kepribadian"),
-     *              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/tanggal"),
-     *              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_mulai"),
-     *              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_selesai"),
-     *              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_instruktur"),
-     *              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
-     *              @OA\Property(property="status", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/status"),
+     *              @OA\Property(property="id_pelatihan_keterampilan", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/id_pelatihan_keterampilan"),
+     *              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/tanggal"),
+     *              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/jam_mulai"),
+     *              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/jam_selesai"),
+     *              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/id_instruktur"),
+     *              @OA\Property(property="materi_pelatihan_keterampilan", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/materi_pelatihan_keterampilan"),
+     *              @OA\Property(property="status", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian successfully created"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan successfully created"),
      *          )
      *      ),
      *      @OA\Response(
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     *              @OA\Property(property="id_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="id_pelatihan_keterampilan", type="array", @OA\Items(example={"Id_pelatihan_keterampilan field is required."})),
      *              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
      *              @OA\Property(property="jam_mulai", type="array", @OA\Items(example={"Jam_mulai field is required."})),
      *              @OA\Property(property="jam_selesai", type="array", @OA\Items(example={"Jam_selesai field is required."})),
      *              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
-     *              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="materi_pelatihan_keterampilan", type="array", @OA\Items(example={"Materi_pelatihan_keterampilan field is required."})),
      *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
@@ -331,17 +331,17 @@ class JadwalPembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::create($request->all());
-        if ($jadwalpembinaankepribadian->exists) {
+        $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::create($request->all());
+        if ($jadwalpelatihanketerampilan->exists) {
             return response()->json([
                 'status' => 200,
-                'message' => "JadwalPembinaanKepribadian berhasil ditambahkan.",
-                'data' => $jadwalpembinaankepribadian
+                'message' => "JadwalPelatihanKeterampilan berhasil ditambahkan.",
+                'data' => $jadwalpelatihanketerampilan
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "JadwalPembinaanKepribadian tidak dapat ditambahkan.",
+                'message' => "JadwalPelatihanKeterampilan tidak dapat ditambahkan.",
                 'data' => null
             ]);
         }
@@ -350,40 +350,40 @@ class JadwalPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/jadwalpembinaankepribadian/{id}",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="Update JadwalPembinaanKepribadian",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="JadwalPembinaanKepribadian ID"),
+     *      path="/jadwalpelatihanketerampilan/{id}",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="Update JadwalPelatihanKeterampilan",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="JadwalPelatihanKeterampilan ID"),
      *      @OA\RequestBody(
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     *              @OA\Property(property="id_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_pembinaan_kepribadian"),
-     *              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/tanggal"),
-     *              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_mulai"),
-     *              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/jam_selesai"),
-     *              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/id_instruktur"),
-     *              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
-     *              @OA\Property(property="status", ref="#/components/schemas/JadwalPembinaanKepribadian/properties/status"),
+     *              @OA\Property(property="id_pelatihan_keterampilan", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/id_pelatihan_keterampilan"),
+     *              @OA\Property(property="tanggal", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/tanggal"),
+     *              @OA\Property(property="jam_mulai", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/jam_mulai"),
+     *              @OA\Property(property="jam_selesai", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/jam_selesai"),
+     *              @OA\Property(property="id_instruktur", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/id_instruktur"),
+     *              @OA\Property(property="materi_pelatihan_keterampilan", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/materi_pelatihan_keterampilan"),
+     *              @OA\Property(property="status", ref="#/components/schemas/JadwalPelatihanKeterampilan/properties/status"),
      *         ),
      *      ),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian successfully updated"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan successfully updated"),
      *          )
      *      ),
      *      @OA\Response(
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     *              @OA\Property(property="id_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="id_pelatihan_keterampilan", type="array", @OA\Items(example={"Id_pelatihan_keterampilan field is required."})),
      *              @OA\Property(property="tanggal", type="array", @OA\Items(example={"Tanggal field is required."})),
      *              @OA\Property(property="jam_mulai", type="array", @OA\Items(example={"Jam_mulai field is required."})),
      *              @OA\Property(property="jam_selesai", type="array", @OA\Items(example={"Jam_selesai field is required."})),
      *              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
-     *              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+     *              @OA\Property(property="materi_pelatihan_keterampilan", type="array", @OA\Items(example={"Materi_pelatihan_keterampilan field is required."})),
      *              @OA\Property(property="status", type="array", @OA\Items(example={"Status field is required."}))
      *          ),
      *      ),
@@ -400,17 +400,17 @@ class JadwalPembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
         $this->validate($request, $this->rules);
 
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
-        if ($jadwalpembinaankepribadian->update($request->all())) {
+        $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::where('id', $id)->firstOrFail();
+        if ($jadwalpelatihanketerampilan->update($request->all())) {
             return response()->json([
                 'status' => 200,
-                'message' => "JadwalPembinaanKepribadian berhasil diubah.",
-                'data' => $jadwalpembinaankepribadian
+                'message' => "JadwalPelatihanKeterampilan berhasil diubah.",
+                'data' => $jadwalpelatihanketerampilan
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "JadwalPembinaanKepribadian tidak dapat diubah.",
+                'message' => "JadwalPelatihanKeterampilan tidak dapat diubah.",
                 'data' => null
             ]);
         }
@@ -419,15 +419,15 @@ class JadwalPembinaanKepribadianController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/jadwalpembinaankepribadian/{id}",
-     *      tags={"JadwalPembinaanKepribadian"},
-     *      summary="JadwalPembinaanKepribadian Removal",
-     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="JadwalPembinaanKepribadian ID"),
+     *      path="/jadwalpelatihanketerampilan/{id}",
+     *      tags={"JadwalPelatihanKeterampilan"},
+     *      summary="JadwalPelatihanKeterampilan Removal",
+     *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="JadwalPelatihanKeterampilan ID"),
      *      @OA\Response(
      *          response=200,
      *          description="success",
      *          @OA\JsonContent(
-     *              @OA\Property(property="message", type="string", example="JadwalPembinaanKepribadian deleted"),
+     *              @OA\Property(property="message", type="string", example="JadwalPelatihanKeterampilan deleted"),
      *          ),
      *      ),
      * )
@@ -437,18 +437,18 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function destroy($id)
     {
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
+        $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::where('id', $id)->firstOrFail();
 
-        if ($jadwalpembinaankepribadian->delete()) {
+        if ($jadwalpelatihanketerampilan->delete()) {
             return response()->json([
                 'status' => 200,
-                'message' => "JadwalPembinaanKepribadian berhasil dihapus.",
+                'message' => "JadwalPelatihanKeterampilan berhasil dihapus.",
                 'data' => null
             ]);
         } else {
             return response()->json([
                 'status' => 500,
-                'message' => "JadwalPembinaanKepribadian tidak dapat dihapus.",
+                'message' => "JadwalPelatihanKeterampilan tidak dapat dihapus.",
                 'data' => null
             ]);
         }

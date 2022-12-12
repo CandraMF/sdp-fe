@@ -232,3 +232,102 @@ $router->post("/instrukturpembinaankepribadian", "InstrukturPembinaanKepribadian
 //$router->get("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@show");
 $router->put("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@update");
 $router->delete("/instrukturpembinaankepribadian/{id}", "InstrukturPembinaanKepribadianController@destroy");
+
+/**
+ * PelatihanKeterampilan routes
+ */
+$router->get("/pelatihanketerampilan/schema", "PelatihanKeterampilanController@schema");
+$router->get("/pelatihanketerampilan", "PelatihanKeterampilanController@index");
+$router->get("/pelatihanketerampilan/dropdown", "PelatihanKeterampilanController@dropdown");
+$router->post("/pelatihanketerampilan", "PelatihanKeterampilanController@store");
+$router->get("/pelatihanketerampilan/{id}", "PelatihanKeterampilanController@show");
+$router->put("/pelatihanketerampilan/{id}", "PelatihanKeterampilanController@update");
+$router->delete("/pelatihanketerampilan/{id}", "PelatihanKeterampilanController@destroy");
+
+/**
+ * JadwalPelatihanKeterampilan routes
+ */
+$router->get("/jadwalpelatihanketerampilan/schema", "JadwalPelatihanKeterampilanController@schema");
+$router->get("/jadwalpelatihanketerampilan", "JadwalPelatihanKeterampilanController@index");
+$router->get("/jadwalpelatihanketerampilan/dropdown", "JadwalPelatihanKeterampilanController@dropdown");
+$router->post("/jadwalpelatihanketerampilan", "JadwalPelatihanKeterampilanController@store");
+$router->get("/jadwalpelatihanketerampilan/{id}", "JadwalPelatihanKeterampilanController@show");
+$router->put("/jadwalpelatihanketerampilan/{id}", "JadwalPelatihanKeterampilanController@update");
+$router->delete("/jadwalpelatihanketerampilan/{id}", "JadwalPelatihanKeterampilanController@destroy");
+
+/**
+ * PesertaPelatihanKeterampilan routes
+ */
+$router->get("/pesertapelatihanketerampilan/schema", "PesertaPelatihanKeterampilanController@schema");
+$router->get("/pesertapelatihanketerampilan", "PesertaPelatihanKeterampilanController@index");
+$router->get("/pesertapelatihanketerampilan/dropdown", "PesertaPelatihanKeterampilanController@dropdown");
+$router->post("/pesertapelatihanketerampilan", "PesertaPelatihanKeterampilanController@store");
+$router->get("/pesertapelatihanketerampilan/{id}", "PesertaPelatihanKeterampilanController@show");
+$router->put("/pesertapelatihanketerampilan/{id}", "PesertaPelatihanKeterampilanController@update");
+$router->delete("/pesertapelatihanketerampilan/{id}", "PesertaPelatihanKeterampilanController@destroy");
+
+/**
+ * LaporanPelatihanKeterampilan routes
+ */
+$router->get("/laporanpelatihanketerampilan/schema", "LaporanPelatihanKeterampilanController@schema");
+$router->get("/laporanpelatihanketerampilan", "LaporanPelatihanKeterampilanController@index");
+$router->get("/laporanpelatihanketerampilan/dropdown", "LaporanPelatihanKeterampilanController@dropdown");
+$router->post("/laporanpelatihanketerampilan", "LaporanPelatihanKeterampilanController@store");
+$router->get("/laporanpelatihanketerampilan/{id}", "LaporanPelatihanKeterampilanController@show");
+$router->put("/laporanpelatihanketerampilan/{id}", "LaporanPelatihanKeterampilanController@update");
+$router->delete("/laporanpelatihanketerampilan/{id}", "LaporanPelatihanKeterampilanController@destroy");
+
+/**
+ * DaftarPesertaPelatihanKeterampilan routes
+ */
+$router->get("/daftarpesertapelatihanketerampilan/schema", "DaftarPesertaPelatihanKeterampilanController@schema");
+$router->get("/daftarpesertapelatihanketerampilan", "DaftarPesertaPelatihanKeterampilanController@index");
+$router->get("/daftarpesertapelatihanketerampilan/dropdown", "DaftarPesertaPelatihanKeterampilanController@dropdown");
+$router->post("/daftarpesertapelatihanketerampilan", "DaftarPesertaPelatihanKeterampilanController@store");
+//$router->get("/daftarpesertapelatihanketerampilan/{id}", "DaftarPesertaPelatihanKeterampilanController@show");
+$router->put("/daftarpesertapelatihanketerampilan/{id}", "DaftarPesertaPelatihanKeterampilanController@update");
+$router->delete("/daftarpesertapelatihanketerampilan/{id}", "DaftarPesertaPelatihanKeterampilanController@destroy");
+
+/**
+ * PrasaranaLahanPelatihanKeterampilan routes
+ */
+$router->get("/prasaranalahanpelatihanketerampilan/schema", "PrasaranaLahanPelatihanKeterampilanController@schema");
+$router->get("/prasaranalahanpelatihanketerampilan", "PrasaranaLahanPelatihanKeterampilanController@index");
+$router->get("/prasaranalahanpelatihanketerampilan/dropdown", "PrasaranaLahanPelatihanKeterampilanController@dropdown");
+$router->post("/prasaranalahanpelatihanketerampilan", "PrasaranaLahanPelatihanKeterampilanController@store");
+//$router->get("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@show");
+$router->put("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@update");
+$router->delete("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@destroy");
+
+/**
+ * PrasaranaRuangPelatihanKeterampilan routes
+ */
+$router->get("/prasaranaruangpelatihanketerampilan/schema", "PrasaranaRuangPelatihanKeterampilanController@schema");
+$router->get("/prasaranaruangpelatihanketerampilan", "PrasaranaRuangPelatihanKeterampilanController@index");
+$router->get("/prasaranaruangpelatihanketerampilan/dropdown", "PrasaranaRuangPelatihanKeterampilanController@dropdown");
+$router->post("/prasaranaruangpelatihanketerampilan", "PrasaranaRuangPelatihanKeterampilanController@store");
+//$router->get("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@show");
+$router->put("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@update");
+$router->delete("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@destroy");
+
+/**
+ * SaranaPelatihanKeterampilan routes
+ */
+$router->get("/saranapelatihanketerampilan/schema", "SaranaPelatihanKeterampilanController@schema");
+$router->get("/saranapelatihanketerampilan", "SaranaPelatihanKeterampilanController@index");
+$router->get("/saranapelatihanketerampilan/dropdown", "SaranaPelatihanKeterampilanController@dropdown");
+$router->post("/saranapelatihanketerampilan", "SaranaPelatihanKeterampilanController@store");
+//$router->get("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@show");
+$router->put("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@update");
+$router->delete("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@destroy");
+
+/**
+ * InstrukturPelatihanKeterampilan routes
+ */
+$router->get("/instrukturpelatihanketerampilan/schema", "InstrukturPelatihanKeterampilanController@schema");
+$router->get("/instrukturpelatihanketerampilan", "InstrukturPelatihanKeterampilanController@index");
+$router->get("/instrukturpelatihanketerampilan/dropdown", "InstrukturPelatihanKeterampilanController@dropdown");
+$router->post("/instrukturpelatihanketerampilan", "InstrukturPelatihanKeterampilanController@store");
+//$router->get("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@show");
+$router->put("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@update");
+$router->delete("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@destroy");

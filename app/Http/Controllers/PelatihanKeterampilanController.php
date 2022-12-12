@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PembinaanKepribadian;
-use App\Services\PembinaanKepribadianService;
+use App\Models\PelatihanKeterampilan;
+use App\Services\PelatihanKeterampilanService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PembinaanKepribadianController extends Controller
+class PelatihanKeterampilanController extends Controller
 {
 
   protected $service;
@@ -15,14 +15,16 @@ class PembinaanKepribadianController extends Controller
 
   public function __construct()
   {
-    $this->service = new PembinaanKepribadianService();
+    $this->service = new PelatihanKeterampilanService();
     $this->rules = array(
-      'id_jenis_pembinaan_kepribadian' => 'required',
+      'id_jenis_pelatihan_keterampilan' => 'required',
       'id_upt' => 'required',
+      'id_bidang' => 'required',
+      'tingkat' => 'required',
       'id_mitra' => 'required',
       'nama_program' => 'required',
       'program_wajib' => 'required',
-      'materi_pembinaan_kepribadian' => 'required',
+      'materi_pelatihan_keterampilan' => 'required',
       'id_instruktur' => 'nullable',
       'penanggung_jawab' => 'required',
       'tanggal_mulai' => 'required',
@@ -41,19 +43,19 @@ class PembinaanKepribadianController extends Controller
 
   /**
    * @OA\Get(
-   *      path="/pembinaankepribadian",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="List of PembinaanKepribadian",
+   *      path="/pelatihanketerampilan",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="List of PelatihanKeterampilan",
    *      @OA\Parameter(in="query", required=false, name="page", @OA\Schema(type="int"), description="Current page", example=1),
    *      @OA\Parameter(in="query", required=false, name="per_page", @OA\Schema(type="int"), description="Total per page", example=10),
    *      @OA\Parameter(in="query", required=false, name="keyword", @OA\Schema(type="string"), description="Keyword", example="john"),
-   *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_jenis_pembinaan_kepribadian:desc"),
-   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_pembinaan_kepribadian,id_upt,id_mitra,nama_program,program_wajib,materi_pembinaan_kepribadian,id_instruktur,penanggung_jawab,tanggal_mulai,tanggal_selesai,tempat_pelaksanaan,perlu_kelulusan,id_sarana,id_prasarana,realisasi_anggaran,id_jenis_anggaran,foto,keterangan,status"),
+   *      @OA\Parameter(in="query", required=false, name="sort", @OA\Schema(type="string"), description="Sort by column", example="id_jenis_pelatihan_keterampilan:desc"),
+   *      @OA\Parameter(in="query", required=false, name="column", @OA\Schema(type="string"), description="Columns selected", example="id_jenis_pelatihan_keterampilan,id_upt,id_mitra,nama_program,program_wajib,materi_pelatihan_keterampilan,id_instruktur,penanggung_jawab,tanggal_mulai,tanggal_selesai,tempat_pelaksanaan,perlu_kelulusan,id_sarana,id_prasarana,realisasi_anggaran,id_jenis_anggaran,foto,keterangan,status"),
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian data successfully loaded"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan data successfully loaded"),
    *          ),
    *      ),
    * )
@@ -67,16 +69,16 @@ class PembinaanKepribadianController extends Controller
   public function index(Request $request)
   {
     $data = $request->toArray();
-    $pembinaankepribadian = $this->service->search($data, $request->url());
+    $pelatihanketerampilan = $this->service->search($data, $request->url());
 
-    return response()->json($pembinaankepribadian);
+    return response()->json($pelatihanketerampilan);
   }
 
   /**
    * @OA\Get(
-   *      path="/pembinaankepribadian/dropdown",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="List of PembinaanKepribadian",
+   *      path="/pelatihanketerampilan/dropdown",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="List of PelatihanKeterampilan",
    *      @OA\Parameter(in="query", required=false, name="sel_col", @OA\Schema(type="string"), description="select coloumn", example=""),
    *      @OA\Parameter(in="query", required=false, name="filter_col", @OA\Schema(type="string"), description="filter column", example=""),
    *      @OA\Parameter(in="query", required=false, name="filter_val", @OA\Schema(type="string"), description="filter value", example=""),
@@ -84,7 +86,7 @@ class PembinaanKepribadianController extends Controller
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian data successfully loaded"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan data successfully loaded"),
    *          ),
    *      ),
    * )
@@ -97,13 +99,13 @@ class PembinaanKepribadianController extends Controller
    */
   public function dropdown(Request $request)
   {
-    $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_jenis_pembinaan_kepribadian"];
+    $col = ($request->has("sel_col")) ? explode(",", $request->sel_col) : ["id_jenis_pelatihan_keterampilan"];
     $columns[] = "id";
     foreach ($col as $c) {
       $columns[] = $c;
     }
 
-    $data = PembinaanKepribadian::select($columns);
+    $data = PelatihanKeterampilan::select($columns);
     if ($request->has("filter_col") && $request->has("filter_val")) {
       $fcol = explode(",", $request->filter_col);
       $fval = explode(",", $request->filter_val);
@@ -112,21 +114,21 @@ class PembinaanKepribadianController extends Controller
         $data = $data->where($fcol[$i], "like", "%" . $filter_val . "%");
       }
     }
-    $pembinaankepribadian = $data->get();
+    $pelatihanketerampilan = $data->get();
 
-    return response()->json($pembinaankepribadian);
+    return response()->json($pelatihanketerampilan);
   }
 
   /**
    * @OA\Get(
-   *      path="/pembinaankepribadian/schema",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="Schema of PembinaanKepribadian",
+   *      path="/pelatihanketerampilan/schema",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="Schema of PelatihanKeterampilan",
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian schema successfully loaded"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan schema successfully loaded"),
    *          ),
    *      ),
    * )
@@ -151,25 +153,25 @@ class PembinaanKepribadianController extends Controller
       ),
       1 =>
       array(
-        'Field' => 'id_jenis_pembinaan_kepribadian',
+        'Field' => 'id_jenis_pelatihan_keterampilan',
         'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
         'Key' => NULL,
         'Default' => NULL,
         'Extra' => '',
       ),
-      2 =>
+	  2 =>
       array(
-        'Field' => 'id_upt',
+        'Field' => 'id_bidang',
         'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
         'Key' => NULL,
         'Default' => NULL,
         'Extra' => '',
-      ),
-      3 =>
+      ),	
+	  3 =>
       array(
-        'Field' => 'id_mitra',
+        'Field' => 'tingkat',
         'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
         'Key' => NULL,
@@ -178,8 +180,8 @@ class PembinaanKepribadianController extends Controller
       ),
       4 =>
       array(
-        'Field' => 'nama_program',
-        'Type' => 'VARCHAR(200)',
+        'Field' => 'id_upt',
+        'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
         'Key' => NULL,
         'Default' => NULL,
@@ -187,8 +189,8 @@ class PembinaanKepribadianController extends Controller
       ),
       5 =>
       array(
-        'Field' => 'program_wajib',
-        'Type' => 'TINYINT(1)',
+        'Field' => 'id_mitra',
+        'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
         'Key' => NULL,
         'Default' => NULL,
@@ -196,7 +198,7 @@ class PembinaanKepribadianController extends Controller
       ),
       6 =>
       array(
-        'Field' => 'materi_pembinaan_kepribadian',
+        'Field' => 'nama_program',
         'Type' => 'VARCHAR(200)',
         'Null' => 'NO',
         'Key' => NULL,
@@ -205,6 +207,24 @@ class PembinaanKepribadianController extends Controller
       ),
       7 =>
       array(
+        'Field' => 'program_wajib',
+        'Type' => 'TINYINT(1)',
+        'Null' => 'NO',
+        'Key' => NULL,
+        'Default' => NULL,
+        'Extra' => '',
+      ),
+      8 =>
+      array(
+        'Field' => 'materi_pelatihan_keterampilan',
+        'Type' => 'VARCHAR(200)',
+        'Null' => 'NO',
+        'Key' => NULL,
+        'Default' => NULL,
+        'Extra' => '',
+      ),
+      9 =>
+      array(
         'Field' => 'id_instruktur',
         'Type' => 'VARCHAR(32)',
         'Null' => 'NO',
@@ -212,7 +232,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      8 =>
+      10 =>
       array(
         'Field' => 'penanggung_jawab',
         'Type' => 'VARCHAR(32)',
@@ -221,7 +241,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      9 =>
+      11 =>
       array(
         'Field' => 'tanggal_mulai',
         'Type' => 'DATETIME',
@@ -230,7 +250,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      10 =>
+      12 =>
       array(
         'Field' => 'tanggal_selesai',
         'Type' => 'DATETIME',
@@ -239,7 +259,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      11 =>
+      13 =>
       array(
         'Field' => 'tempat_pelaksanaan',
         'Type' => 'VARCHAR(200)',
@@ -248,7 +268,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      12 =>
+      14 =>
       array(
         'Field' => 'perlu_kelulusan',
         'Type' => 'TINYINT(1)',
@@ -257,7 +277,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      13 =>
+      15 =>
       array(
         'Field' => 'id_sarana',
         'Type' => 'VARCHAR(32)',
@@ -266,7 +286,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      14 =>
+      16 =>
       array(
         'Field' => 'id_prasarana',
         'Type' => 'VARCHAR(32)',
@@ -275,7 +295,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      15 =>
+      17 =>
       array(
         'Field' => 'realisasi_anggaran',
         'Type' => 'DECIMAL(, 18)',
@@ -284,7 +304,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      16 =>
+      18 =>
       array(
         'Field' => 'id_jenis_anggaran',
         'Type' => 'VARCHAR(32)',
@@ -293,7 +313,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      17 =>
+      19 =>
       array(
         'Field' => 'foto',
         'Type' => 'VARCHAR(200)',
@@ -302,7 +322,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      18 =>
+      20 =>
       array(
         'Field' => 'keterangan',
         'Type' => 'VARCHAR(200)',
@@ -311,7 +331,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      19 =>
+      21 =>
       array(
         'Field' => 'status',
         'Type' => 'VARCHAR(50)',
@@ -320,7 +340,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      20 =>
+      22 =>
       array(
         'Field' => 'updated_at',
         'Type' => 'TIMESTAMP',
@@ -329,7 +349,7 @@ class PembinaanKepribadianController extends Controller
         'Default' => NULL,
         'Extra' => '',
       ),
-      21 =>
+      23 =>
       array(
         'Field' => 'updated_by',
         'Type' => 'VARCHAR(32)',
@@ -340,12 +360,12 @@ class PembinaanKepribadianController extends Controller
       ),
     );
     $schema = array(
-      'name' => 'pembinaankepribadian',
+      'name' => 'pelatihanketerampilan',
       'module' => 'lain-lain',
       'primary_key' => 'id',
       'api' => [
-        'endpoint' => 'pembinaan-kepribadian',
-        'url' => '/pembinaankepribadian'
+        'endpoint' => 'pelatihan-keterampilan',
+        'url' => '/pelatihanketerampilan'
       ],
       'scheme' => array_values($fields),
     );
@@ -354,15 +374,15 @@ class PembinaanKepribadianController extends Controller
 
   /**
    * @OA\Get(
-   *      path="/pembinaankepribadian/{id}",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="PembinaanKepribadian details",
-   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="PembinaanKepribadian ID"),
+   *      path="/pelatihanketerampilan/{id}",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="PelatihanKeterampilan details",
+   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="string"), description="PelatihanKeterampilan ID"),
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian successfully loaded"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan successfully loaded"),
    *          ),
    *      ),
    * )
@@ -372,69 +392,69 @@ class PembinaanKepribadianController extends Controller
    */
   public function show($id)
   {
-    $pembinaankepribadian = PembinaanKepribadian::where('id', $id)->firstOrFail();
-    if (!$pembinaankepribadian->exists) {
+    $pelatihanketerampilan = PelatihanKeterampilan::where('id', $id)->firstOrFail();
+    if (!$pelatihanketerampilan->exists) {
       return response()->json([
         'status' => 500,
-        'message' => "PembinaanKepribadian tidak dapat ditemukan.",
+        'message' => "PelatihanKeterampilan tidak dapat ditemukan.",
         'data' => null
       ]);
     }
 
-    $data = $this->service->show($pembinaankepribadian);
-    //$collection = collect($pembinaankepribadian);
+    $data = $this->service->show($pelatihanketerampilan);
+    //$collection = collect($pelatihanketerampilan);
     //$merge = $collection->merge($data);    
     return response()->json([
       'status' => 200,
-      'message' => "PembinaanKepribadian ditemukan.",
+      'message' => "PelatihanKeterampilan ditemukan.",
       'data' => $data //$merge->all()
     ]);
   }
 
   /**
    * @OA\Post(
-   *      path="/pembinaankepribadian",
-   *      tags={"Create PembinaanKepribadian"},
-   *      summary="Create PembinaanKepribadian",
+   *      path="/pelatihanketerampilan",
+   *      tags={"Create PelatihanKeterampilan"},
+   *      summary="Create PelatihanKeterampilan",
    *      @OA\RequestBody(
    *         description="Body",
    *         required=true,
    *         @OA\JsonContent(
-   *              @OA\Property(property="id_jenis_pembinaan_kepribadian", ref="#/components/schemas/PembinaanKepribadian/properties/id_jenis_pembinaan_kepribadian"),
-   *              @OA\Property(property="id_upt", ref="#/components/schemas/PembinaanKepribadian/properties/id_upt"),
-   *              @OA\Property(property="id_mitra", ref="#/components/schemas/PembinaanKepribadian/properties/id_mitra"),
-   *              @OA\Property(property="nama_program", ref="#/components/schemas/PembinaanKepribadian/properties/nama_program"),
-   *              @OA\Property(property="program_wajib", ref="#/components/schemas/PembinaanKepribadian/properties/program_wajib"),
-   *              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/PembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
-   *              @OA\Property(property="id_instruktur", ref="#/components/schemas/PembinaanKepribadian/properties/id_instruktur"),
-   *              @OA\Property(property="penanggung_jawab", ref="#/components/schemas/PembinaanKepribadian/properties/penanggung_jawab"),
-   *              @OA\Property(property="tanggal_mulai", ref="#/components/schemas/PembinaanKepribadian/properties/tanggal_mulai"),
-   *              @OA\Property(property="tanggal_selesai", ref="#/components/schemas/PembinaanKepribadian/properties/tanggal_selesai"),
-   *              @OA\Property(property="tempat_pelaksanaan", ref="#/components/schemas/PembinaanKepribadian/properties/tempat_pelaksanaan"),
-   *              @OA\Property(property="perlu_kelulusan", ref="#/components/schemas/PembinaanKepribadian/properties/perlu_kelulusan"),
-   *              @OA\Property(property="id_sarana", ref="#/components/schemas/PembinaanKepribadian/properties/id_sarana"),
-   *              @OA\Property(property="id_prasarana", ref="#/components/schemas/PembinaanKepribadian/properties/id_prasarana"),
-   *              @OA\Property(property="foto", ref="#/components/schemas/PembinaanKepribadian/properties/foto"),
-   *              @OA\Property(property="status", ref="#/components/schemas/PembinaanKepribadian/properties/status"),
+   *              @OA\Property(property="id_jenis_pelatihan_keterampilan", ref="#/components/schemas/PelatihanKeterampilan/properties/id_jenis_pelatihan_keterampilan"),
+   *              @OA\Property(property="id_upt", ref="#/components/schemas/PelatihanKeterampilan/properties/id_upt"),
+   *              @OA\Property(property="id_mitra", ref="#/components/schemas/PelatihanKeterampilan/properties/id_mitra"),
+   *              @OA\Property(property="nama_program", ref="#/components/schemas/PelatihanKeterampilan/properties/nama_program"),
+   *              @OA\Property(property="program_wajib", ref="#/components/schemas/PelatihanKeterampilan/properties/program_wajib"),
+   *              @OA\Property(property="materi_pelatihan_keterampilan", ref="#/components/schemas/PelatihanKeterampilan/properties/materi_pelatihan_keterampilan"),
+   *              @OA\Property(property="id_instruktur", ref="#/components/schemas/PelatihanKeterampilan/properties/id_instruktur"),
+   *              @OA\Property(property="penanggung_jawab", ref="#/components/schemas/PelatihanKeterampilan/properties/penanggung_jawab"),
+   *              @OA\Property(property="tanggal_mulai", ref="#/components/schemas/PelatihanKeterampilan/properties/tanggal_mulai"),
+   *              @OA\Property(property="tanggal_selesai", ref="#/components/schemas/PelatihanKeterampilan/properties/tanggal_selesai"),
+   *              @OA\Property(property="tempat_pelaksanaan", ref="#/components/schemas/PelatihanKeterampilan/properties/tempat_pelaksanaan"),
+   *              @OA\Property(property="perlu_kelulusan", ref="#/components/schemas/PelatihanKeterampilan/properties/perlu_kelulusan"),
+   *              @OA\Property(property="id_sarana", ref="#/components/schemas/PelatihanKeterampilan/properties/id_sarana"),
+   *              @OA\Property(property="id_prasarana", ref="#/components/schemas/PelatihanKeterampilan/properties/id_prasarana"),
+   *              @OA\Property(property="foto", ref="#/components/schemas/PelatihanKeterampilan/properties/foto"),
+   *              @OA\Property(property="status", ref="#/components/schemas/PelatihanKeterampilan/properties/status"),
    *         ),
    *      ),
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian successfully created"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan successfully created"),
    *          )
    *      ),
    *      @OA\Response(
    *          response="422",
    *          description="error",
    *          @OA\JsonContent(
-   *              @OA\Property(property="id_jenis_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_jenis_pembinaan_kepribadian field is required."})),
+   *              @OA\Property(property="id_jenis_pelatihan_keterampilan", type="array", @OA\Items(example={"Id_jenis_pelatihan_keterampilan field is required."})),
    *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
    *              @OA\Property(property="id_mitra", type="array", @OA\Items(example={"Id_mitra field is required."})),
    *              @OA\Property(property="nama_program", type="array", @OA\Items(example={"Nama_program field is required."})),
    *              @OA\Property(property="program_wajib", type="array", @OA\Items(example={"Program_wajib field is required."})),
-   *              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+   *              @OA\Property(property="materi_pelatihan_keterampilan", type="array", @OA\Items(example={"Materi_pelatihan_keterampilan field is required."})),
    *              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
    *              @OA\Property(property="penanggung_jawab", type="array", @OA\Items(example={"penanggung_jawab field is required."})),
    *              @OA\Property(property="tanggal_mulai", type="array", @OA\Items(example={"Tanggal_mulai field is required."})),
@@ -459,17 +479,17 @@ class PembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
     $this->validate($request, $this->rules);
 
-    $pembinaankepribadian = PembinaanKepribadian::create($request->all());
-    if ($pembinaankepribadian->exists) {
+    $pelatihanketerampilan = PelatihanKeterampilan::create($request->all());
+    if ($pelatihanketerampilan->exists) {
       return response()->json([
         'status' => 200,
-        'message' => "PembinaanKepribadian berhasil ditambahkan.",
-        'data' => $pembinaankepribadian
+        'message' => "PelatihanKeterampilan berhasil ditambahkan.",
+        'data' => $pelatihanketerampilan
       ]);
     } else {
       return response()->json([
         'status' => 500,
-        'message' => "PembinaanKepribadian tidak dapat ditambahkan.",
+        'message' => "PelatihanKeterampilan tidak dapat ditambahkan.",
         'data' => null
       ]);
     }
@@ -478,49 +498,49 @@ class PembinaanKepribadianController extends Controller
 
   /**
    * @OA\Put(
-   *      path="/pembinaankepribadian/{id}",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="Update PembinaanKepribadian",
-   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="PembinaanKepribadian ID"),
+   *      path="/pelatihanketerampilan/{id}",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="Update PelatihanKeterampilan",
+   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="PelatihanKeterampilan ID"),
    *      @OA\RequestBody(
    *         description="Body",
    *         required=true,
    *         @OA\JsonContent(
-   *              @OA\Property(property="id_jenis_pembinaan_kepribadian", ref="#/components/schemas/PembinaanKepribadian/properties/id_jenis_pembinaan_kepribadian"),
-   *              @OA\Property(property="id_upt", ref="#/components/schemas/PembinaanKepribadian/properties/id_upt"),
-   *              @OA\Property(property="id_mitra", ref="#/components/schemas/PembinaanKepribadian/properties/id_mitra"),
-   *              @OA\Property(property="nama_program", ref="#/components/schemas/PembinaanKepribadian/properties/nama_program"),
-   *              @OA\Property(property="program_wajib", ref="#/components/schemas/PembinaanKepribadian/properties/program_wajib"),
-   *              @OA\Property(property="materi_pembinaan_kepribadian", ref="#/components/schemas/PembinaanKepribadian/properties/materi_pembinaan_kepribadian"),
-   *              @OA\Property(property="id_instruktur", ref="#/components/schemas/PembinaanKepribadian/properties/id_instruktur"),
-   *              @OA\Property(property="penanggung_jawab", ref="#/components/schemas/PembinaanKepribadian/properties/penanggung_jawab"),
-   *              @OA\Property(property="tanggal_mulai", ref="#/components/schemas/PembinaanKepribadian/properties/tanggal_mulai"),
-   *              @OA\Property(property="tanggal_selesai", ref="#/components/schemas/PembinaanKepribadian/properties/tanggal_selesai"),
-   *              @OA\Property(property="tempat_pelaksanaan", ref="#/components/schemas/PembinaanKepribadian/properties/tempat_pelaksanaan"),
-   *              @OA\Property(property="perlu_kelulusan", ref="#/components/schemas/PembinaanKepribadian/properties/perlu_kelulusan"),
-   *              @OA\Property(property="id_sarana", ref="#/components/schemas/PembinaanKepribadian/properties/id_sarana"),
-   *              @OA\Property(property="id_prasarana", ref="#/components/schemas/PembinaanKepribadian/properties/id_prasarana"),
-   *              @OA\Property(property="foto", ref="#/components/schemas/PembinaanKepribadian/properties/foto"),
-   *              @OA\Property(property="status", ref="#/components/schemas/PembinaanKepribadian/properties/status"),
+   *              @OA\Property(property="id_jenis_pelatihan_keterampilan", ref="#/components/schemas/PelatihanKeterampilan/properties/id_jenis_pelatihan_keterampilan"),
+   *              @OA\Property(property="id_upt", ref="#/components/schemas/PelatihanKeterampilan/properties/id_upt"),
+   *              @OA\Property(property="id_mitra", ref="#/components/schemas/PelatihanKeterampilan/properties/id_mitra"),
+   *              @OA\Property(property="nama_program", ref="#/components/schemas/PelatihanKeterampilan/properties/nama_program"),
+   *              @OA\Property(property="program_wajib", ref="#/components/schemas/PelatihanKeterampilan/properties/program_wajib"),
+   *              @OA\Property(property="materi_pelatihan_keterampilan", ref="#/components/schemas/PelatihanKeterampilan/properties/materi_pelatihan_keterampilan"),
+   *              @OA\Property(property="id_instruktur", ref="#/components/schemas/PelatihanKeterampilan/properties/id_instruktur"),
+   *              @OA\Property(property="penanggung_jawab", ref="#/components/schemas/PelatihanKeterampilan/properties/penanggung_jawab"),
+   *              @OA\Property(property="tanggal_mulai", ref="#/components/schemas/PelatihanKeterampilan/properties/tanggal_mulai"),
+   *              @OA\Property(property="tanggal_selesai", ref="#/components/schemas/PelatihanKeterampilan/properties/tanggal_selesai"),
+   *              @OA\Property(property="tempat_pelaksanaan", ref="#/components/schemas/PelatihanKeterampilan/properties/tempat_pelaksanaan"),
+   *              @OA\Property(property="perlu_kelulusan", ref="#/components/schemas/PelatihanKeterampilan/properties/perlu_kelulusan"),
+   *              @OA\Property(property="id_sarana", ref="#/components/schemas/PelatihanKeterampilan/properties/id_sarana"),
+   *              @OA\Property(property="id_prasarana", ref="#/components/schemas/PelatihanKeterampilan/properties/id_prasarana"),
+   *              @OA\Property(property="foto", ref="#/components/schemas/PelatihanKeterampilan/properties/foto"),
+   *              @OA\Property(property="status", ref="#/components/schemas/PelatihanKeterampilan/properties/status"),
    *         ),
    *      ),
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian successfully updated"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan successfully updated"),
    *          )
    *      ),
    *      @OA\Response(
    *          response="422",
    *          description="error",
    *          @OA\JsonContent(
-   *              @OA\Property(property="id_jenis_pembinaan_kepribadian", type="array", @OA\Items(example={"Id_jenis_pembinaan_kepribadian field is required."})),
+   *              @OA\Property(property="id_jenis_pelatihan_keterampilan", type="array", @OA\Items(example={"Id_jenis_pelatihan_keterampilan field is required."})),
    *              @OA\Property(property="id_upt", type="array", @OA\Items(example={"Id_upt field is required."})),
    *              @OA\Property(property="id_mitra", type="array", @OA\Items(example={"Id_mitra field is required."})),
    *              @OA\Property(property="nama_program", type="array", @OA\Items(example={"Nama_program field is required."})),
    *              @OA\Property(property="program_wajib", type="array", @OA\Items(example={"Program_wajib field is required."})),
-   *              @OA\Property(property="materi_pembinaan_kepribadian", type="array", @OA\Items(example={"Materi_pembinaan_kepribadian field is required."})),
+   *              @OA\Property(property="materi_pelatihan_keterampilan", type="array", @OA\Items(example={"Materi_pelatihan_keterampilan field is required."})),
    *              @OA\Property(property="id_instruktur", type="array", @OA\Items(example={"Id_instruktur field is required."})),
    *              @OA\Property(property="penanggung_jawab", type="array", @OA\Items(example={"penanggung_jawab field is required."})),
    *              @OA\Property(property="tanggal_mulai", type="array", @OA\Items(example={"Tanggal_mulai field is required."})),
@@ -546,17 +566,17 @@ class PembinaanKepribadianController extends Controller
         $request->merge(['updated_by' => $user['preferred_username']);
     $this->validate($request, $this->rules);
 
-    $pembinaankepribadian = PembinaanKepribadian::where('id', $id)->firstOrFail();
-    if ($pembinaankepribadian->update($request->all())) {
+    $pelatihanketerampilan = PelatihanKeterampilan::where('id', $id)->firstOrFail();
+    if ($pelatihanketerampilan->update($request->all())) {
       return response()->json([
         'status' => 200,
-        'message' => "PembinaanKepribadian berhasil diubah.",
-        'data' => $pembinaankepribadian
+        'message' => "PelatihanKeterampilan berhasil diubah.",
+        'data' => $pelatihanketerampilan
       ]);
     } else {
       return response()->json([
         'status' => 500,
-        'message' => "PembinaanKepribadian tidak dapat diubah.",
+        'message' => "PelatihanKeterampilan tidak dapat diubah.",
         'data' => null
       ]);
     }
@@ -565,15 +585,15 @@ class PembinaanKepribadianController extends Controller
 
   /**
    * @OA\Delete(
-   *      path="/pembinaankepribadian/{id}",
-   *      tags={"PembinaanKepribadian"},
-   *      summary="PembinaanKepribadian Removal",
-   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="PembinaanKepribadian ID"),
+   *      path="/pelatihanketerampilan/{id}",
+   *      tags={"PelatihanKeterampilan"},
+   *      summary="PelatihanKeterampilan Removal",
+   *      @OA\Parameter(in="path", required=true, name="id", @OA\Schema(type="id"), description="PelatihanKeterampilan ID"),
    *      @OA\Response(
    *          response=200,
    *          description="success",
    *          @OA\JsonContent(
-   *              @OA\Property(property="message", type="string", example="PembinaanKepribadian deleted"),
+   *              @OA\Property(property="message", type="string", example="PelatihanKeterampilan deleted"),
    *          ),
    *      ),
    * )
@@ -583,18 +603,18 @@ class PembinaanKepribadianController extends Controller
    */
   public function destroy($id)
   {
-    $pembinaankepribadian = PembinaanKepribadian::where('id', $id)->firstOrFail();
+    $pelatihanketerampilan = PelatihanKeterampilan::where('id', $id)->firstOrFail();
 
-    if ($pembinaankepribadian->delete()) {
+    if ($pelatihanketerampilan->delete()) {
       return response()->json([
         'status' => 200,
-        'message' => "PembinaanKepribadian berhasil dihapus.",
+        'message' => "PelatihanKeterampilan berhasil dihapus.",
         'data' => null
       ]);
     } else {
       return response()->json([
         'status' => 500,
-        'message' => "PembinaanKepribadian tidak dapat dihapus.",
+        'message' => "PelatihanKeterampilan tidak dapat dihapus.",
         'data' => null
       ]);
     }
