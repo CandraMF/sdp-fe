@@ -173,7 +173,7 @@ $router->get("/daftarpesertapembinaankepribadian/schema", "DaftarPesertaPembinaa
 $router->get("/daftarpesertapembinaankepribadian", "DaftarPesertaPembinaanKepribadianController@index");
 $router->get("/daftarpesertapembinaankepribadian/dropdown", "DaftarPesertaPembinaanKepribadianController@dropdown");
 $router->post("/daftarpesertapembinaankepribadian", "DaftarPesertaPembinaanKepribadianController@store");
-//$router->get("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@show");
+$router->get("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@show");
 $router->put("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@update");
 $router->delete("/daftarpesertapembinaankepribadian/{id}", "DaftarPesertaPembinaanKepribadianController@destroy");
 
@@ -207,7 +207,7 @@ $router->get("/prasaranaruangpembinaankepribadian/schema", "PrasaranaRuangPembin
 $router->get("/prasaranaruangpembinaankepribadian", "PrasaranaRuangPembinaanKepribadianController@index");
 $router->get("/prasaranaruangpembinaankepribadian/dropdown", "PrasaranaRuangPembinaanKepribadianController@dropdown");
 $router->post("/prasaranaruangpembinaankepribadian", "PrasaranaRuangPembinaanKepribadianController@store");
-//$router->get("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@show");
+$router->get("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@show");
 $router->put("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@update");
 $router->delete("/prasaranaruangpembinaankepribadian/{id}", "PrasaranaRuangPembinaanKepribadianController@destroy");
 
@@ -295,7 +295,7 @@ $router->get("/prasaranalahanpelatihanketerampilan/schema", "PrasaranaLahanPelat
 $router->get("/prasaranalahanpelatihanketerampilan", "PrasaranaLahanPelatihanKeterampilanController@index");
 $router->get("/prasaranalahanpelatihanketerampilan/dropdown", "PrasaranaLahanPelatihanKeterampilanController@dropdown");
 $router->post("/prasaranalahanpelatihanketerampilan", "PrasaranaLahanPelatihanKeterampilanController@store");
-//$router->get("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@show");
+$router->get("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@show");
 $router->put("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@update");
 $router->delete("/prasaranalahanpelatihanketerampilan/{id}", "PrasaranaLahanPelatihanKeterampilanController@destroy");
 
@@ -306,7 +306,7 @@ $router->get("/prasaranaruangpelatihanketerampilan/schema", "PrasaranaRuangPelat
 $router->get("/prasaranaruangpelatihanketerampilan", "PrasaranaRuangPelatihanKeterampilanController@index");
 $router->get("/prasaranaruangpelatihanketerampilan/dropdown", "PrasaranaRuangPelatihanKeterampilanController@dropdown");
 $router->post("/prasaranaruangpelatihanketerampilan", "PrasaranaRuangPelatihanKeterampilanController@store");
-//$router->get("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@show");
+$router->get("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@show");
 $router->put("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@update");
 $router->delete("/prasaranaruangpelatihanketerampilan/{id}", "PrasaranaRuangPelatihanKeterampilanController@destroy");
 
@@ -317,7 +317,7 @@ $router->get("/saranapelatihanketerampilan/schema", "SaranaPelatihanKeterampilan
 $router->get("/saranapelatihanketerampilan", "SaranaPelatihanKeterampilanController@index");
 $router->get("/saranapelatihanketerampilan/dropdown", "SaranaPelatihanKeterampilanController@dropdown");
 $router->post("/saranapelatihanketerampilan", "SaranaPelatihanKeterampilanController@store");
-//$router->get("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@show");
+$router->get("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@show");
 $router->put("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@update");
 $router->delete("/saranapelatihanketerampilan/{id}", "SaranaPelatihanKeterampilanController@destroy");
 
@@ -328,6 +328,6 @@ $router->get("/instrukturpelatihanketerampilan/schema", "InstrukturPelatihanKete
 $router->get("/instrukturpelatihanketerampilan", "InstrukturPelatihanKeterampilanController@index");
 $router->get("/instrukturpelatihanketerampilan/dropdown", "InstrukturPelatihanKeterampilanController@dropdown");
 $router->post("/instrukturpelatihanketerampilan", "InstrukturPelatihanKeterampilanController@store");
-//$router->get("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@show");
+$router->get("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@show");
 $router->put("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@update");
 $router->delete("/instrukturpelatihanketerampilan/{id}", "InstrukturPelatihanKeterampilanController@destroy");
