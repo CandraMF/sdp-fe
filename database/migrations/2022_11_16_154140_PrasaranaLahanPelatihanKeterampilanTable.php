@@ -3,7 +3,7 @@
 	use Illuminate\Database\Schema\Blueprint;
 	use Illuminate\Support\Facades\Schema;
 
-	class PrasaranaRuangPelatihanKeterampilanTable extends Migration
+	class PrasaranaLahanPelatihanKeterampilanTable extends Migration
 	{
 		public function up()
 		{

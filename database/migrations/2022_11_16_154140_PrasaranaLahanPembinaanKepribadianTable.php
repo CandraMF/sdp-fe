@@ -3,14 +3,14 @@
 	use Illuminate\Database\Schema\Blueprint;
 	use Illuminate\Support\Facades\Schema;
 
-	class PrasaranaRuangPelatihanKeterampilanTable extends Migration
+	class PrasaranaLahanPembinaanKepribadianTable extends Migration
 	{
 		public function up()
 		{
-			Schema::create('prasarana_lahan_pelatihan_keterampilan', function (Blueprint $table) {
+			Schema::create('prasarana_lahan_pembinaan_kepribadian', function (Blueprint $table) {
 				$table->bigIncrements('id');
 				$table->integer('id_prasarana_lahan');
-				$table->integer('id_pelatihan_keterampilan');
+				$table->integer('id_pembinaan_kepribadian');
 				$table->dateTime('updated_at');
 				$table->string('updated_by',32);
 				
@@ -19,6 +19,6 @@
 
 		public function down()
 		{
-			Schema::dropIfExists('prasarana_lahan_pelatihan_keterampilan');
+			Schema::dropIfExists('prasarana_lahan_pembinaan_kepribadian');
 		}
 	}
