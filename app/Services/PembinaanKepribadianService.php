@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\PembinaanKepribadian;
 use App\Exports\PembinaanKepribadianExport;
+use App\Models\JadwalPembinaanKepribadian;
 use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -75,15 +76,19 @@ class PembinaanKepribadianService
 		}
 		foreach ($pembinaan_kepribadian as $val) {
 			$result[] = [
-                'id_jadwal_pembinaan_kepribadian' => $val['id_jadwal_pembinaan_kepribadian'],
 				'id' => $val['id'],
-				'nama_program' => $val['nama_program'],
-				'jnskegiatan' => $val['jnskegiatan'],
-				'tempat_pelaksanaan' => $val['tempat_pelaksanaan'],
+				'id_pembinaan_kepribadian' => $val['id_pembinaan_kepribadian'],
+				'nama_program' => $val['pembinaan_kepribadian']['nama_program'],
+				'jnskegiatan' => $val['pembinaan_kepribadian']['jenis']['deskripsi'],
+				'tempat_pelaksanaan' => $val['pembinaan_kepribadian']['tempat_pelaksanaan'],
 				'tanggal' => $val['tanggal'],
 				'jam_mulai' => $val['jam_mulai'],
 				'jam_selesai' => $val['jam_selesai'],
-				'status' => $val['status']
+				'status' => $val['pembinaan_kepribadian']['status'],
+				'status_daftar_peserta_pembinaan_kepribadian' => $val['daftar_peserta'] ? $val['daftar_peserta']['status'] : null,
+				'id_daftar_peserta_pembinaan_kepribadian' => $val['daftar_peserta'] ? $val['daftar_peserta']['id'] : null,
+				'keterangan_daftar_peserta_pembinaan_kepribadian' => $val['daftar_peserta'] ? $val['daftar_peserta']['keterangan'] : null,
+				'jumlah_peserta' => $val['daftar_peserta'] ? $val['daftar_peserta']['peserta_count'] : null,
 			];
 		}
 
@@ -105,14 +110,17 @@ class PembinaanKepribadianService
 		$sort = isset($data['sort']) ? $data['sort'] : NULL;
 		$column = isset($data['column']) ? $data['column'] : 'id';
 
-		$defaultColumn = ['jadwal_pembinaan_kepribadian.id as id_jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', 'pembinaan_kepribadian.nama_program', 'daftar_referensi.groups as jnskegiatan', 'pembinaan_kepribadian.tempat_pelaksanaan', 'jadwal_pembinaan_kepribadian.tanggal', 'jadwal_pembinaan_kepribadian.jam_mulai', 'jadwal_pembinaan_kepribadian.jam_selesai', 'pembinaan_kepribadian.status'];
-		$q = PembinaanKepribadian::query();
-		$q = $q->select($defaultColumn);
-		$q = $q->join('daftar_referensi', 'pembinaan_kepribadian.id_jenis_pembinaan_kepribadian', '=', 'daftar_referensi.id_lookup');
-		$q = $q->leftJoin('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
+		// $defaultColumn = ['jadwal_pembinaan_kepribadian.id as id_jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', 'pembinaan_kepribadian.nama_program', 'daftar_referensi.deskripsi as jnskegiatan', 'pembinaan_kepribadian.tempat_pelaksanaan', 'jadwal_pembinaan_kepribadian.tanggal', 'jadwal_pembinaan_kepribadian.jam_mulai', 'jadwal_pembinaan_kepribadian.jam_selesai', 'pembinaan_kepribadian.status', 'jadwal_pembinaan_kepribadian.tanggal as tanggal_jadwal_pembinaan_kerpibadian'];
+		$q = JadwalPembinaanKepribadian::with(['daftarPeserta' => function($q) {
+            $q->withCount('peserta');
+        }, 'pembinaanKepribadian.jenis']);
+		// $q = $q->select($defaultColumn);
+		// $q = $q->leftJoin('jadwal_pembinaan_kepribadian', 'pembinaan_kepribadian.id', '=', 'jadwal_pembinaan_kepribadian.id_pembinaan_kepribadian');
 
-		$q = $q->where('daftar_referensi.groups', '=', 'jenis pembinaan kepribadian');
+		// $q = $q->where('daftar_referensi.groups', '=', 'jenis pembinaan kepribadian');
 		$data = $this->mapping($q);
+
+        // $data = $q->get()->toArray();
 		$collection = collect(array_values($data));
 
 		if (!is_null($keyword) && !is_null($column)) {
@@ -122,7 +130,7 @@ class PembinaanKepribadianService
 		}
 
 		if (!is_null($sort)) {
-			$exSort = explode(',', $sort);
+			$exSort = explode(',',  $sort);
 			foreach ($exSort as $key => $value) {
 				$xdir = explode(':', $value);
 				if (empty($xdir[0])) {
@@ -173,7 +181,12 @@ class PembinaanKepribadianService
 			'id_jenis_anggaran' => $pembinaan_kepribadian->id_jenis_anggaran,
 			'foto' => $pembinaan_kepribadian->foto,
 			'keterangan' => $pembinaan_kepribadian->keterangan,
-			'status' => $pembinaan_kepribadian->status
+			'status' => $pembinaan_kepribadian->status,
+            'sarana' => $pembinaan_kepribadian->sarana,
+            'prasarana_ruang' => $pembinaan_kepribadian->prasaranaRuang,
+            'prasarana_lahan' => $pembinaan_kepribadian->prasaranaLahan,
+            'instruktur' => $pembinaan_kepribadian->instruktur,
+            'jadwal' => $pembinaan_kepribadian->jadwal,
 		];
 
 

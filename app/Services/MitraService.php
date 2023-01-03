@@ -26,7 +26,7 @@ class MitraService
 
 	/**
 	 * Make http client
-	 * 
+	 *
 	 * @param string $baseURI
 	 * @param bool $httpErrors
 	 * @param string $token
@@ -48,7 +48,7 @@ class MitraService
 
 	/**
 	 * Create pagination
-	 * 
+	 *
 	 * @param array $items
 	 * @param int $perPage
 	 * @param int $page
@@ -63,7 +63,7 @@ class MitraService
 
 	/**
 	 * Mapping index list
-	 * 
+	 *
 	 * @param object $data
 	 * @return mixed
 	 */
@@ -82,7 +82,7 @@ class MitraService
 				'alamat' => $val['alamat'],
 				'no_telp' => $val['no_telp'],
 				'id_dati2' => $val['id_dati2'],
-				'propinsi' => $val['propinsi'],
+				'provinsi' => $val['provinsi'],
 				'kabkota' => $val['kabkota']
 			];
 		}
@@ -92,7 +92,7 @@ class MitraService
 
 	/**
 	 * Get list
-	 * 
+	 *
 	 * @param array $data
 	 * @param string $url
 	 * @return mixed
@@ -106,7 +106,7 @@ class MitraService
 		$column = isset($data['column']) ? $data['column'] : 'id';
 
 
-		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota'];
+		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as provinsi', 'dati2.deskripsi as kabkota', 'dati2.id_dati2'];
 		$q = Mitra::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');
@@ -147,7 +147,7 @@ class MitraService
 
 	/**
 	 * Mapping details
-	 * 
+	 *
 	 * @param object $mitra
 	 * @return mixed
 	 */
@@ -163,7 +163,11 @@ class MitraService
 			'no_telp' => $mitra->no_telp,
 			'no_hp' => $mitra->no_hp,
 			'email' => $mitra->email,
-			'keterangan' => $mitra->keterangan
+			'keterangan' => $mitra->keterangan,
+            'kabkota' => $mitra->kabkota,
+            'provinsi' => $mitra->provinsi,
+            'updated_by' => $mitra->updated_by,
+            'updated_at' => $mitra->updated_at,
 		];
 		return $data;
 	}
@@ -176,7 +180,7 @@ class MitraService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota'];
+		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as provinsi', 'dati2.deskripsi as kabkota'];
 		$q = Mitra::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');
@@ -228,7 +232,7 @@ class MitraService
 		$sort = $data['sort'] ?? NULL;
 		$column = $data['column'] ?? 'id';
 
-		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota'];
+		$defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as provinsi', 'dati2.deskripsi as kabkota'];
 		$q = Mitra::query();
 		$q = $q->select($defaultColumn);
 		$q = $q->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');
@@ -270,14 +274,14 @@ class MitraService
 		$judul = 'Mitra';
 		$columns = ["Nama", "Mitra", "Penanggung Jawab", "Alamat", "No Telpon", "Provinsi", "Kota"];
 
-		$columnOfValues = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota'];
+		$columnOfValues = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as provinsi', 'dati2.deskripsi as kabkota'];
 		$sizeCellcolumns = ["Nama" => 1000, "Mitra" => 1000, "Penanggung Jawab" => 1000, "Alamat" => 1000, "No Telpon" => 1000, "Provinsi" => 1000, "Kota" => 1000];
 		$sizeCells = [
 			'nama_mitra' => 1000,
 			'nama_pic' => 1000,
 			'alamat' => 1000,
 			'no_telp' => 1000,
-			'propinsi' => 1000,
+			'provinsi' => 1000,
 			'kabkota' => 1000
 		];
 		$collection = json_decode(json_encode($collection), true);

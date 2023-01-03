@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\DaftarPesertaPembinaanKepribadian;
 
 /**
  * Class PesertaPembinaanKepribadian
@@ -47,7 +48,7 @@ class PesertaPembinaanKepribadian extends Model
     protected $table = "peserta_pembinaan_kepribadian";
     protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
         'id_daftar_peserta_pembinaan_kepribadian' ,'id_wbp' ,'kehadiran' ,'no_sertifikat' ,'file_sertifikat' ,'nilai' ,'predikat' , 'updated_at', 'updated_by'
@@ -79,5 +80,10 @@ class PesertaPembinaanKepribadian extends Model
     public function getKeyName()
     {
         return $this->primaryKey;
+    }
+
+    public function daftarPeserta()
+    {
+        return $this->belongsTo(DaftarPesertaPembinaanKepribadian::class, 'id_daftar_peserta_pembinaan_kepribadian', 'id');
     }
 }

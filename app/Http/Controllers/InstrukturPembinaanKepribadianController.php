@@ -6,6 +6,7 @@ use App\Models\InstrukturPembinaanKepribadian;
 use App\Services\InstrukturPembinaanKepribadianService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class InstrukturPembinaanKepribadianController extends Controller
 {
@@ -123,7 +124,7 @@ class InstrukturPembinaanKepribadianController extends Controller
     public function schema(Request $request)
     {
         $fields = array (
-  0 => 
+  0 =>
   array (
     'Field' => 'id',
     'Type' => 'BIGINT()',
@@ -132,7 +133,7 @@ class InstrukturPembinaanKepribadianController extends Controller
     'Default' => NULL,
     'Extra' => ' AUTO_INCREMENT',
   ),
-  1 => 
+  1 =>
   array (
     'Field' => 'id_instruktur',
     'Type' => 'INT()',
@@ -141,7 +142,7 @@ class InstrukturPembinaanKepribadianController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  2 => 
+  2 =>
   array (
     'Field' => 'id_pembinaan_kepribadian',
     'Type' => 'INT()',
@@ -150,7 +151,7 @@ class InstrukturPembinaanKepribadianController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  3 => 
+  3 =>
   array (
     'Field' => 'updated_at',
     'Type' => 'TIMESTAMP',
@@ -159,7 +160,7 @@ class InstrukturPembinaanKepribadianController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  4 => 
+  4 =>
   array (
     'Field' => 'updated_by',
     'Type' => 'VARCHAR(32)',
@@ -170,9 +171,9 @@ class InstrukturPembinaanKepribadianController extends Controller
   ),
 );
         $schema = array(
-            'name' => 'instrukturpembinaankepribadian', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id', 
+            'name' => 'instrukturpembinaankepribadian',
+            'module' => 'lain-lain',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pembinaan-kepribadian',
                 'url' => '/instrukturpembinaankepribadian'
@@ -213,7 +214,7 @@ class InstrukturPembinaanKepribadianController extends Controller
 
         $data = $this->service->show($instrukturpembinaankepribadian);
         //$collection = collect($instrukturpembinaankepribadian);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "InstrukturPembinaanKepribadian ditemukan.",
@@ -257,6 +258,9 @@ class InstrukturPembinaanKepribadianController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules);
+        $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
 
         $instrukturpembinaankepribadian = InstrukturPembinaanKepribadian::create($request->all());
         if ($instrukturpembinaankepribadian->exists) {

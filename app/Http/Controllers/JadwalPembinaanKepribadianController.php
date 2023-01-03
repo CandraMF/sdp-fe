@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JadwalPembinaanKepribadian;
+use App\Models\DaftarPesertaPembinaanKepribadian;
 use App\Services\JadwalPembinaanKepribadianService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class JadwalPembinaanKepribadianController extends Controller
             'tanggal' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
-            'id_instruktur' => 'required',
+            // 'id_instruktur' => 'requir   ed',
             'materi_pembinaan_kepribadian' => 'required',
             'foto' => 'nullable',
             'status' => 'required',
@@ -262,7 +263,9 @@ class JadwalPembinaanKepribadianController extends Controller
      */
     public function show($id)
     {
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();
+        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::with(['pembinaanKepribadian' => function($q) {
+            $q->with(['sarana', 'prasaranaRuang', 'prasaranaLahan', 'instruktur']);
+        }, 'daftarPeserta'])->where('id', $id)->firstOrFail();
         if (!$jadwalpembinaankepribadian->exists) {
             return response()->json([
                 'status' => 500,
@@ -273,7 +276,7 @@ class JadwalPembinaanKepribadianController extends Controller
 
         $data = $this->service->show($jadwalpembinaankepribadian);
         //$collection = collect($jadwalpembinaankepribadian);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "JadwalPembinaanKepribadian ditemukan.",
@@ -327,12 +330,22 @@ class JadwalPembinaanKepribadianController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
-        $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::create($request->all());
-        if ($jadwalpembinaankepribadian->exists) {
+        $jadwalpembinaankepribadian = DB::table('jadwal_pembinaan_kepribadian')->insertGetId($request->all());
+        if ($jadwalpembinaankepribadian) {
+
+            $id = $jadwalpembinaankepribadian;
+
+            $request->merge(['id_jadwal_pk' => $id]);
+
+            $app = new \App\Http\Controllers\DaftarPesertaPembinaanKepribadianController;
+            $app->store($request);
+
+            $daftar_peserta_id = DaftarPesertaPembinaanKepribadian::latest('updated_at')->first()->id;
+
             return response()->json([
                 'status' => 200,
                 'message' => "JadwalPembinaanKepribadian berhasil ditambahkan.",
@@ -396,8 +409,8 @@ class JadwalPembinaanKepribadianController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $jadwalpembinaankepribadian = JadwalPembinaanKepribadian::where('id', $id)->firstOrFail();

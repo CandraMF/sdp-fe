@@ -284,7 +284,7 @@ class StatusPrasaranaLahanController extends Controller
 
         $data = $this->service->show($statusprasaranalahan);
         //$collection = collect($statusprasaranalahan);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "StatusPrasaranaLahan ditemukan.",
@@ -342,8 +342,9 @@ class StatusPrasaranaLahanController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        $request->merge(['tanggal' => date('Y-m-d H:i:s')]);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $statusprasaranalahan = StatusPrasaranaLahan::create($request->all());
@@ -415,8 +416,8 @@ class StatusPrasaranaLahanController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $statusprasaranalahan = StatusPrasaranaLahan::where('id', $id)->firstOrFail();

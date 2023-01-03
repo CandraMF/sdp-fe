@@ -19,11 +19,11 @@ class PesertaPembinaanKepribadianController extends Controller
         $this->rules = array(
             'id_daftar_peserta_pembinaan_kepribadian' => 'required',
             'id_wbp' => 'required',
-            'kehadiran' => 'required',
-            'no_sertifikat' => 'required',
-            'file_sertifikat' => 'required',
-            'nilai' => 'required',
-            'predikat' => 'required',
+            // 'kehadiran' => 'required',
+            // 'no_sertifikat' => 'required',
+            // 'file_sertifikat' => 'required',
+            // 'nilai' => 'required',
+            // 'predikat' => 'required',
         );
     }
 
@@ -263,7 +263,7 @@ class PesertaPembinaanKepribadianController extends Controller
 
         $data = $this->service->show($pesertapembinaankepribadian);
         //$collection = collect($pesertapembinaankepribadian);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "PesertaPembinaanKepribadian ditemukan.",
@@ -317,8 +317,8 @@ class PesertaPembinaanKepribadianController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $pesertapembinaankepribadian = PesertaPembinaanKepribadian::create($request->all());
@@ -386,9 +386,9 @@ class PesertaPembinaanKepribadianController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
-        $this->validate($request, $this->rules);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
+        // $this->validate($request, $this->rules);
 
         $pesertapembinaankepribadian = PesertaPembinaanKepribadian::where('id', $id)->firstOrFail();
         if ($pesertapembinaankepribadian->update($request->all())) {

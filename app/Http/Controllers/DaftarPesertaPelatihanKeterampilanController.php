@@ -18,10 +18,10 @@ class DaftarPesertaPelatihanKeterampilanController extends Controller
         $this->service = new DaftarPesertaPelatihanKeterampilanService();
         $this->rules = array(
             'id_jadwal_pk' => 'required',
-            'id_peserta' => 'required',
+            // 'id_peserta' => 'required',
             'status' => 'required',
-            'keterangan' => 'nullable',
-            'verifikasi_oleh' => 'required',
+            // 'keterangan' => 'nullable',
+            // 'verifikasi_oleh' => 'required',
         );
     }
 
@@ -243,7 +243,7 @@ class DaftarPesertaPelatihanKeterampilanController extends Controller
 
         $data = $this->service->show($daftarpesertapelatihanketerampilan);
         //$collection = collect($daftarpesertapelatihanketerampilan);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "DaftarPesertaPelatihanKeterampilan ditemukan.",
@@ -293,8 +293,8 @@ class DaftarPesertaPelatihanKeterampilanController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::create($request->all());
@@ -358,8 +358,8 @@ class DaftarPesertaPelatihanKeterampilanController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $daftarpesertapelatihanketerampilan = DaftarPesertaPelatihanKeterampilan::where('id', $id)->firstOrFail();

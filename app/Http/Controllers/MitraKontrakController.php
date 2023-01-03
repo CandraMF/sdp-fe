@@ -273,7 +273,7 @@ class MitraKontrakController extends Controller
 
         $data = $this->service->show($mitrakontrak);
         //$collection = collect($mitrakontrak);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "MitraKontrak ditemukan.",
@@ -325,8 +325,8 @@ class MitraKontrakController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitrakontrak = MitraKontrak::create($request->all());
@@ -392,8 +392,8 @@ class MitraKontrakController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitrakontrak = MitraKontrak::where('id', $id)->firstOrFail();

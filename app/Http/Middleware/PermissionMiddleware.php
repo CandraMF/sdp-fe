@@ -26,7 +26,7 @@ class PermissionMiddleware
     public function handle($request, Closure $next)
     {
         if(!$request->hasHeader('X-Header-Service') && $request->hasHeader('Authorization')) {
-            $user = Auth::user();
+            // $user = Auth::user();
             $redisKey = "permission" . $user['preferred_username'];
             $permissions = collect(Redis::get($redisKey));
             $method = $this->mappingMethod($request->method());

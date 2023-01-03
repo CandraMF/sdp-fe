@@ -43,7 +43,7 @@ class Sarana extends Model
     protected $table = "sarana";
     protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
         'id_jenis_sarana' ,'nama_sarana' ,'id_upt' ,'tgl_pengadaan' ,'keterangan' , 'updated_at', 'updated_by'

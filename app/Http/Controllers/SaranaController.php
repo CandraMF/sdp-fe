@@ -244,7 +244,7 @@ class SaranaController extends Controller
 
         $data = $this->service->show($sarana);
         //$collection = collect($sarana);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "Sarana ditemukan.",
@@ -294,8 +294,8 @@ class SaranaController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $sarana = Sarana::create($request->all());
@@ -359,8 +359,8 @@ class SaranaController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $sarana = Sarana::where('id', $id)->firstOrFail();

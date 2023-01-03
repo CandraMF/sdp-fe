@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\DaftarPesertaPembinaanKepribadian;
+use App\Models\PembinaanKepribadian;
 
 /**
  * Class JadwalPembinaanKepribadian
@@ -81,5 +83,15 @@ class JadwalPembinaanKepribadian extends Model
     public function getKeyName()
     {
         return $this->primaryKey;
+    }
+
+    public function pembinaanKepribadian()
+    {
+        return $this->belongsTo(PembinaanKepribadian::class, 'id_pembinaan_kepribadian', 'id');
+    }
+
+    public function daftarPeserta()
+    {
+        return $this->hasOne(DaftarPesertaPembinaanKepribadian::class, 'id_jadwal_pk', 'id');
     }
 }

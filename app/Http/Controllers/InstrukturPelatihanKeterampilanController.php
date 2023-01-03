@@ -123,7 +123,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
     public function schema(Request $request)
     {
         $fields = array (
-  0 => 
+  0 =>
   array (
     'Field' => 'id',
     'Type' => 'BIGINT()',
@@ -132,7 +132,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
     'Default' => NULL,
     'Extra' => ' AUTO_INCREMENT',
   ),
-  1 => 
+  1 =>
   array (
     'Field' => 'id_instruktur',
     'Type' => 'INT()',
@@ -141,7 +141,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  2 => 
+  2 =>
   array (
     'Field' => 'id_pelatihan_keterampilan',
     'Type' => 'INT()',
@@ -150,7 +150,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  3 => 
+  3 =>
   array (
     'Field' => 'updated_at',
     'Type' => 'TIMESTAMP',
@@ -159,7 +159,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
     'Default' => NULL,
     'Extra' => '',
   ),
-  4 => 
+  4 =>
   array (
     'Field' => 'updated_by',
     'Type' => 'VARCHAR(32)',
@@ -170,9 +170,9 @@ class InstrukturPelatihanKeterampilanController extends Controller
   ),
 );
         $schema = array(
-            'name' => 'instrukturpelatihanketerampilan', 
-            'module' => 'lain-lain', 
-            'primary_key' => 'id', 
+            'name' => 'instrukturpelatihanketerampilan',
+            'module' => 'lain-lain',
+            'primary_key' => 'id',
             'api' => [
                 'endpoint' => 'pelatihan-keterampilan',
                 'url' => '/instrukturpelatihanketerampilan'
@@ -213,7 +213,7 @@ class InstrukturPelatihanKeterampilanController extends Controller
 
         $data = $this->service->show($instrukturpelatihanketerampilan);
         //$collection = collect($instrukturpelatihanketerampilan);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "InstrukturPelatihanKeterampilan ditemukan.",
@@ -256,6 +256,10 @@ class InstrukturPelatihanKeterampilanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
+
         $this->validate($request, $this->rules);
 
         $instrukturpelatihanketerampilan = InstrukturPelatihanKeterampilan::create($request->all());

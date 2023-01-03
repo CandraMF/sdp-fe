@@ -273,7 +273,7 @@ class JadwalPelatihanKeterampilanController extends Controller
 
         $data = $this->service->show($jadwalpelatihanketerampilan);
         //$collection = collect($jadwalpelatihanketerampilan);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "JadwalPelatihanKeterampilan ditemukan.",
@@ -327,8 +327,8 @@ class JadwalPelatihanKeterampilanController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::create($request->all());
@@ -396,8 +396,8 @@ class JadwalPelatihanKeterampilanController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $jadwalpelatihanketerampilan = JadwalPelatihanKeterampilan::where('id', $id)->firstOrFail();

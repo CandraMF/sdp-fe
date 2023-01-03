@@ -262,7 +262,7 @@ class MitraController extends Controller
      */
     public function show($id)
     {
-        $defaultColumn = ['mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as propinsi', 'dati2.deskripsi as kabkota', 'mitra.id_dati2', 'mitra.no_hp', 'mitra.email', 'mitra.keterangan', 'provinsi.id_provinsi'];
+        $defaultColumn = ['mitra.updated_by', 'mitra.updated_at', 'mitra.id', 'mitra.nama_mitra', 'mitra.nama_pic', 'mitra.alamat', 'mitra.no_telp', 'provinsi.deskripsi as provinsi', 'dati2.deskripsi as kabkota', 'mitra.id_dati2', 'mitra.no_hp', 'mitra.email', 'mitra.keterangan', 'provinsi.id_provinsi'];
         $mitra = Mitra::query();
         $mitra = $mitra->select($defaultColumn);
         $mitra = $mitra->join('dati2', 'mitra.id_dati2', '=', 'dati2.id_dati2');
@@ -279,7 +279,7 @@ class MitraController extends Controller
 
         $data = $this->service->show($mitra);
         //$collection = collect($mitra);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "Mitra ditemukan.",
@@ -331,14 +331,14 @@ class MitraController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitra = Mitra::create($request->all());
         if ($mitra->exists) {
             $id_mitra = Mitra::latest('updated_at')->first()->id;
-            $data_mitra = ['id_mitra' =>  $id_mitra];
+            $data_mitra = ['id' =>  $id_mitra];
             return response()->json([
                 'status' => 200,
                 'message' => "Mitra berhasil ditambahkan.",
@@ -400,8 +400,8 @@ class MitraController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $mitra = Mitra::where('id', $id)->firstOrFail();

@@ -18,14 +18,14 @@ class StatusSaranaController extends Controller
         $this->service = new StatusSaranaService();
         $this->rules = array(
             'id_sarana' => 'required',
-            'tanggal' => 'required',
+            // 'tanggal' => 'required',
             'status' => 'required',
             'kepemilikan' => 'required',
             'jumlah' => 'required',
             'satuan' => 'required',
             'kondisi_baik' => 'required',
             'kondisi_rusak' => 'required',
-            'foto' => 'required',
+            // 'foto' => 'required',
             'keterangan' => 'nullable',
         );
     }
@@ -293,7 +293,7 @@ class StatusSaranaController extends Controller
 
         $data = $this->service->show($statussarana);
         //$collection = collect($statussarana);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "StatusSarana ditemukan.",
@@ -353,8 +353,9 @@ class StatusSaranaController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        $request->merge(['tanggal' => date('Y-m-d')]);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $statussarana = StatusSarana::create($request->all());
@@ -428,8 +429,8 @@ class StatusSaranaController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $statussarana = StatusSarana::where('id', $id)->firstOrFail();

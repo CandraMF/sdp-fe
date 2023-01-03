@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\JadwalPembinaanKepribadian;
+use App\Models\SaranaPembinaanKepribadian;
 
 /**
  * Class PembinaanKepribadian
@@ -71,18 +73,18 @@ class PembinaanKepribadian extends Model
     protected $table = "pembinaan_kepribadian";
     protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $orderable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     protected $searchable = [
-        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'id_instruktur' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'id_sarana' ,'id_prasarana' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'foto' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
+        'id_jenis_pembinaan_kepribadian' ,'id_upt' ,'id_mitra' ,'nama_program' ,'program_wajib' ,'materi_pembinaan_kepribadian' ,'penanggung_jawab' ,'tanggal_mulai' ,'tanggal_selesai' ,'tempat_pelaksanaan' ,'perlu_kelulusan' ,'realisasi_anggaran' ,'id_jenis_anggaran' ,'keterangan' ,'status' , 'updated_at', 'updated_by'
     ];
 
     /**
@@ -103,5 +105,35 @@ class PembinaanKepribadian extends Model
     public function getKeyName()
     {
         return $this->primaryKey;
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(JadwalPembinaanKepribadian::class, 'id_pembinaan_kepribadian');
+    }
+
+    public function jenis()
+    {
+        return $this->belongsTo(DaftarReferensi::class, 'id_jenis_pembinaan_kepribadian', 'id_lookup');
+    }
+
+    public function sarana()
+    {
+        return $this->hasMany(SaranaPembinaanKepribadian::class, 'id_pembinaan_kepribadian', 'id');
+    }
+
+    public function prasaranaRuang()
+    {
+        return $this->hasMany(PrasaranaRuangPembinaanKepribadian::class, 'id_pembinaan_kepribadian', 'id');
+    }
+
+    public function prasaranaLahan()
+    {
+        return $this->hasMany(PrasaranaLahanPembinaanKepribadian::class, 'id_pembinaan_kepribadian', 'id');
+    }
+
+    public function instruktur()
+    {
+        return $this->hasMany(InstrukturPembinaanKepribadian::class, 'id_pembinaan_kepribadian', 'id');
     }
 }

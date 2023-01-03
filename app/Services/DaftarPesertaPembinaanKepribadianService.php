@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\JadwalPembinaanKepribadian;
+use App\Models\DaftarPesertaPembinaanKepribadian;
 use GuzzleHttp\Client;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -16,7 +16,7 @@ use PhpOffice\PhpWord\Element\Table;
 use PhpOffice\PhpWord\TemplateProcessor;
 
 
-class JadwalPembinaanKepribadianService
+class DaftarPesertaPembinaanKepribadianService
 {
 
 	public function __construct()
@@ -68,22 +68,20 @@ class JadwalPembinaanKepribadianService
 	 */
 	private function mapping(object $data)
 	{
-		$jadwal_pembinaan_kepribadian  = $data->get()->toArray();
-		if (empty($jadwal_pembinaan_kepribadian)) {
+		$daftar_peserta_pembinaan_kepribadian  = $data->get()->toArray();
+		if (empty($daftar_peserta_pembinaan_kepribadian)) {
 			return [];
 		}
-		foreach ($jadwal_pembinaan_kepribadian  as $val) {
+		foreach ($daftar_peserta_pembinaan_kepribadian  as $val) {
 			$result[] = [
-
-				'id' => $val['id'],
-				'id_pembinaan_kepribadian' => $val['id_pembinaan_kepribadian'],
-				'tanggal' => $val['tanggal'],
-				'jam_mulai' => $val['jam_mulai'],
-				'jam_selesai' => $val['jam_selesai'],
-				'id_instruktur' => $val['id_instruktur'],
-				'materi_pembinaan_kepribadian' => $val['materi_pembinaan_kepribadian'],
-				'foto' => $val['foto'],
-				'status' => $val['status']
+                'id' => $val['id'],
+                'id_jadwal_pk' => $val['id_jadwal_pk'],
+                'id_peserta' => $val['id_peserta'],
+                'status' => $val['status'],
+                'keterangan' => $val['keterangan'],
+                'updated_at' => $val['updated_at'],
+                'updated_by' => $val['updated_by'],
+                'verifikasi_oleh' => $val['verifikasi_oleh'],
 			];
 		}
 
@@ -106,8 +104,8 @@ class JadwalPembinaanKepribadianService
 		$column = isset($data['column']) ? $data['column'] : 'id';
 
 
-		$defaultColumn = ['id', 'id_pembinaan_kepribadian', 'tanggal', 'jam_mulai', 'jam_selesai', 'id_instruktur', 'materi_pembinaan_kepribadian', 'foto', 'status'];
-		$q = JadwalPembinaanKepribadian::query();
+		$defaultColumn = ['id','id_jadwal_pk','id_peserta','status','keterangan','updated_at','updated_by','verifikasi_oleh'];
+        $q = DaftarPesertaPembinaanKepribadian::query();
 		$q = $q->select($defaultColumn);
 
 
@@ -146,23 +144,20 @@ class JadwalPembinaanKepribadianService
 	/**
 	 * Mapping details
 	 *
-	 * @param object $jad   wal_pembinaan_kepribadian
+	 * @param object $daftar_peserta_pembinaan_kepribadian
 	 * @return mixed
 	 */
-	public function show(object $jadwal_pembinaan_kepribadian)
+	public function show(object $daftar_peserta_pembinaan_kepribadian)
 	{
 		$data = [
-			'id' => $jadwal_pembinaan_kepribadian->id,
-			'id_pembinaan_kepribadian' => $jadwal_pembinaan_kepribadian->id_pembinaan_kepribadian,
-			'tanggal' => $jadwal_pembinaan_kepribadian->tanggal,
-			'jam_mulai' => $jadwal_pembinaan_kepribadian->jam_mulai,
-			'jam_selesai' => $jadwal_pembinaan_kepribadian->jam_selesai,
-			'id_instruktur' => $jadwal_pembinaan_kepribadian->id_instruktur,
-			'materi_pembinaan_kepribadian' => $jadwal_pembinaan_kepribadian->materi_pembinaan_kepribadian,
-			'foto' => $jadwal_pembinaan_kepribadian->foto,
-            'status' => $jadwal_pembinaan_kepribadian->status,
-            'pembinaan_kepribadian' => $jadwal_pembinaan_kepribadian->pembinaanKepribadian,
-            'daftar_peserta' => $jadwal_pembinaan_kepribadian->daftarPeserta,
+            'id' => $daftar_peserta_pembinaan_kepribadian->id,
+            'id_jadwal_pk' => $daftar_peserta_pembinaan_kepribadian->id_jadwal_pk,
+            'id_peserta' => $daftar_peserta_pembinaan_kepribadian->id_peserta,
+            'status' => $daftar_peserta_pembinaan_kepribadian->status,
+            'keterangan' => $daftar_peserta_pembinaan_kepribadian->keterangan,
+            'updated_at' => $daftar_peserta_pembinaan_kepribadian->updated_at,
+            'updated_by' => $daftar_peserta_pembinaan_kepribadian->updated_by,
+            'verifikasi_oleh' => $daftar_peserta_pembinaan_kepribadian->verifikasi_oleh,
 		];
 		return $data;
 	}

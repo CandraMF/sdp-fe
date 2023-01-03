@@ -17,11 +17,11 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     {
         $this->service = new DaftarPesertaPembinaanKepribadianService();
         $this->rules = array(
-            'id_jadwal_pk' => 'required',
-            'id_peserta' => 'required',
+            // 'id_jadwal_pk' => 'required',
+            // 'id_peserta' => 'required',
             'status' => 'required',
             'keterangan' => 'nullable',
-            'verifikasi_oleh' => 'required',
+            // 'verifikasi_oleh' => 'required',
         );
     }
 
@@ -243,7 +243,7 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
 
         $data = $this->service->show($daftarpesertapembinaankepribadian);
         //$collection = collect($daftarpesertapembinaankepribadian);
-        //$merge = $collection->merge($data);    
+    //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "DaftarPesertaPembinaanKepribadian ditemukan.",
@@ -293,8 +293,8 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::create($request->all());
@@ -358,8 +358,8 @@ class DaftarPesertaPembinaanKepribadianController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $daftarpesertapembinaankepribadian = DaftarPesertaPembinaanKepribadian::where('id', $id)->firstOrFail();

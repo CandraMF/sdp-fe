@@ -21,20 +21,20 @@ class PembinaanKepribadianController extends Controller
       'id_upt' => 'required',
       'id_mitra' => 'required',
       'nama_program' => 'required',
-      'program_wajib' => 'required',
+    //   'program_wajib' => 'required',
       'materi_pembinaan_kepribadian' => 'required',
-      'id_instruktur' => 'nullable',
+    //   'id_instruktur' => 'nullable',
       'penanggung_jawab' => 'required',
       'tanggal_mulai' => 'required',
       'tanggal_selesai' => 'required',
       'tempat_pelaksanaan' => 'required',
-      'perlu_kelulusan' => 'required',
-      'id_sarana' => 'nullable',
-      'id_prasarana' => 'nullable',
-      'realisasi_anggaran' => 'nullable',
-      'id_jenis_anggaran' => 'nullable',
-      'foto' => 'required',
-      'keterangan' => 'nullable',
+    //   'perlu_kelulusan' => 'required',
+    //   'id_sarana' => 'nullable',
+    //   'id_prasarana' => 'nullable',
+    //   'realisasi_anggaran' => 'nullable',
+    //   'id_jenis_anggaran' => 'nullable',
+    //   'foto' => 'required',
+    //   'keterangan' => 'nullable',
       'status' => 'required',
     );
   }
@@ -372,7 +372,13 @@ class PembinaanKepribadianController extends Controller
    */
   public function show($id)
   {
-    $pembinaankepribadian = PembinaanKepribadian::where('id', $id)->firstOrFail();
+    $pembinaankepribadian = PembinaanKepribadian::with([
+        'sarana',
+        'prasaranaRuang',
+        'prasaranaLahan',
+        'instruktur.instruktur',
+        'jadwal'
+    ])->where('id', $id)->firstOrFail();
     if (!$pembinaankepribadian->exists) {
       return response()->json([
         'status' => 500,

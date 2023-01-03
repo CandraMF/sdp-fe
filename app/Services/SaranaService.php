@@ -26,7 +26,7 @@ class SaranaService
 
 	/**
 	 * Make http client
-	 * 
+	 *
 	 * @param string $baseURI
 	 * @param bool $httpErrors
 	 * @param string $token
@@ -48,7 +48,7 @@ class SaranaService
 
 	/**
 	 * Create pagination
-	 * 
+	 *
 	 * @param array $items
 	 * @param int $perPage
 	 * @param int $page
@@ -63,7 +63,7 @@ class SaranaService
 
 	/**
 	 * Mapping index list
-	 * 
+	 *
 	 * @param object $data
 	 * @return mixed
 	 */
@@ -89,7 +89,7 @@ class SaranaService
 
 	/**
 	 * Get list
-	 * 
+	 *
 	 * @param array $data
 	 * @param string $url
 	 * @return mixed
@@ -143,7 +143,7 @@ class SaranaService
 
 	/**
 	 * Mapping details
-	 * 
+	 *
 	 * @param object $sarana
 	 * @return mixed
 	 */

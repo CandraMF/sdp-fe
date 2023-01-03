@@ -26,7 +26,7 @@ class StatusSaranaService
 
 	/**
 	 * Make http client
-	 * 
+	 *
 	 * @param string $baseURI
 	 * @param bool $httpErrors
 	 * @param string $token
@@ -48,7 +48,7 @@ class StatusSaranaService
 
 	/**
 	 * Create pagination
-	 * 
+	 *
 	 * @param array $items
 	 * @param int $perPage
 	 * @param int $page
@@ -63,7 +63,7 @@ class StatusSaranaService
 
 	/**
 	 * Mapping index list
-	 * 
+	 *
 	 * @param object $data
 	 * @return mixed
 	 */
@@ -92,7 +92,7 @@ class StatusSaranaService
 
 	/**
 	 * Get list
-	 * 
+	 *
 	 * @param array $data
 	 * @param string $url
 	 * @return mixed
@@ -145,7 +145,7 @@ class StatusSaranaService
 
 	/**
 	 * Mapping details
-	 * 
+	 *
 	 * @param object $status_sarana
 	 * @return mixed
 	 */
@@ -162,7 +162,9 @@ class StatusSaranaService
 			'kondisi_baik' => $status_sarana->kondisi_baik,
 			'kondisi_rusak' => $status_sarana->kondisi_rusak,
 			'foto' => $status_sarana->foto,
-			'keterangan' => $status_sarana->keterangan
+			'keterangan' => $status_sarana->keterangan,
+			'updated_at' => $status_sarana->updated_at,
+			'updated_by' => $status_sarana->updated_by,
 		];
 		return $data;
 	}

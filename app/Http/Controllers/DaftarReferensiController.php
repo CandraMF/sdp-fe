@@ -224,7 +224,7 @@ class DaftarReferensiController extends Controller
 
         $data = $this->service->show($daftarreferensi);
         //$collection = collect($daftarreferensi);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "DaftarReferensi ditemukan.",
@@ -241,7 +241,7 @@ class DaftarReferensiController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+
      *         ),
      *      ),
      *      @OA\Response(
@@ -255,7 +255,7 @@ class DaftarReferensiController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+
      *          ),
      *      ),
      * )
@@ -265,6 +265,9 @@ class DaftarReferensiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
 
         $this->validate($request, $this->rules);
 
@@ -315,7 +318,7 @@ class DaftarReferensiController extends Controller
      *         description="Body",
      *         required=true,
      *         @OA\JsonContent(
-     
+
      *         ),
      *      ),
      *      @OA\Response(
@@ -329,7 +332,7 @@ class DaftarReferensiController extends Controller
      *          response="422",
      *          description="error",
      *          @OA\JsonContent(
-     
+
      *          ),
      *      ),
      * )

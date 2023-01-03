@@ -293,7 +293,7 @@ class InstrukturController extends Controller
 
         $data = $this->service->show($instruktur);
         //$collection = collect($instruktur);
-        //$merge = $collection->merge($data);    
+        //$merge = $collection->merge($data);
         return response()->json([
             'status' => 200,
             'message' => "Instruktur ditemukan.",
@@ -341,8 +341,8 @@ class InstrukturController extends Controller
     public function store(Request $request)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $instruktur = Instruktur::create($request->all());
@@ -404,8 +404,8 @@ class InstrukturController extends Controller
     public function update(Request $request, $id)
     {
         $request->merge(['updated_at' => date('Y-m-d H:i:s')]);
-        $user = Auth::user();
-        $request->merge(['updated_by' => $user['preferred_username']);
+        // $user = Auth::user();
+        $request->merge(['updated_by' => 'admin']);
         $this->validate($request, $this->rules);
 
         $instruktur = Instruktur::where('id', $id)->firstOrFail();

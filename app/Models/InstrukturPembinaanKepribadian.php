@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Instruktur;
 
 /**
  * Class InstrukturPembinaanKepribadian
@@ -37,7 +38,7 @@ class InstrukturPembinaanKepribadian extends Model
     protected $table = "instruktur_pembinaan_kepribadian";
     protected $primaryKey = "id";
     public $timestamps = false;
-    public $incrementing = false;    
+    public $incrementing = false;
 
     protected $fillable = [
         'id_instruktur' ,'id_pembinaan_kepribadian' , 'updated_at', 'updated_by'
@@ -69,5 +70,10 @@ class InstrukturPembinaanKepribadian extends Model
     public function getKeyName()
     {
         return $this->primaryKey;
+    }
+
+    public function instruktur()
+    {
+        return $this->belongsTo(Instruktur::class, 'id_instruktur', 'id');
     }
 }
